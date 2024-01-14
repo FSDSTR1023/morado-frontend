@@ -1,107 +1,120 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import DatePiker from "react-datepicker"
-import 'react-datepicker/dist/react-datepicker.css'
 
-const AddUsers = () => {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    dob: new Date ("2008", "06", "22"),
-    telefono: "",
-    correo: "",
-    pais: "",
-    tipo: "",
-    docNum: "",
-    usuario: "",
-    contrasena: ""
-  });
+const AddUser = () => {
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [DoB, setDoB] = useState('');
+  const [country, setCountry] = useState('');
+  const [docType, setDocType] = useState('');
+  const [docNum, setDocNum] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+  const handleLogin = () => {
+    // Aquí puedes realizar la lógica de autenticación
+    // También puedes realizar una llamada a la API para autenticar al usuario
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor
-    console.log('Datos del formulario:', formData);
-  };
-
-//   =================================
-
-// class App extends Component {
-//     state = {
-//       startDate: new Date(),
-//     };
-  
-//     render() {
-//       const { startDate } = this.state;
-//       return <DatePiker selected={startDate} onChange={this.handleChange} />;
-//     }
-  
-//     handleChange = (startDate) => {
-//       this.setState({
-//         startDate,
-//       });
-//     };
-//   }
-  
-
-
-
-// =====================================
-
-  
   return (
-    <form onSubmit={handleSubmit}>
-      <label>  Nombre: <input type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} /> </label>
-      <br />
-      <label>  Apellido: <input type="text" name="apellido" value={formData.apellido} onChange={handleInputChange} /> </label>
-      <br />
-      <label>  Fecha de Nacimiento: 
-        
-       
-        <DatePiker selected={formData.dob} onChange={handleInputChange}/> </label>
-      
-      <br />
-      <label>  Teléfono: <input type="text" name="telefono" value={formData.telefono} onChange={handleInputChange} /> </label>
-      <br />
-      <label> Correo electrónico: <input type="email" name="correo" value={formData.correo} onChange={handleInputChange} /> </label>
-      <br />
-      <label>  Pais: <input type="text" name="pais" value={formData.pais} onChange={handleInputChange} /> </label>
-      <br />
-      <label>  Tipo de Documento: 
-        <select>
-            <option value="NIF/NIE">____________</option>
-            <option value="Pasaporte">Pasaporte</option>
-            <option value="NIF/NIE">NIF/NIE</option>
-        </select>
+    <div>
+      <h2 className='text-base font-semibold leading-7 text-gray-900'>Datos Usuario</h2>
+      <form className='flex flex-col px-5'>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Nombre 
+        <br />
+      <input className='px-5 border border-20 mb-3' 
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
       </label>
-      <br />    
-      <label>  Número de Documento: <input type="text" name="docNum" value={formData.docNum} onChange={handleInputChange} /> </label>
-
-      <br />
-      <br />
-      <label>  Usuario: <input type="text" name="usuario" value={formData.usuario} onChange={handleInputChange} /> </label>
-      <br />
-      <label>  Contraseña: <input type="text" name="contrasena" value={formData.contrasena} onChange={handleInputChange} /> </label>
-      <br />
-
-      <label>  Contraseña: <input type="calendar" name="cal" value={formData.cal} onChange={handleInputChange} /> </label>
-      <br />
-
-      <br />
-      <br />
-      <button type="submit">Enviar</button>
-    </form>
-
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Apellidos
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Teléfono
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Email
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Fecha de Nacimiento
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="date"
+            value={DoB}
+            onChange={(e) => setDoB(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        País
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Tipo de Documento  
+        <br />    
+        <input className='px-5 border border-20 mb-3'
+            type="text"
+            value={docType}
+            onChange={(e) => setDocType(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Numero de Documento
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="text"
+            value={docNum}
+            onChange={(e) => setDocNum(e.target.value)}
+          />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Nombre de Usuario
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            />
+      </label>
+      <label className='block text-sm font-medium leading-6 text-gray-900'>
+        Contraseña
+        <br />
+        <input className='px-5 border border-20 mb-3'
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            />
+      </label>
+      </form>
+    </div>
   );
 };
 
-export default AddUsers;
+export default AddUser;
