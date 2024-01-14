@@ -14,3 +14,4 @@ const NavAdmin = () => {
 }
 
 export default NavAdmin
+

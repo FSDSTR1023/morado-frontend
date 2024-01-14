@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import DatePiker from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 
-const Formulario = () => {
+const AddUsers = () => {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -104,4 +104,4 @@ const Formulario = () => {
   );
 };
 
-export default Formulario;
+export default AddUsers;
