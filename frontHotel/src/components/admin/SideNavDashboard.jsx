@@ -22,7 +22,7 @@ const navlinks = [
     link: "dashboard",
   },
   {
-    name: "Reservaciones",
+    name: "Reservas",
     icon: PiNotepad,
     link: "bookings",
   },
