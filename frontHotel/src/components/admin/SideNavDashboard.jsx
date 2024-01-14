@@ -18,7 +18,7 @@ const navlinks = [
     icon: MdDashboard,
   },
   {
-    name: "Reservaciones",
+    name: "Reservas",
     icon: PiNotepad,
   },
   {
