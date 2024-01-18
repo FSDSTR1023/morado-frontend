@@ -1,117 +1,181 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
 
 const AddUser = () => {
-  const [name, setName] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [DoB, setDoB] = useState('');
-  const [country, setCountry] = useState('');
-  const [docType, setDocType] = useState('');
-  const [docNum, setDocNum] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // se crea un arreglo vacio como datos iniciales
+  const newUserInit = { 
+    name: "",
+    lastName: "",
+    phone: 0,
+    email: "",
+    DoB: "",
+    country: "",
+    docType: "",
+    docNum: "",
+    username: "",
+    pwd: "",
+  };
 
-  const handleLogin = () => {
-    // Aquí puedes realizar la lógica de autenticación
-    // También puedes realizar una llamada a la API para autenticar al usuario
+  // se asigna el arreglo vacio al estado inicial
+  const [addUser, setAddUser] = useState(newUserInit);
+
+  // se recolecta los datos a medida que se vaya cambiando par luego enviarlos a la BBDD
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setAddUser({ ...addUser, [name]: value });
+  };
+
+  // aqui se almacenan los datos que se van a enviar a la BBDD
+  const newUser = {
+    name: addUser.name,
+    lastName: addUser.lastName,
+    phone: addUser.phone,
+    email: addUser.email,
+    DoB: addUser.DoB,
+    country: addUser.country,
+    docType: addUser.docType,
+    docNum: addUser.docNum,
+    username: addUser.username,
+    pwd: addUser.pwd,
+  };
+
+  // Esta es la funcion para hacer el post y enviar los datos a MonoDB
+  const saveUser = async (e) => {
+    try {
+      await axios.post("http://localhost:5000/users", newUser);
+      console.log("Usuario registrado con éxito");
+    } catch (error) {
+      console.error("no se puede guardar la tarea");
+    }
   };
 
   return (
     <div>
-      <h2 className='text-base font-semibold leading-7 text-gray-900'>Datos Usuario</h2>
-      <form className='flex flex-col px-5'>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Nombre 
-        <br />
-      <input className='px-5 border border-20 mb-3' 
+      <form onSubmit={saveUser} className="flex flex-col px-5">
+        <h2 className="text-base font-semibold leading-7 text-gray-900">
+          Datos Usuario
+        </h2>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Nombre
+          <br />
+          <input
+
+          // En los inputs estan actualizados los "  value  ", ya estan relacionados con el arreglo que
+          // se va a guardar en la BBDD
+          // Todos los campos llaman a la funcion handlechange para que se vayan agregando al arreglo
+          // antes de enviarlos a la BBDD
+            className="px-5 border border-20 mb-3"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={addUser.name}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Apellidos
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Apellidos
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="text"
-            value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
+            name="lastName"
+            value={addUser.lastName}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Teléfono
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Teléfono
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            name="phone"
+            value={addUser.phone}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Email
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Email
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={addUser.email}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Fecha de Nacimiento
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Fecha de Nacimiento
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="date"
-            value={DoB}
-            onChange={(e) => setDoB(e.target.value)}
+            name="DoB"
+            value={addUser.DoB}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        País
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          País
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="text"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            name="country"
+            value={addUser.country}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Tipo de Documento  
-        <br />    
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Tipo de Documento
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="text"
-            value={docType}
-            onChange={(e) => setDocType(e.target.value)}
+            name="docType"
+            value={addUser.docType}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Numero de Documento
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Numero de Documento
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="text"
-            value={docNum}
-            onChange={(e) => setDocNum(e.target.value)}
+            name="docNum"
+            value={addUser.docNum}
+            onChange={handleOnChange}
           />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Nombre de Usuario
-        <br />
-        <input className='px-5 border border-20 mb-3'
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Nombre de Usuario
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            />
-      </label>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>
-        Contraseña
-        <br />
-        <input className='px-5 border border-20 mb-3'
+            name="username"
+            value={addUser.username}
+            onChange={handleOnChange}
+          />
+        </label>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Contraseña
+          <br />
+          <input
+            className="px-5 border border-20 mb-3"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            />
-      </label>
+            name="pwd"
+            value={addUser.pwd}
+            onChange={handleOnChange}
+          />
+        </label>
+
+        {/* se envian los datos a mongo con el onClick */}
+        <button type="submit" onClick={saveUser} className="bg-[#003A70] text-white hover:bg-[#dadada] hover:text-[#003A70] h-8">
+          Guardar
+        </button>
       </form>
     </div>
   );
