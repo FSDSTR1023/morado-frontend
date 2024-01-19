@@ -22,6 +22,7 @@ function App() {
           <Route path='bookings' element={<Bookings />}/>
           {/* se cambia el elemento de guests a la nueva pagina principal de usuarios */}
           <Route path='guests' element={<MainUsers />}/>
+          <Route path='guests/:id' element={<MainUsers />}/>
           <Route path='calendar' element={<Calendar />}/>
           <Route path='settings' element={<Settings />}/>
         </Route>

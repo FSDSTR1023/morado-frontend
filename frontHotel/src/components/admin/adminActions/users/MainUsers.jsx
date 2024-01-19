@@ -5,7 +5,7 @@ import UsersList from "./UsersList"
 
 const MainUsers = () => {
   return (
-    <div className="flex space-x-10">
+    <div className="w-full space-x-10 bg-gray-50 flex p-5">
         <AddUser />
         <UsersList />
     </div>

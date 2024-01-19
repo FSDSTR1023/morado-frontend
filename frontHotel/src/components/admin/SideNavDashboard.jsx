@@ -57,13 +57,13 @@ const SideNavDashboard = () => {
         animate={isExpanded ? "expanded" : "nonExpanded"}
         variants={variants}
         className={
-          "py-12 flex flex-col border border-r-1 w-1/5 h-[94vh] relative" +
+          "py-12 flex flex-col border border-r-1 w-1/5 h-[94vh] relative shadow-xl  bg-gray-100" +
           (isExpanded ? " px-10" : " px-4")
         }
       >
         <div
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-5 h-5  bg-[#003A70] rounded-full absolute -right-[10.5px] top-14 flex items-center justify-center text-white hover:cursor-pointer md:cursor-auto"
+          className="w-5 h-5  bg-[#003A70] rounded-full absolute -right-[10.5px] top-14 flex items-center justify-center text-white hover:cursor-pointer md:cursor-auto "
         >
           {isExpanded ? (
             <MdOutlineKeyboardDoubleArrowLeft />
@@ -87,9 +87,9 @@ const SideNavDashboard = () => {
             >
               <NavLink
               // esta funcion marca el elemento que está activo al entrar en una ruta especifica
-                // className={({ isActive }) => {
-                //   return isActive ? setActiveSideIndex(index) : "";
-                // }}
+                className={({ isActive }) => {
+                  return isActive ? setActiveSideIndex(index) : "";
+                }}
                 to={item.link}
               >
                 <div className="flex flex-row space-x-3 items-center ">

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import {useParams} from 'react-router-dom'
 
 const AddUser = () => {
   // se crea un arreglo vacio como datos iniciales
@@ -17,8 +18,14 @@ const AddUser = () => {
     pwd: "",
   };
 
+  // variable para obtener id del usuario a traves de Param
+  let {id} = useParams ()
+
   // se asigna el arreglo vacio al estado inicial
   const [addUser, setAddUser] = useState(newUserInit);
+
+  // variable de estado par capturar el Id que llega mediante url
+  const [urlId, setUrlId] = useState (id);
 
   // se recolecta los datos a medida que se vaya cambiando par luego enviarlos a la BBDD
   const handleOnChange = (e) => {
@@ -40,21 +47,47 @@ const AddUser = () => {
     pwd: addUser.pwd,
   };
 
+ 
+
   // Esta es la funcion para hacer el post y enviar los datos a MonoDB
   const saveUser = async (e) => {
     try {
       await axios.post("http://localhost:5000/users", newUser);
       console.log("Usuario registrado con éxito");
     } catch (error) {
-      console.error("no se puede guardar la tarea");
+      console.error("no se puede guardar el usuario");
     }
   };
+
+const actualId = async(idValue) => {
+  const res = await axios.get("http://localhost:5000/users/" + idValue)
+  setAddUser({
+    _id: res.data._id,
+    name: res.data.name,
+    lastName: res.data.lastName,
+    phone: res.data.phone,
+    email: res.data.email,
+    DoB: res.data.DoB,
+    country: res.data.country,
+    docType: res.data.docType,
+    docNum: res.data.docNum,
+    username: res.data.username,
+    pwd: res.data.pwd
+  })
+
+}
+
+useEffect(() => {
+  if(urlId !== ''){
+    actualId(urlId)
+  }
+  },[urlId])
 
   return (
     <div>
       <form onSubmit={saveUser} className="flex flex-col px-5">
         <h2 className="text-base font-semibold leading-7 text-gray-900">
-          Datos Usuario
+          Datos Usuario 
         </h2>
         <label className="block text-sm font-medium leading-6 text-gray-900">
           Nombre
@@ -65,7 +98,7 @@ const AddUser = () => {
           // se va a guardar en la BBDD
           // Todos los campos llaman a la funcion handlechange para que se vayan agregando al arreglo
           // antes de enviarlos a la BBDD
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="text"
             name="name"
             value={addUser.name}
@@ -76,7 +109,7 @@ const AddUser = () => {
           Apellidos
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="text"
             name="lastName"
             value={addUser.lastName}
@@ -87,7 +120,7 @@ const AddUser = () => {
           Teléfono
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="number"
             name="phone"
             value={addUser.phone}
@@ -98,7 +131,7 @@ const AddUser = () => {
           Email
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="email"
             name="email"
             value={addUser.email}
@@ -109,7 +142,7 @@ const AddUser = () => {
           Fecha de Nacimiento
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="date"
             name="DoB"
             value={addUser.DoB}
@@ -120,7 +153,7 @@ const AddUser = () => {
           País
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="text"
             name="country"
             value={addUser.country}
@@ -131,7 +164,7 @@ const AddUser = () => {
           Tipo de Documento
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="text"
             name="docType"
             value={addUser.docType}
@@ -142,7 +175,7 @@ const AddUser = () => {
           Numero de Documento
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="text"
             name="docNum"
             value={addUser.docNum}
@@ -153,7 +186,7 @@ const AddUser = () => {
           Nombre de Usuario
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="text"
             name="username"
             value={addUser.username}
@@ -164,7 +197,7 @@ const AddUser = () => {
           Contraseña
           <br />
           <input
-            className="px-5 border border-20 mb-3"
+            className="px-5 border border-20 mb-3 shadow"
             type="password"
             name="pwd"
             value={addUser.pwd}

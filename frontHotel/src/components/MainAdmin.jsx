@@ -15,7 +15,7 @@ function MainAdmin() {
         </div>
         <div className='w-full flex'>
           <SideNavDashboard />
-          <main className='flex grow px-10 py-10'>
+          <main className='flex grow'>
             <Outlet />
           </main>
         </div>
