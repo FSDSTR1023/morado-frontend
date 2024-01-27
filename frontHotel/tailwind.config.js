@@ -12,5 +12,11 @@ export default {
   },
   plugins: [
   ],
+  variants: {
+    extend: {
+      visibility: ['responsive', 'hover', 'focus', 'group-hover'],
+    },
+  },
 }
+
 

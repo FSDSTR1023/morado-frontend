@@ -13,9 +13,9 @@ function MainAdmin() {
         <div>
           <NavAdmin />
         </div>
-        <div className='w-full flex'>
+        <div className='flex'>
           <SideNavDashboard />
-          <main className='flex grow'>
+          <main className='flex items-start w-screen justify-center'>
             <Outlet />
           </main>
         </div>

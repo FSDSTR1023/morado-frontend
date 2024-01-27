@@ -16,3 +16,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Estilo para enlaces activos */
+.active-link {
+  background-color: #003A70;
+  color: white;
+  font-weight: bold;
+}
+
+/* Estilo para enlaces inactivos */
+.inactive-link {
+  background-color: #dadada;
+  color: #003A70;
+}

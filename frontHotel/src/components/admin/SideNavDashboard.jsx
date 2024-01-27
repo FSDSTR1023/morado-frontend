@@ -48,7 +48,6 @@ const variants = {
 };
 
 const SideNavDashboard = () => {
-  const [activeSideIndex, setActiveSideIndex] = useState(0);
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
@@ -57,13 +56,12 @@ const SideNavDashboard = () => {
         animate={isExpanded ? "expanded" : "nonExpanded"}
         variants={variants}
         className={
-          "py-12 flex flex-col border border-r-1 w-1/5 h-[94vh] relative shadow-xl  bg-gray-100" +
-          (isExpanded ? " px-10" : " px-4")
+          "py-16 flex flex-col w-1/5 h-[94vh] relative bg-gray-100"
         }
       >
         <div
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-5 h-5  bg-[#003A70] rounded-full absolute -right-[10.5px] top-14 flex items-center justify-center text-white hover:cursor-pointer md:cursor-auto "
+          className="w-5 h-5  bg-[#003A70] rounded-full absolute -right-[10.5px] top-6 flex items-center justify-center text-white hover:cursor-pointer md:cursor-auto "
         >
           {isExpanded ? (
             <MdOutlineKeyboardDoubleArrowLeft />
@@ -74,40 +72,38 @@ const SideNavDashboard = () => {
 
         <div>
           {navlinks.map((item, index) => (
-            <button // * se cambia Div por button
+            <div
               key={index}
-              className={
-                //Estilo modificado para que el link funcione al hacer click en cualquier parte
-                "my-1 p-0 pl-5 pr-0 w-full h-14 rounded hover:cursor-pointer md:cursor-auto" +
-                (activeSideIndex === index
-                  ? " bg-[#003A70] hover:bg-[#003A70] text-white font-semibold"
-                  : " hover:bg-[#dadada] hover:text-[#003A70]")
-              }
-              onClick={() => setActiveSideIndex(index)}
+              className="my-1 p-0 pl-5 pr-0 w-full h-14 rounded md:cursor-auto hover:bg-white"
             >
               <NavLink
-              // esta funcion marca el elemento que está activo al entrar en una ruta especifica
-                className={({ isActive }) => {
-                  return isActive ? setActiveSideIndex(index) : "";
-                }}
                 to={item.link}
+                className={({ isActive }) => {
+                  return isActive
+                    ? "hover:ease-in-out text-[#003A70] font-bold text-lg bg-white"
+                    : "hover:ease-in-out  hover:bg-white  hover:text-[#003A70] hover:font-bold hover:text-lg ";
+                }}
               >
-                <div className="flex flex-row space-x-3 items-center ">
-                  <item.icon size={21} className="" />
+                <div className="flex flex-row space-x-3 items-center">
+                  <item.icon
+                    size={21}
+                    className={
+                      "h-14 items-center block before:text-transparent "
+                    }
+                  />
                   <span
-                    // cambiado el estilo para reubicar el texto
                     className={
                       "h-14 flex items-center " +
                       (isExpanded
-                        ? "block  max-md:hidden max-w-2 before:text-transparent after:text-black"
-                        : "hidden max-md:hidden md:w-10 after:text-transparent")
+                        ? " max-xl:hidden max-w-2 block"
+                        : "hidden max-md:hidden md:w-10 after:text-transparent px-5")
                     }
                   >
                     {item.name}
                   </span>
                 </div>
               </NavLink>
-            </button>
+            </div>
           ))}
         </div>
       </motion.div>

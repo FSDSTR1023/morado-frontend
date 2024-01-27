@@ -12,9 +12,11 @@ function BdUserslist({
   phone,
   email,
   country,
+  DoB,
   docType,
   docNum,
   username,
+  isAdmin
 }) {
   return (
     <div>
@@ -23,8 +25,11 @@ function BdUserslist({
       {phone}
       {email}
       {country}
-      {docType} {docNum}
+      {DoB}
+      {docType}
+      {docNum}
       {username}
+      {isAdmin}
     </div>
   );
 }

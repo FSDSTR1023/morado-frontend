@@ -3,7 +3,7 @@ import React from 'react'
 
 const DashboardMain = () => {
   return (
-    <div className='felx flex-col py-12 px-10'>
+    <div className='felx flex-col py-12 px-10 bg-white'>
       <h2>DASHBOARD</h2>
     </div>
     
