@@ -12,102 +12,68 @@ import { IoPeople } from "react-icons/io5";
 import { PiNotepad } from "react-icons/pi";
 import { ImCalendar } from "react-icons/im";
 import { FaHotel } from "react-icons/fa";
-import { motion } from "framer-motion";
 
 const navlinks = [
-  {
-    name: "Dashboard",
-    icon: MdDashboard,
-    link: "dashboard",
-  },
-  {
-    name: "Reservas",
-    icon: PiNotepad,
-    link: "bookings",
-  },
-  {
-    name: "Huéspedes",
-    icon: IoPeople,
-    link: "guests",
-  },
-  {
-    name: "Calendario",
-    icon: ImCalendar,
-    link: "calendar",
-  },
-  {
-    name: "Configuración",
-    icon: FaHotel,
-    link: "settings",
-  },
+  { name: "Dashboard", icon: MdDashboard, link: "dashboard" },
+  { name: "Reservas", icon: PiNotepad, link: "bookings" },
+  { name: "Huéspedes", icon: IoPeople, link: "guests" },
+  { name: "Calendario", icon: ImCalendar, link: "calendar" },
+  { name: "Configuración", icon: FaHotel, link: "settings" },
 ];
 
-const variants = {
-  expanded: { width: "300px" },
-  nonExpanded: { width: "100px" },
-};
-
 const SideNavDashboard = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
-
+  const [open, setOpen] = useState(true);
   return (
-    <>
-      <motion.div
-        animate={isExpanded ? "expanded" : "nonExpanded"}
-        variants={variants}
-        className={
-          "py-16 flex flex-col w-1/5 h-[94vh] relative bg-gray-100"
-        }
+    <section>
+      <div
+        className={`bg-gray-100 h-[94vh] ${
+          open ? "w-[200px]" : "w-[80px]"
+        } duration-200 pl-4 text-[#003A70] font-bold py-12 flex flex-col w-1/5 h-[94vh] relative bg-gray-100`}
       >
         <div
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="w-5 h-5  bg-[#003A70] rounded-full absolute -right-[10.5px] top-6 flex items-center justify-center text-white hover:cursor-pointer md:cursor-auto "
+          className="cursor-pointer self-end w-5 h-5 bg-[#003A70] rounded-full flex items-center justify-center text-white"
+          size={26}
+          onClick={() => setOpen(!open)}
         >
-          {isExpanded ? (
+          {open ? (
             <MdOutlineKeyboardDoubleArrowLeft />
           ) : (
             <MdOutlineKeyboardDoubleArrowRight />
           )}
         </div>
 
-        <div>
+        <div className="flex flex-col font-semibold">
           {navlinks.map((item, index) => (
-            <div
+            <NavLink
+              to={item.link}
               key={index}
-              className="my-1 p-0 pl-5 pr-0 w-full h-14 rounded md:cursor-auto hover:bg-white"
+              className={({ isActive }) => {
+                return isActive
+                  ? " text-[#003A70] bg-white duration-500"
+                  : " hover:bg-white hover:text-[#003A70] text-black duration-300";
+              }}
             >
-              <NavLink
-                to={item.link}
-                className={({ isActive }) => {
-                  return isActive
-                    ? "hover:ease-in-out text-[#003A70] font-bold text-lg bg-white"
-                    : "hover:ease-in-out  hover:bg-white  hover:text-[#003A70] hover:font-bold hover:text-lg ";
-                }}
-              >
-                <div className="flex flex-row space-x-3 items-center">
-                  <item.icon
-                    size={21}
-                    className={
-                      "h-14 items-center block before:text-transparent "
-                    }
-                  />
-                  <span
-                    className={
-                      "h-14 flex items-center " +
-                      (isExpanded
-                        ? " max-xl:hidden max-w-2 block"
-                        : "hidden max-md:hidden md:w-10 after:text-transparent px-5")
-                    }
-                  >
-                    {item.name}
-                  </span>
+              <div className="flex flex-row space-x-3 items-center p-4">
+                <div>
+                  <item.icon size={21} className={"items-center"} />
                 </div>
-              </NavLink>
-            </div>
+
+                <div
+                  style={{
+                    transitionDelay: `${index + 2}00ms`,
+                  }}
+                  className={`duration-500 ${
+                    !open && "opacity-0 translate-x-3 overflow-hidden "
+                  }`}
+                >
+                  {item.name}
+                </div>
+              </div>
+            </NavLink>
           ))}
         </div>
-      </motion.div>
-    </>
+      </div>
+    </section>
   );
 };
 

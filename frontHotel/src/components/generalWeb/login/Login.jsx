@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import NavAdmin from "../../admin/NavAdmin.jsx";
+import NavAdmin from "../../admin/adminActions/adminSettings/NavAdmin";
 
 const Login = () => {
   const [username, setUsername] = useState("");

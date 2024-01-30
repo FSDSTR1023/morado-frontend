@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { getAllusers } from "../../../../utils/HandelApi.jsx";
+import { getAllusers } from "../../../../utils/HandelApiUsers.jsx";
 import BdUserslist from "./../users/BdUserslist.jsx";
 import { MdDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";

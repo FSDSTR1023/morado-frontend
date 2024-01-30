@@ -1,10 +1,6 @@
-// import './App.css';
 import { Outlet } from 'react-router-dom';
-// import DashboardMain from './admin/DashboardMain.jsx';
-import NavAdmin from './admin/NavAdmin.jsx';
+import NavAdmin from './admin/adminActions/adminSettings/NavAdmin';
 import SideNavDashboard from './admin/SideNavDashboard';
-// import './styles/components.css';
-// import {Route} from 'react-router-dom'
 
 function MainAdmin() {
 

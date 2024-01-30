@@ -2,10 +2,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-
-// en esta parte estaba toda la estructura de la tabla
-// ahora la estructura esta en UsersList.jsx
-// =============================================================================
 function BdUserslist({
   name,
   lastName,
