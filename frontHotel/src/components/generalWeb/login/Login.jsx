@@ -1,13 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import NavAdmin from "../../admin/adminActions/adminSettings/NavAdmin";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Aquí puedes realizar la lógica de autenticación
+    try {
+      const response = await axios.post("/api/login", { username, password });
+      console.log("Respuesta del servidor:", response.data);
+      // Puedes manejar la respuesta del servidor según tus necesidades
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.response.data);
+      // Puedes manejar el error según tus necesidades
+    }
     console.log("Usuario:", username);
     console.log("Contraseña:", password);
     // También puedes realizar una llamada a la API para autenticar al usuario
