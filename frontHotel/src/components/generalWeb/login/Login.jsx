@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async () => {
     // Aquí puedes realizar la lógica de autenticación
     try {
-      const response = await axios.post("http://localhost:5000/auth", { username, password });
+      const response = await axios.post("auth/api/login", { username, password });
       console.log("Respuesta del servidor:", response.data);
       // Puedes manejar la respuesta del servidor según tus necesidades
     } catch (error) {
