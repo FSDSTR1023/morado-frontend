@@ -26,8 +26,8 @@ const { adults, setAdults } = useContext(PplContext)
     <Menu.Items as='ul' className='bg-white absolute w-full flex flex-col z-40 shadow-xl' >
       {list.map((li, index) => {
           return (
-            <Menu.Item onClick={() => 
-            setAdults(li.name)}
+            <Menu.Item 
+            onClick={() => setAdults(li.name)}
             as='li'
             className='border-b last-of-type:border-b-0 h-12 hover:bg-accent hover:text-white w-full flex justify-center items-center cursor-pointer'
             key={index}>

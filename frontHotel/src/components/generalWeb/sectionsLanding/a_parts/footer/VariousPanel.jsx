@@ -10,18 +10,20 @@ const VariousPanel = () => {
 
         <form className="w-[80%]">
             <div className="place-content-center">
-              <label className="block text-sm font-medium leading-6 text-gray-900"> Nombre <br />
-                <input className="w-full px-2 border border-20 shadow" type="text" name="name" />
-              </label> {/* ------------------------- */}
-              <label className="block text-sm font-medium leading-6 text-gray-900"> Teléfono <br />
-                <input className="w-full px-2 border border-20 shadow" type="number" name="telefono" />
-              </label> {/* ------------------------- */}
-              <label className="block text-sm font-medium leading-6 text-gray-900"> Email <br />
-                <input className="w-full px-2 border border-20 shadow" type="email" name="email" />
-              </label> {/* ------------------------- */}
-              <label className="block text-sm font-medium leading-6 text-gray-900"> Mensaje <br />
-                <textarea className="w-full px-2 border border-20 shadow" type="text" name="mensaje"/>
-              </label> {/* ------------------------- */}
+              <div className="flex flex-row gap-3 mt-2">
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Nombre <br />
+                  <input className="w-full px-2 border border-20 shadow" type="text" name="name" />
+                </label> {/* ------------------------- */}
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Teléfono <br />
+                  <input className="w-full px-2 border border-20 shadow" type="number" name="telefono" />
+                </label> {/* ------------------------- */}
+              </div>
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Email <br />
+                  <input className="w-full px-2 border border-20 shadow" type="email" name="email" />
+                </label> {/* ------------------------- */}
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Mensaje <br />
+                  <textarea className="w-full px-2 border border-20 shadow resize-none" type="text" name="mensaje" rows="3"/>
+                </label> {/* ------------------------- */}
             </div>
  
             <div className="w-full flex flex-row justify-center gap-5">

@@ -8,11 +8,12 @@ import FotoUsuario from "../../buttons/FotoUsuario";
 
 function NavBar() {
   let LinksMain = [
-    { name: "Inicio", link: "#Home" },
-    { name: "Habitaciones", link: "#Rooms" },
-    { name: "Ubicación", link: "#Location" },
-    { name: "Reseñas", link: "#Review" },
-    { name: "Preguntas Frecuentes", link: "#Faquestions" },
+    { name: "Inicio", link: "/#Home" },
+    { name: "Nosotros", link: "/#Hotel" },
+    { name: "Habitaciones", link: "/#Rooms" },
+    { name: "Ubicación", link: "/#Location" },
+    { name: "Reseñas", link: "/#Review" },
+    { name: "Preguntas Frecuentes", link: "/#Faquestions" },
   ];
 
   let LinksLogin = [

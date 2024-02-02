@@ -9,6 +9,7 @@ import Faquestions from "./generalWeb/sectionsLanding/Faquestions.jsx"
 import Footer from './generalWeb/sectionsLanding/a_parts/footer/Footer.jsx'
 import BookForm from './generalWeb/sectionsLanding/a_parts/BookForm.jsx'
 import HeroSlider from "./generalWeb/sectionsLanding/a_parts/HeroSlider.jsx"
+import Hotel from "./generalWeb/sectionsLanding/Hotel.jsx"
 
 const HomeRes = () => {
   return (
@@ -21,6 +22,8 @@ const HomeRes = () => {
             <BookForm  />
           </div>
         </div>
+        
+      <div className="self-baseline" id="Hotel"><Hotel  /></div>
 
       <div className="self-baseline" id="Rooms"><Rooms  /></div>
       {/* <div className="self-baseline" id="Location"><Location  /></div> */}

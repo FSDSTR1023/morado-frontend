@@ -27,9 +27,6 @@ const handleClick = (e) => {
   return total <= room.maxPeople
 })
   setAllRooms(newRooms)
-  
-  // console.log(newRooms)
-  // console.log(total)
 }
 
 

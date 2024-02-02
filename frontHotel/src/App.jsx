@@ -9,11 +9,18 @@ import Settings from './components/admin/adminActions/adminSettings/Settings.jsx
 import AddUser from './components/admin/adminActions/users/AddUsers.jsx';
 import UsersList from './components/admin/adminActions/users/UsersList.jsx';
 
+import Conditions from './components/generalWeb/Conditions.jsx'
+import Policies from './components/generalWeb/Policies.jsx';
+
 function App() {
   return (
     <div>
       <Routes>
         <Route path='/' element={<HomeRes />} />
+
+        <Route path='/policies' element={<Policies />} />
+        <Route path='/conditions' element={<Conditions />} />
+
         <Route path='/#Rooms/:id' element={<HomeRes />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/adminctrl' element={<MainAdmin />}>

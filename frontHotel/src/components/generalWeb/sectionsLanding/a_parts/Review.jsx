@@ -2,35 +2,6 @@
 // import React from 'react'
 import { Typography, Avatar, Rating } from "@material-tailwind/react";
 
-// let info2 = [
-//   {
-//     id: 1,
-//     opinion:
-//       "This is an excellent product, the documentation is excellent and helped me get things done more efficiently.",
-//     src: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80z",
-//     name: "Toni Andrew",
-//     desc: "Lead Frontend Developer",
-//     value: 2,
-//   },
-//   {
-//     id: 2,
-//     opinion:
-//       "This is an excellent product, the documentation is excellent and helped me get things done more efficiently.",
-//     src: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80z",
-//     name: "Toni Andrew",
-//     desc: "Lead Frontend Developer",
-//     value: 5,
-//   },
-//   {
-//     id: 3,
-//     opinion:
-//       "This is an excellent product, the documentation is excellent and helped me get things done more efficiently.",
-//     src: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80z",
-//     name: "Toni Andrew",
-//     desc: "Lead Frontend Developer",
-//     value: 3,
-//   },
-// ];
 
 const Review = ({ info }) => {
     const {
@@ -38,7 +9,6 @@ const Review = ({ info }) => {
       opinion,
       src,
       name,
-      desc,
       value
     } = info;
 
@@ -50,16 +20,13 @@ const Review = ({ info }) => {
               <Typography
                 variant="h2"
                 color="blue-gray"
-                className="mb-6 font-medium"
+                className="mb-6 font-normal text-[1rem]"
               >
                 &quot; {opinion} &quot;
               </Typography>
               <Avatar className="rounded-full max-w-full w-[80px] h-[80px] shadow-xl" src={src} size="md" />
               <Typography variant="h6" className="mt-4">
                 {name}
-              </Typography>
-              <Typography color="gray" className="mb-4 font-normal">
-                {desc}
               </Typography>
               <Rating
                 value={value}
