@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import NavAdmin from "../../admin/adminActions/adminSettings/NavAdmin";
+// import NavAdmin from "../../admin/adminActions/adminSettings/NavAdmin";
+import NavBar from "../sectionsLanding/a_parts/NavBar";
 import axios from "axios";
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
   const handleLogin = async () => {
     // Aquí puedes realizar la lógica de autenticación
     try {
-      const response = await axios.post("/api/login", { username, password });
+      const response = await axios.post("http://localhost:5000/auth", { username, password });
       console.log("Respuesta del servidor:", response.data);
       // Puedes manejar la respuesta del servidor según tus necesidades
     } catch (error) {
@@ -24,7 +25,7 @@ const Login = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <NavAdmin />
+      <NavBar />
       <div className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-xs rounded">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
