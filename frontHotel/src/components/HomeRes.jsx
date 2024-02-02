@@ -10,6 +10,9 @@ import Footer from './generalWeb/sectionsLanding/a_parts/footer/Footer.jsx'
 import BookForm from './generalWeb/sectionsLanding/a_parts/BookForm.jsx'
 import HeroSlider from "./generalWeb/sectionsLanding/a_parts/HeroSlider.jsx"
 import Hotel from "./generalWeb/sectionsLanding/Hotel.jsx"
+import Login from "./generalWeb/login/Login.jsx"
+
+
 
 const HomeRes = () => {
   return (
@@ -30,6 +33,7 @@ const HomeRes = () => {
       <div className="self-baseline" id="Review"><ReviewGroup  /></div>
       <div className="shadow-xl mb-10" id="Faquestions">
           <Faquestions  />
+          <Login />
       </div>
       <Footer />
     </div>
