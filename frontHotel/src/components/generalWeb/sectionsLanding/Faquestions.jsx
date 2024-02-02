@@ -67,9 +67,6 @@ let info2 = [
   },
 ];
 
-
-
-
 export default function AccordionCustomAnimation() {
   const [open, setOpen] = React.useState(0);
 
