@@ -18,10 +18,13 @@
 //     },
 //   },
 // }
+const withMT = require("@material-tailwind/react/utils/withMT");
 
-module.exports = {
+module.exports = withMT ({
   content: ['./src/**/*.{js,jsx,ts,tsx}',
-            "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",],
+            "./node_modules/tw-elements-react/dist/js/**/*.js"]
+  ,
+            // './node_modules/react-tailwindcss-datepicker/dist/index.esm.js'],
   theme: {
     fontFamily: {
       primary: 'Gilda Display',
@@ -52,6 +55,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
-};
+  plugins: [
+    require("tw-elements-react/dist/plugin.cjs")
+  ],
+});
 

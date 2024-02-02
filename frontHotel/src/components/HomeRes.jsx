@@ -3,10 +3,10 @@
 import NavBar from "./generalWeb/sectionsLanding/a_parts/NavBar.jsx"
 // import Home from "./generalWeb/sectionsLanding/Home.jsx"
 import Rooms from "./generalWeb/sectionsLanding/a_parts/Rooms.jsx"
-import Location from "./generalWeb/sectionsLanding/Location.jsx"
-import Review from "./generalWeb/sectionsLanding/Review.jsx"
+// import Location from "./generalWeb/sectionsLanding/Location.jsx"
+import ReviewGroup from "./generalWeb/sectionsLanding/a_parts/ReviewGroup.jsx"
 import Faquestions from "./generalWeb/sectionsLanding/Faquestions.jsx"
-import Footer from './generalWeb/sectionsLanding/a_parts/Footer.jsx'
+import Footer from './generalWeb/sectionsLanding/a_parts/footer/Footer.jsx'
 import BookForm from './generalWeb/sectionsLanding/a_parts/BookForm.jsx'
 import HeroSlider from "./generalWeb/sectionsLanding/a_parts/HeroSlider.jsx"
 
@@ -23,9 +23,11 @@ const HomeRes = () => {
         </div>
 
       <div className="self-baseline" id="Rooms"><Rooms  /></div>
-      <div className="self-baseline" id="Location"><Location  /></div>
-      <div className="self-baseline" id="Review"><Review  /></div>
-      <div className="self-baseline" id="Faquestions"><Faquestions  /></div>
+      {/* <div className="self-baseline" id="Location"><Location  /></div> */}
+      <div className="self-baseline" id="Review"><ReviewGroup  /></div>
+      <div className="shadow-xl mb-10" id="Faquestions">
+          <Faquestions  />
+      </div>
       <Footer />
     </div>
   )

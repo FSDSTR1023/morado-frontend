@@ -1,8 +1,15 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 // import React from 'react'
 
-const Location = () => {
+import React from 'react';
+
+const Location = (props) => {
   return (
-    <div className="bg-blue-400 h-screen">Location</div>
+    <div>
+
+      
+    </div>
   )
 }
 
