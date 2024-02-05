@@ -6,10 +6,10 @@ import VariousPanel from './VariousPanel';
 
 const Footer = () => {
   return (
-  <footer className='bg-white'>
+  <footer className='bg-white w-full'>
     <div className='shadow-xl mb-5'>
       <div className='container mx-auto lg:px-0'>
-          <div className='grid grid-cols-1 mx-auto gap-[30px] lg:grid-cols-3 lg:max-w-none lg:mx-0 py-4'>
+          <div className='grid grid-cols-1 px-5 gap-[30px] lg:grid-cols-3 lg:mx-0 py-4'>
               <div className='min-h-[100px] mb-auto md:mb-5'>
                 <LinksPagesFooter />
               </div>

@@ -8,8 +8,8 @@ import { BsChevronDown } from 'react-icons/bs';
 const list =[
   {name: '0 Niños' },
   {name: '1 Niño'},
-  {name: '3 Niños'},
-  {name: '4 Niños'}
+  {name: '2 Niños'},
+  {name: '3 Niños'}
 ]
 
 const KidsDropdown = () => {

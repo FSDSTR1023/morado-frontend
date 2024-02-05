@@ -7,7 +7,7 @@ import { IoPerson } from "react-icons/io5";
 import { IoPeople } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 
-const Room = ({ room }) => {
+const FilteredRoomDesign = ({ room }) => {
   const {
     _id,
     roomNum,
@@ -22,7 +22,25 @@ const Room = ({ room }) => {
     bedNum,
     bedType,
     photos,
+    featured
   } = room;
+
+  // Muetra Todos los amenities individualmente
+  // ===================================================================
+  // const amenitiesList = room.amenities.map((amenity, index) => (
+  //   <div key={index}>
+  //     {amenity}
+  //   </div>
+  // ));
+
+  // Muestra cada una de las fotos
+  // ===================================================================
+  // const fotos = room.photos.map((foto, index) => (
+  //   <div key={index}>
+  //     <img src={foto} alt="" />
+  //   </div>
+  // ));
+
   return (
     <div className="bg-white shadow-2xl min-h-[550px] group">
       {/* ==== imagen =============== */}
@@ -101,4 +119,4 @@ const Room = ({ room }) => {
   );
 };
 
-export default Room;
+export default FilteredRoomDesign;

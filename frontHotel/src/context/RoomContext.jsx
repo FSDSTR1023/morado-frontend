@@ -9,7 +9,13 @@ export const PplContext = createContext()
 const RoomProvider = ({ children }) => {
   const [allRooms, setAllRooms] = useState([]);
 
-  const [adults, setAdults] = useState( '1 Adulto' );
+  const [CheckIn, setCheckIn] = useState ('')
+  const [CheckOut, setCheckOut] = useState ('')
+
+  console.log(CheckIn)
+  // console.log(CheckOut)
+
+  const [adults, setAdults] = useState( '1 Adultos' );
   const [kids, setKids] = useState( '0 Niños' );
   const [total, setTotal] = useState(0);
 
@@ -22,17 +28,17 @@ useEffect(() => {
 },[adults, kids]);
 
 const handleClick = (e) => {
-  e.preventDefault();
-  const newRooms = allRooms.filter((room) => {
-  return total <= room.maxPeople
-})
-  setAllRooms(newRooms)
+//   e.preventDefault();
+//   const newRooms = allRooms.filter((room) => {
+//   return total <= room.maxPeople
+// })
+//   setAllRooms(newRooms)
 }
 
 
 return (
     <RoomContext.Provider value={allRooms}  >
-      <PplContext.Provider value={{adults, setAdults, kids, setKids, handleClick}}>
+      <PplContext.Provider value={{adults, setAdults, kids, setKids, handleClick, CheckIn, setCheckIn, CheckOut, setCheckOut, total}}>
         {children}
       </PplContext.Provider>
     </RoomContext.Provider>

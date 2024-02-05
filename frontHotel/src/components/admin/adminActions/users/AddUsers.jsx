@@ -141,7 +141,7 @@ const AddUser = () => {
 
           <div className="border-b-black border-b-2 my-7 flex flex-row justify-between">
             Información de Usuario
-º          </div>
+         </div>
 
           <div className="flex gap-5 px-5"> 
             {/* ================================================================================== */}

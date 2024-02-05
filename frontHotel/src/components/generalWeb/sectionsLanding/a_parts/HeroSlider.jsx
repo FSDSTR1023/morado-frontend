@@ -31,15 +31,16 @@ const HeroSlider = () => {
     <Swiper 
     // modules={[EffectFade, Autoplay]}
     effect={'fade'}
-    loop={true}
+    loop= 'true'
     autoplay={{
-      delay:1000,
+      delay:500,
       disableOnInteraction: false,
     }}
     className='heroSlider h-[600px] lg:h-[650px]'>
       {slides.map((slide, index) => {
         const {title, bg, btnText} = slide
-        return <SwiperSlide key={index} className='h-full relative flex justify-center items-center'>
+        return (
+        <SwiperSlide key={index} className='h-full relative flex justify-center items-center'>
            <div className='z-20 text-white text-center'>
               <div className='uppercase font-tertiary tracking-[4px] mb-5'>
                 Solo relájate y dispfruta
@@ -58,7 +59,8 @@ const HeroSlider = () => {
               alt="" />
            </div>
            <div className='absolute w-full h-full bg-black/70'></div>
-          </SwiperSlide>;
+          </SwiperSlide>
+          );
       })}
     </Swiper>
   )

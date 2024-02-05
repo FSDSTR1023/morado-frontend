@@ -1,32 +1,21 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import DatePicker from "react-datepicker"
-import 'react-datepicker/dist/react-datepicker.css';
-import './datepicker.css';
-import { BsCalendar } from 'react-icons/bs'
-
+import React, { useContext, useState } from "react";
+import { RoomContext, PplContext } from "../../../../context/RoomContext";
+import "react-datepicker/dist/react-datepicker.css";
+import "./datepicker.css";
 
 const CheckIn = () => {
+  const { CheckIn, setCheckIn } = useContext(PplContext);
 
-    const [startDate, setStartDate] = useState(false)
-    // relative flex items-center justify-end h-full
-    return (
-    <div className='relative flex items-center justify-end h-full'>
-        <div className='absolute z-20 pr-8 '>
-            <div>
-                <BsCalendar className='text-accent text-base' />
-            </div>
-        </div>
-        <div className='w-full h-full'>
-            <DatePicker 
-                className='w-full h-full'
-                selected={startDate}
-                placeholderText='Check in'
-                onChange={(date) => setStartDate(date)}
-            />
-        </div>
+  return (
+    <div className="flex items-center justify-center h-full w-full">
+      <div className="flex flex-row lg:flex-col w-full h-full items-center">
+            <label className="pl-2 w-[150px] lg:w-full h-full font-bold flex items-center text-black border-b-0 lg:border-b-2">Check-in:</label>
+            <input className="w-full h-full self-center px-2 pl-4 cursor-text" type="date" value={CheckIn} name="CheckIn" onChange={(e) => { setCheckIn(e.target.value); }} />
+        {/* ================================================================================== */}
+      </div>
     </div>
-    );
+  );
 };
 
 export default CheckIn;

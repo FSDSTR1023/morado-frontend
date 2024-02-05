@@ -72,6 +72,9 @@ const SideNavDashboard = () => {
             </NavLink>
           ))}
         </div>
+        <div>
+
+        </div>
       </div>
     </section>
   );

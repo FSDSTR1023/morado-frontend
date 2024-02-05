@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { Input, Textarea } from "@material-tailwind/react";
 
 const VariousPanel = () => {
   return (
@@ -8,22 +9,19 @@ const VariousPanel = () => {
         Déjanos un mensaje
       </div>
 
-        <form className="w-[80%]">
-            <div className="place-content-center">
-              <div className="flex flex-row gap-3 mt-2">
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Nombre <br />
-                  <input className="w-full px-2 border border-20 shadow" type="text" name="name" />
-                </label> {/* ------------------------- */}
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Teléfono <br />
-                  <input className="w-full px-2 border border-20 shadow" type="number" name="telefono" />
-                </label> {/* ------------------------- */}
+        <form>
+            <div className="place-content-center mx-5">
+              <div className="flex flex-row mb-2 gap-2 mt-3">
+                  <Input  className='bg-white' label='Nombre' type="text" name="name" />
+                  <Input className='bg-white' label='Teléfono' type="number" name="telefono" />
               </div>
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Email <br />
-                  <input className="w-full px-2 border border-20 shadow" type="email" name="email" />
-                </label> {/* ------------------------- */}
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Mensaje <br />
-                  <textarea className="w-full px-2 border border-20 shadow resize-none" type="text" name="mensaje" rows="3"/>
-                </label> {/* ------------------------- */}
+                  <div className="mb-2">
+                    <Input className='bg-white' label='E-mail' type="email" name="email" />
+                  </div>
+                  <div className="mb-2" >
+                    <Textarea className='bg-white' label='Mensaje'  size="md" type="text" name="mensaje"/>
+                  </div>
+                  
             </div>
  
             <div className="w-full flex flex-row justify-center gap-5">
