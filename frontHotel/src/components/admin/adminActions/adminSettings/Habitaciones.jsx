@@ -169,7 +169,7 @@ const AddRoom = () => {
         </form>
 
         <img className="ml-7 w-80 object-cover shadow-2xl" 
-            src="https://images.pexels.com/photos/5371683/pexels-photo-5371683.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src="https://cdn.pixabay.com/photo/2019/07/16/02/12/hotel-4340863_1280.jpg"
             alt="Agregar Habitación" 
         />
 
