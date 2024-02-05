@@ -18,7 +18,7 @@ const navlinks = [
   { name: "Reservas", icon: PiNotepad, link: "bookings" },
   { name: "Huéspedes", icon: IoPeople, link: "guests" },
   { name: "Calendario", icon: ImCalendar, link: "calendar" },
-  { name: "Configuración", icon: FaHotel, link: "settings" },
+  { name: "Habitaciones", icon: FaHotel, link: "settings" },
 ];
 
 const SideNavDashboard = () => {
