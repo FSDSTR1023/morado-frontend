@@ -12,16 +12,16 @@ const MainBooking = () => {
         <NavBar />
       </div>
       {/*==================================================================*/}
-      <div className='flex flex-col-reverse lg:flex-row'>
+      <div className='flex flex-col-reverse lg:flex-row mx-2 lg:mx-20'>
         <main className='w-full justify-center'>
           <Outlet />
         </main>
-        <div className='w-full lg:w-3/4'>
+        <div className='w-full lg:w-1/2 justify-center'>
           <ResDetails />
         </div>
       </div>
       {/*==================================================================*/}
-      <div>
+      <div className='mt-5 lg:mt-10'>
         <Footer />
       </div>
     </>

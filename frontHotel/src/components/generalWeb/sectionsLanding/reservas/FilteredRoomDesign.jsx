@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoBedOutline } from "react-icons/io5";
 import { IoPerson } from "react-icons/io5";
 import { IoPeople } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
+import { RiArrowRightDoubleLine } from "react-icons/ri";
+import { PplContext } from "../../../../context/RoomContext";
 
 const Room = ({ room }) => {
   const {
@@ -25,13 +27,13 @@ const Room = ({ room }) => {
     featured
   } = room;
 
-  // Muetra Todos los amenities individualmente
-  // ===================================================================
   const amenitiesList = room.amenities.map((amenity, index) => (
     <div key={index}>
       {amenity}
     </div>
   ));
+
+  const {handleresRoom} = useContext(PplContext)
 
   // Muestra cada una de las fotos
   // ===================================================================
@@ -116,19 +118,39 @@ const Room = ({ room }) => {
               {/* <Link to={"/#Rooms/" + _id} className="btn btn-secondary btn-sm max-w-[240px] mx-auto self-end">
                   Reserva desde €{rate}
                 </Link> */}
-
-              <div className="flex justify-center flex-col lg:flex-row w-full h-1/2 lg:gap-5 px-5 mb-3 content-end">
-                <div className="w-full mb-2 ml-5 lg:mb-0">
-                  {amenitiesList.slice(0, 3)}
-                </div>
-                {/* ------------------------------------------------------------- */}
-                <div className="flex flex-col w-full">
-                      <div className="flex flex-row font-extrabold text-2xl justify-end text-accent">
-                        <span className="mr-2">€</span>{rate}
-                      </div>
-                  <div className="flex-col text-right">
-                      <div className="text-gray-700">Por noche</div>
-                      <div className="font-normal text-sm">Impuestos y tasas incluidos (puede aplicar un impuesto municipal adicional)</div>
+              <div className="flex flex-col">
+                <div className="flex justify-center flex-col lg:flex-row w-full h-1/2 lg:gap-3 px-5 mb-3 content-end">
+                  <div className="w-full">
+                    <div className="w-full font-bold text-md border-b-2">
+                      Servicios en la habitación
+                    </div>
+                    <div className="w-full mb-2 pl-5 lg:mb-0">
+                      {amenitiesList.slice(0, 3)}
+                    </div>
+                  </div>
+                  {/* ------------------------------------------------------------- */}
+                  <div className="flex flex-col w-full">
+                        <div className="flex flex-row font-extrabold text-2xl justify-end text-accent">
+                          <span className="mr-2">€</span>{rate}
+                        </div>
+                    <div className="flex-col text-right">
+                        <div className="text-gray-700">Por noche</div>
+                        <div className="font-normal text-sm">Impuestos y tasas incluidos (puede aplicar un impuesto municipal adicional)</div>
+                    </div>
+                  </div>
+                </div> {/* ---------------------------------------------- */}
+                <div className=" flex flex-col lg:flex-row gap-5 w-full mb-3 justify-center items-center">
+                  <Link to={"/roomdetails/" + room._id} className="w-full flex justify-start hover:text-accent-hover">
+                    <div className=" flex justify-center items-center mx-2"><RiArrowRightDoubleLine  size={18}/></div>
+                    <div className="flex-flex-row underline" >
+                      Detalle de la habitación
+                    </div>
+                  </Link>
+                
+                  <div className="w-full flex justify-center mx-5">
+                    <button onClick={(e) => handleresRoom(e)} className="btn btn-secondary btn-xs rounded-full shadow-xl">
+                      Reservar
+                    </button>
                   </div>
                 </div>
               </div>
