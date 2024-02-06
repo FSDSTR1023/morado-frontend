@@ -35,10 +35,10 @@ const AddRoom = () => {
     event.preventDefault();
         try {
             if (urlId) {
-            await axios.put(`http://localhost:5000/users/${urlId}`, addRoom);
+            await axios.put(`http://localhost:5000/rooms/${urlId}`, addRoom);
             console.log("Habitación actualizada con éxito");
         } else {
-            await axios.post("http://localhost:5000/users", addRoom);
+            await axios.post("http://localhost:5000/rooms", addRoom);
             console.log("Habitación registrada con éxito");
         }
     setAddRoom(newRoomInit);
@@ -51,19 +51,20 @@ const AddRoom = () => {
     const actualId = async (idValue) => {
     const res = await axios.get("http://localhost:5000/rooms/" + idValue);
     setAddRoom({
-        name: res.data.name,
-        lastName: res.data.lastName,
-        phone: res.data.phone,
-        email: res.data.email,
-        DoB: res.data.DoB,
-        country: res.data.country,
-        docType: res.data.docType,
-        docNum: res.data.docNum,
-        username: res.data.username,
-        pwd: res.data.pwd,
-        isAdmin: res.data.isAdmin
+        
+        roomNum: res.data.roomNum,
+        title: res.data.title,
+        isSuite: res.data.isSuite,
+        roomType: res.data.roomType,
+        desc: res.data.desc,
+        amenities: res.data.amenities,
+        rate: res.data.rate,
+        maxPeople: res.data.maxPeople,
+        status: res.data.status,
+        bedNum: res.data.bedNum,
+        bedType: res.data.bedType,
+        photos: res.data.photo
     });
-    console.log(res.data.isAdmin)
   };
 
 
@@ -98,42 +99,45 @@ const AddRoom = () => {
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
         <div>
         <div className="border-b-black border-b-2 mb-7">
-            Datos Personales
+            Datos Habitación
         </div>
         <div className="place-content-center px-5"> 
             <div className="flex flex-row gap-5"> {/* =================================================== */}
                 <label className="block text-sm font-medium leading-6 text-gray-900"> Número de Habitación <br />
-                <input className="px-2 border border-20 mb-3 shadow w-72" type="text" name="name" value={addRoom.roomNum} onChange={handleOnChange} />
+                <input className="px-2 border border-20 mb-3 shadow w-72" type="text" name="roomNum" value={addRoom.roomNum} onChange={handleOnChange} />
                 </label>
             {/* ------------------------- */}
             <label className="block text-sm font-medium leading-6 text-gray-900"> Titulo de Habitación <br />
-                <input className="px-2 border border-20 mb-3 shadow w-72" type="text" name="lastName" value={addRoom.title} onChange={handleOnChange} />
+                <input className="px-2 border border-20 mb-3 shadow w-72" type="text" name="title" value={addRoom.title} onChange={handleOnChange} />
             </label>
               </div> {/* ================================================================================== */}
 
 
-            <label className="block text-sm font-medium leading-6 text-gray-900"> Fecha de Nacimiento <br />
-                <input className="px-2 border border-20 mb-3 shadow pr-1" type="date" name="DoB" value={addRoom.DoB} onChange={handleOnChange} />
+            <label className="block text-sm font-medium leading-6 text-gray-900"> Suite<br />
+                <input className="px-2 border border-20 mb-3 shadow pr-1" type="checkbox" name="isSuite" value={addRoom.isSuite} onChange={handleOnChange} />
             </label>{/* ================================================================================== */}
 
             <div className="flex flex-row gap-4">
-                <label className="block text-sm font-medium leading-6 text-gray-900"> País <br />
-                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="country" value={addRoom.country} onChange={handleOnChange} />
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Tipo de Habitación <br />
+                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="roomType" value={addRoom.roomType} onChange={handleOnChange} />
                 </label>{/* ================================================================================== */}
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Tipo de Documento <br />
-                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="docType" value={addRoom.docType} onChange={handleOnChange} />
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Descripción <br />
+                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="desc" value={addRoom.desc} onChange={handleOnChange} />
                 </label>{/* ================================================================================== */}
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Numero de Documento <br />
-                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="docNum" value={addRoom.docNum} onChange={handleOnChange} />
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Amenities <br />
+                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="amenities" value={addRoom.amenities} onChange={handleOnChange} />
                 </label>{/* ================================================================================== */}
             </div>
 
             <div className="flex flex-row gap-4 w-full">
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Teléfono <br />
-                    <input className="px-2 border border-20 mb-3 shadow " type="number" name="phone" value={addRoom.phone} onChange={handleOnChange} />
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Rate <br />
+                    <input className="px-2 border border-20 mb-3 shadow " type="number" name="rate" value={addRoom.rate} onChange={handleOnChange} />
                 </label>{/* ================================================================================== */}
-                <label className="block text-sm font-medium leading-6 text-gray-900"> Email <br />
-                    <input className="px-2 border border-20 mb-3 shadow w-[208%]" type="email" name="email" value={addRoom.email} onChange={handleOnChange} />
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Máximo de personas <br />
+                    <input className="px-2 border border-20 mb-3 shadow" type="number" name="maxPeople" value={addRoom.maxPeople} onChange={handleOnChange} />
+                </label>
+                <label className="block text-sm font-medium leading-6 text-gray-900"> Número de camas <br />
+                    <input className="px-2 border border-20 mb-3 shadow" type="number" name="bedNum" value={addRoom.bedNum} onChange={handleOnChange} />
                 </label>{/* ================================================================================== */}
                 </div>
             </div>
@@ -141,23 +145,12 @@ const AddRoom = () => {
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
 
         <div className="border-b-black border-b-2 my-7 flex flex-row justify-between">
-            Información de Usuario
+            Fotos de la habitación
         </div>
 
         <div className="flex gap-5 px-5"> 
             {/* ================================================================================== */}
-            <label className="block text-sm font-medium leading-6 text-gray-900"> Nombre de Usuario <br />
-                <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="username" value={addRoom.username} onChange={handleOnChange} />
-            </label>
-            {/* ================================================================================== */}
-            <label className="block text-sm font-medium leading-6 text-gray-900"> Contraseña <br />
-                <input className="px-2 border border-20 mb-3 shadow w-full" type="password" name="pwd" value={addRoom.pwd} onChange={handleOnChange} />
-            </label>
-            {/* ================================================================================== */}
-            <label className="flex text-sm font-medium leading-6 text-gray-900 align-middle">
-                <input className="px-2 border border-20 mx-3 w-full" type="checkbox" name="isAdmin" checked={addRoom.isAdmin} onChange={handleOnChange} />
-                Administrador
-            </label>
+            
         </div>
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
         </div>
@@ -178,4 +171,4 @@ const AddRoom = () => {
     );
 };
 
-export default AddRoom
+export default AddRoom;
