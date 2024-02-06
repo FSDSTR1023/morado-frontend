@@ -23,10 +23,16 @@ const AddRoom = () => {
     let { id } = useParams();
     const [addRoom, setAddRoom] = useState(newRoomInit);
     const [urlId, setUrlId] = useState(id || "");
+    const [image, setImage] = useState(null);
+
+    const handleImageChange = (event) => {
+      const file = event.target.files[0];
+      setImage(file);
+    };
 
     const handleOnChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const newValue = type === "checkbox" ? checked : value;
+        const { roomNum, title, roomType, isSuite } = event.target;
+        const newValue = isSuite === "checkbox" ? checked : value;
 
     setAddRoom((prevData) => ({ ...prevData, [name]: newValue }));
     };
@@ -50,8 +56,7 @@ const AddRoom = () => {
 
     const actualId = async (idValue) => {
     const res = await axios.get("http://localhost:5000/rooms/" + idValue);
-    setAddRoom({
-        
+    setAddRoom({      
         roomNum: res.data.roomNum,
         title: res.data.title,
         isSuite: res.data.isSuite,
