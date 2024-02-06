@@ -15,6 +15,7 @@ import ResConfirmation from './components/generalWeb/sectionsLanding/reservas/Re
 
 import Conditions from './components/generalWeb/Conditions.jsx'
 import Policies from './components/generalWeb/Policies.jsx';
+import RoomDetails from './components/generalWeb/sectionsLanding/reservas/RoomDetails.jsx';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/' element={<HomeRes />} />
         <Route path='/policies' element={<Policies />} />
         <Route path='/conditions' element={<Conditions />} />
+        <Route path='/roomdetails/:id' element={<RoomDetails />}/>
         {/* ===================================================================== */}
         <Route path='/bookings' element={<MainBooking />}>
               <Route path='rooms' element={<ResRoom />}/>

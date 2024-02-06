@@ -4,6 +4,11 @@ import { RoomContext, PplContext } from "../../../../context/RoomContext";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.css";
 
+
+const EditNew = () =>{
+  
+}
+
 const CheckIn = () => {
   const { CheckOut, setCheckOut } = useContext(PplContext);
 

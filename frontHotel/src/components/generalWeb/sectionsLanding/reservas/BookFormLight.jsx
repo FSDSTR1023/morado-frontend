@@ -4,9 +4,6 @@ import AdultsDropdown from '../a_parts/AdultsDropdown.jsx'
 import KidsDropdown from '../a_parts/KidsDropdown.jsx'
 import CheckIn from '../a_parts/CheckIn.jsx'
 import CheckOut from '../a_parts/CheckOut.jsx'
-import { RoomContext, PplContext } from '../../../../context/RoomContext.jsx';
-
-
 
 const BookFormLight = () => {
 return (

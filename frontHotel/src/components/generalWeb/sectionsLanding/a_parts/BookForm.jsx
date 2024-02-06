@@ -7,8 +7,18 @@ import CheckOut from './CheckOut.jsx'
 import { RoomContext, PplContext } from '../../../../context/RoomContext.jsx';
 import { Link } from 'react-router-dom';
 
+// const handleClick = (e) => {
+  //   e.preventDefault();
+  //   const newRooms = allRooms.filter((room) => {
+  //   return total <= room.maxPeople
+  // })
+  //   setAllRooms(newRooms)
+  // }
+  
+
 const BookForm = () => {
   const {handleClick} = useContext(PplContext)
+
   return (
   <form className='h-[300px] bg-white w-full lg:h-[70px]'>
     <div className='flex flex-col w-full h-full lg:flex-row'>
@@ -24,9 +34,9 @@ const BookForm = () => {
       <div className='flex-1 border-r'>
         <KidsDropdown />
       </div>
-      <button onClick={(e) => handleClick(e)} type='submit' className='btn btn-primary w-full h-full'>
+      <button type='submit' className='btn btn-primary w-full h-full'>
       <Link className='w-full h-full flex justify-center items-center' to='/bookings/rooms'>
-        Buscar
+          Buscar
       </Link>
       </button>
     </div>
