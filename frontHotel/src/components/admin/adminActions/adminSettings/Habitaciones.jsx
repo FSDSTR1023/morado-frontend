@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PiUserListFill } from "react-icons/pi";
 
+const cloudinaryUploadPresets = import.meta.env.VITE_CLOUDINARY_UPLOADPRESETS;
+const cloudinaryname = import.meta.env.VITE_CLOUDINARY_NAME;
+
 const AddRoom = () => {
     const newRoomInit = {
         roomNum: 0,
@@ -14,7 +17,7 @@ const AddRoom = () => {
         amenities: "",
         rate: 0,
         maxPeople: 0,
-        status: "",
+        status: "disponible",
         bedNum: 0,
         bedType: "",
         photos: ""
@@ -29,10 +32,10 @@ const AddRoom = () => {
       const file = event.target.files[0];
       setImage(file);
     };
-
+    
     const handleOnChange = (event) => {
-        const { roomNum, title, roomType, isSuite } = event.target;
-        const newValue = isSuite === "checkbox" ? checked : value;
+      const { name, value, type, checked } = event.target;
+      const newValue = type === "checkbox" ? checked : value;
 
     setAddRoom((prevData) => ({ ...prevData, [name]: newValue }));
     };
@@ -40,7 +43,23 @@ const AddRoom = () => {
     const handleSubmit = async (event) => {
     event.preventDefault();
         try {
-            if (urlId) {
+          if (image) {
+            // Subir imagen a Cloudinary
+            const formData = new FormData();
+            formData.append('file', image);
+            formData.append('upload_preset', cloudinaryUploadPresets);
+
+            const response = await axios.post(
+                'https://api.cloudinary.com/v1_1/dqowbomuh/image/upload',
+                formData
+            );
+
+            const imageUrl = response.data.secure_url;
+
+            // Almacenar URL de la imagen en el estado
+            setAddRoom((prevData) => ({ ...prevData, photos: imageUrl }));
+            }
+          if (urlId) {
             await axios.put(`http://localhost:5000/rooms/${urlId}`, addRoom);
             console.log("Habitación actualizada con éxito");
         } else {
@@ -121,6 +140,12 @@ const AddRoom = () => {
             <label className="block text-sm font-medium leading-6 text-gray-900"> Suite<br />
                 <input className="px-2 border border-20 mb-3 shadow pr-1" type="checkbox" name="isSuite" value={addRoom.isSuite} onChange={handleOnChange} />
             </label>{/* ================================================================================== */}
+            <label className="block text-sm font-medium leading-6 text-gray-900"> Tipo de Cama <br />
+                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="bedType" value={addRoom.bedType} onChange={handleOnChange} />
+                </label>{/* ================================================================================== */}
+            <label className="block text-sm font-medium leading-6 text-gray-900"> Status <br />
+                    <input className="px-2 border border-20 mb-3 shadow w-full" type="text" name="status" value={addRoom.status} onChange={handleOnChange} />
+            </label>{/* ================================================================================== */}
 
             <div className="flex flex-row gap-4">
                 <label className="block text-sm font-medium leading-6 text-gray-900"> Tipo de Habitación <br />
@@ -155,10 +180,13 @@ const AddRoom = () => {
 
         <div className="flex gap-5 px-5"> 
             {/* ================================================================================== */}
-            
+            <div>
+            <input type="file" name="photos" multiple onChange={handleImageChange} />
+        </div> 
         </div>
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
         </div>
+        <div></div>
         <div className="flex flex-col w-full">
             <button type="submit" className="bg-[#003A70] text-white hover:bg-[#dadada] hover:text-[#003A70] h-8">
                 Guardar
