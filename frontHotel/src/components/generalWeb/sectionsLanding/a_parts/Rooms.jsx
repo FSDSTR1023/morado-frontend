@@ -5,6 +5,7 @@ import Room  from './Room.jsx';
 
 const Rooms = () => {
   const rooms = useContext(RoomContext);
+  console.log(rooms)
 
 const ftRooms = rooms.filter((ftroom) => ftroom.featured === true )
 

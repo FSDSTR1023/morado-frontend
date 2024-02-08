@@ -4,7 +4,7 @@ import AdultsDropdown from './AdultsDropdown.jsx'
 import KidsDropdown from './KidsDropdown.jsx'
 import CheckIn from './CheckIn.jsx'
 import CheckOut from './CheckOut.jsx'
-import { RoomContext, PplContext } from '../../../../context/RoomContext.jsx';
+import { PplContext } from '../../../../context/RoomContext.jsx';
 import { Link } from 'react-router-dom';
 
 // const handleClick = (e) => {
@@ -17,10 +17,10 @@ import { Link } from 'react-router-dom';
   
 
 const BookForm = () => {
-  const {handleClick} = useContext(PplContext)
-
+  const {handleResInfo} = useContext(PplContext)
+  
   return (
-  <form className='h-[300px] bg-white w-full lg:h-[70px]'>
+  <form className='h-[300px] w-full lg:h-[70px]'>
     <div className='flex flex-col w-full h-full lg:flex-row'>
       <div className='flex-1 border-r'>
         <CheckIn />
@@ -35,7 +35,7 @@ const BookForm = () => {
         <KidsDropdown />
       </div>
       <button type='submit' className='btn btn-primary w-full h-full'>
-      <Link className='w-full h-full flex justify-center items-center' to='/bookings/rooms'>
+      <Link onClick={()=>{handleResInfo()}} className='w-full h-full flex justify-center items-center' to='/bookings/rooms'>
           Buscar
       </Link>
       </button>

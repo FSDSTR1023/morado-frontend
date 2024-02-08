@@ -30,7 +30,7 @@ function App() {
         <Route path='/roomdetails/:id' element={<RoomDetails />}/>
         {/* ===================================================================== */}
         <Route path='/bookings' element={<MainBooking />}>
-              <Route path='rooms' element={<ResRoom />}/>
+              <Route path='rooms' element={<ResRoom />} />
               <Route path='guests' element={<ResGuests />}/>
               <Route path='confirmation' element={<ResConfirmation />}/>
         </Route>
@@ -50,6 +50,7 @@ function App() {
     </div>  
   )
 }
+
 
 
 export default App

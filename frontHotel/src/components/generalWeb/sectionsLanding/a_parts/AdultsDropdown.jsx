@@ -13,12 +13,12 @@ const list =[
 ]
 
 const AdultsDropdown = () => {
-const { adults, setAdults } = useContext(PplContext)
+const { adultsPrev, setAdultsPrev } = useContext(PplContext)
 
   return <Menu as='div' className="w-full h-full bg-white relative">
     {/* button */}
-    <Menu.Button className='w-full h-full flex items-center justify-between px-8'>
-      {adults}
+    <Menu.Button className='w-full h-full flex items-center justify-between px-5 mr-10'>
+      {adultsPrev}
       <BsChevronDown className='text-base text-accent-hover'/>
     </Menu.Button>
 
@@ -27,7 +27,7 @@ const { adults, setAdults } = useContext(PplContext)
       {list.map((li, index) => {
           return (
             <Menu.Item 
-            onClick={() => setAdults(li.name)}
+            onClick={() => setAdultsPrev(li.name)}
             as='li'
             className='border-b last-of-type:border-b-0 h-12 hover:bg-accent hover:text-white w-full flex justify-center items-center cursor-pointer'
             key={index}>

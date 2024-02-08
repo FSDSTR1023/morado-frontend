@@ -32,8 +32,8 @@ const Room = ({ room }) => {
       {amenity}
     </div>
   ));
-
-  const {handleresRoom} = useContext(PplContext)
+  
+  const {addToCart, removeFromCart, adultsPrev, kidsPrev, CheckInPrev, CheckOutPrev} = useContext(PplContext)
 
   // Muestra cada una de las fotos
   // ===================================================================
@@ -140,7 +140,7 @@ const Room = ({ room }) => {
                   </div>
                 </div> {/* ---------------------------------------------- */}
                 <div className=" flex flex-col lg:flex-row gap-5 w-full mb-3 justify-center items-center">
-                  <Link to={"/roomdetails/" + room._id} className="w-full flex justify-start hover:text-accent-hover">
+                  <Link className="w-full flex justify-start hover:text-accent-hover">
                     <div className=" flex justify-center items-center mx-2"><RiArrowRightDoubleLine  size={18}/></div>
                     <div className="flex-flex-row underline" >
                       Detalle de la habitación
@@ -148,15 +148,18 @@ const Room = ({ room }) => {
                   </Link>
                 
                   <div className="w-full flex justify-center mx-5">
-                    <button onClick={(e) => handleresRoom(e)} className="btn btn-secondary btn-xs rounded-full shadow-xl">
+                    <button
+                    onClick={()=>{addToCart(room._id, adultsPrev, kidsPrev, CheckInPrev, CheckOutPrev)}}
+                    className="btn btn-secondary btn-xs rounded-full shadow-xl">
                       Reservar
                     </button>
                   </div>
+                {/* **************************************** */}
                 </div>
               </div>
           </div>
       </div>
-
+{/* to={"/roomdetails/" + room._id}  */}
     </div>
   );
 };

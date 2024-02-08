@@ -5,15 +5,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import RoomProvider from "./context/RoomContext.jsx";
-
-// import PplProvider from "./context/PplContext.jsx";
+import ResContextProvider from "./context/ResContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <RoomProvider>
-  {/* <PplProvider> */}
+    // <ResContextProvider>
+  <RoomProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-  {/* </PplProvider> */}
-    </RoomProvider>
+  </RoomProvider>
+    // </ResContextProvider>
 );
