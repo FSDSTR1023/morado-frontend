@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import { PiUserListFill } from "react-icons/pi";
 
 const cloudinaryUploadPresets = import.meta.env.VITE_CLOUDINARY_UPLOADPRESETS;
-const cloudinaryname = import.meta.env.VITE_CLOUDINARY_NAME;
 
 const AddRoom = () => {
     const newRoomInit = {
@@ -27,12 +26,16 @@ const AddRoom = () => {
     const [addRoom, setAddRoom] = useState(newRoomInit);
     const [urlId, setUrlId] = useState(id || "");
     const [image, setImage] = useState(null);
-
+    
     const handleImageChange = (event) => {
       const file = event.target.files[0];
-      setImage(file);
+      cloudinary.upload(file, { upload_preset: cloudinaryUploadPresets })
+        .then((result) => {
+          setUrlId(result.secure_url);
+          setImage(file);
+        });
     };
-    
+
     const handleOnChange = (event) => {
       const { name, value, type, checked } = event.target;
       const newValue = type === "checkbox" ? checked : value;
@@ -43,22 +46,21 @@ const AddRoom = () => {
     const handleSubmit = async (event) => {
     event.preventDefault();
         try {
-          if (image) {
-            // Subir imagen a Cloudinary
+          if(image){
             const formData = new FormData();
             formData.append('file', image);
             formData.append('upload_preset', cloudinaryUploadPresets);
 
             const response = await axios.post(
-                'https://api.cloudinary.com/v1_1/dqowbomuh/image/upload',
-                formData
+              'https://api.cloudinary.com/v1_1/dqowbomuh/image/upload',
+              formData
             );
-
+            
             const imageUrl = response.data.secure_url;
 
-            // Almacenar URL de la imagen en el estado
             setAddRoom((prevData) => ({ ...prevData, photos: imageUrl }));
-            }
+
+          }
           if (urlId) {
             await axios.put(`http://localhost:5000/rooms/${urlId}`, addRoom);
             console.log("Habitación actualizada con éxito");
@@ -87,10 +89,9 @@ const AddRoom = () => {
         status: res.data.status,
         bedNum: res.data.bedNum,
         bedType: res.data.bedType,
-        photos: res.data.photo
+        photos: res.data.photos
     });
   };
-
 
     const isMounted = useRef(true);
 
@@ -136,7 +137,6 @@ const AddRoom = () => {
             </label>
               </div> {/* ================================================================================== */}
 
-
             <label className="block text-sm font-medium leading-6 text-gray-900"> Suite<br />
                 <input className="px-2 border border-20 mb-3 shadow pr-1" type="checkbox" name="isSuite" value={addRoom.isSuite} onChange={handleOnChange} />
             </label>{/* ================================================================================== */}
@@ -181,7 +181,7 @@ const AddRoom = () => {
         <div className="flex gap-5 px-5"> 
             {/* ================================================================================== */}
             <div>
-            <input type="file" name="photos" multiple onChange={handleImageChange} />
+            <input type="file" name="image" onChange={handleImageChange}/>
         </div> 
         </div>
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
