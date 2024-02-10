@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoBedOutline } from "react-icons/io5";
 import { IoPerson } from "react-icons/io5";
@@ -24,54 +24,50 @@ const Room = ({ room }) => {
     bedNum,
     bedType,
     photos,
-    featured
+    featured,
   } = room;
 
   const amenitiesList = room.amenities.map((amenity, index) => (
-    <div key={index}>
-      {amenity}
-    </div>
+    <div key={index}>{amenity}</div>
   ));
 
-  const {addToCart, removeFromCart} = useContext(PplContext)
+  const { removeFromCart } = useContext(PplContext);
+
+  // // Estado para almacenar los valores de rate
+  // const [totalRates, setTotalRates] = useState([]);
+
+  // useEffect(() => {
+  //   // Actualizar el estado cuando cambia la propiedad rate
+  //   setTotalRates((prevRates) => [...prevRates, rate]);
+  // }, [rate]);
 
   return (
-    <div className="shadow-lg group">
+    <div className="group h-full">
 
-      <div className='flex flex-col lg:flex-row'>
-          <div className="">
+      <div className="flex flex-col">
+
+        <div>
+          <Link to={"/#Rooms/" + _id}>
+            <h3 className=" text-accent font-extrabold border-b-2 mb-2">
+              {title}
+            </h3>
+          </Link>
+        </div>
+
+        <div>
+          <div className="flex flex-row font-extrabold text-xl justify-end text-accent m-0">
+            <span className="mr-2">€</span>
+            {rate}
           </div>
-          <div className="lg:w-[80%] lg:justify-center">
-            {/* ==== titulo y descripcion ================ */}
-            <div className="lg:flex-col text-center">
-              <Link to={"/#Rooms/" + _id}> <h3 className="h3 border-b-2 text-accent font-extrabold drop-shadow-xl">{title}</h3> </Link>
-              <p className="max-w-[300px] mx-auto mb-3 lg:mb-6"> {desc} </p>
-            </div>{/* ====================== */}
-              <div className="flex flex-col">
-                <div className="flex justify-center flex-col lg:flex-row w-full h-1/2 lg:gap-3 px-5 mb-3 content-end">
-                  {/* ------------------------------------------------------------- */}
-                  <div className="flex flex-col w-full">
-                        <div className="flex flex-row font-extrabold text-2xl justify-end text-accent">
-                          <span className="mr-2">€</span>{rate}
-                        </div>
-                    <div className="flex-col text-right">
-                        <div className="text-gray-700">Por noche</div>
-                    </div>
-                  </div>
-                </div> {/* ---------------------------------------------- */}
-                <div className=" flex flex-col lg:flex-row gap-5 w-full mb-3 justify-center items-center">
-                  <div className="w-full flex justify-center mx-5">
-                    <button
-                    onClick={()=>{removeFromCart(room._id)}}
-                    className="btn btn-secondary btn-xs rounded-full shadow-xl">
-                      Quitar
-                    </button>
-                  </div>
-                {/* **************************************** */}
-                </div>
-              </div>
-          </div>
+          <div className="flex text-gray-700 justify-end m">Por noche</div>
+        </div>
       </div>
+
+        <div className="flex justify-end mb-0 border-t-2 mt-2">
+          <div onClick={() => { removeFromCart(room._id, room.adults, room.kids, room.CheckIn, room.CheckOut); }} >
+            Quitar
+          </div>
+        </div>
     </div>
   );
 };

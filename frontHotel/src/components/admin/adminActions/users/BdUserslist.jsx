@@ -3,7 +3,7 @@
 import React from "react";
 
 function BdUserslist({
-  name,
+  nameu,
   lastName,
   phone,
   email,
@@ -16,7 +16,7 @@ function BdUserslist({
 }) {
   return (
     <div>
-      {name}
+      {nameu}
       {lastName}
       {phone}
       {email}

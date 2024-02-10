@@ -5,7 +5,7 @@ import KidsDropdown from './KidsDropdown.jsx'
 import CheckIn from './CheckIn.jsx'
 import CheckOut from './CheckOut.jsx'
 import { PplContext } from '../../../../context/RoomContext.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // const handleClick = (e) => {
   //   e.preventDefault();
@@ -17,6 +17,13 @@ import { Link } from 'react-router-dom';
   
 
 const BookForm = () => {
+
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
   const {handleResInfo} = useContext(PplContext)
   
   return (

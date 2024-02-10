@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:6000/users';
+const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
 
 // ========:::: GET ALL  ::::========
 
 const getAllusers = async (setAllusers) => {
   try {
-    await axios.get(baseUrl).then(({ data }) => {
+    await axios.get(`${urlUser}`).then(({ data }) => {
       console.log('data --->', data);
       setAllusers(data);
     });

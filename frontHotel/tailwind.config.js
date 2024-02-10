@@ -45,6 +45,11 @@ module.exports = withMT ({
       xl: '1140px',
     },
     extend: {
+      activeLink: {
+        accent: {
+          DEFAULT: '#967142',
+        },
+      },
       colors: {
         primary: '#0a0a0a',
         accent: {

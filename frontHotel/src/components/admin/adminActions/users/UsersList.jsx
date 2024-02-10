@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar.jsx"
   export default function UsersList() {
 
   const [allusers, setAllusers] = useState([]);
+  const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
 
   useEffect(() => {
     getAllusers(setAllusers);
@@ -21,7 +22,7 @@ import SearchBar from "./SearchBar.jsx"
   // Peticion al Backend para Eliminar el registo concatenando la ruta con el Id del usuario
   // ========================================================================================================
   const deleteUser = async (id) => {
-    await axios.delete("http://localhost:5000/users/" + id)
+    await axios.delete(`${urlUser}/${id}`)
     alert(" El Usuario: " + id + " ha si do Eliminado");
     getAllusers(setAllusers);
   }
@@ -66,7 +67,7 @@ import SearchBar from "./SearchBar.jsx"
                 key={item._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
               >
-                <td className="px-3 py-2"> <BdUserslist name={item.name} /> </td>
+                <td className="px-3 py-2"> <BdUserslist nameu={item.nameu} /> </td>
                 <td className="px-3 py-2"> <BdUserslist lastName={item.lastName} /> </td>
                 <td className="px-3 py-2"> <BdUserslist phone={item.phone} /> </td>
                 <td className="px-3 py-2 max-w-48 min-w-48 truncate"> <BdUserslist email={item.email} /> </td>

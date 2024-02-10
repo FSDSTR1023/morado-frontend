@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
@@ -5,8 +6,11 @@ import { Link, useParams } from "react-router-dom";
 import { PiUserListFill } from "react-icons/pi";
 
 const AddUser = () => {
+
+  const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
+
   const newUserInit = {
-    name: "",
+    nameu: "",
     lastName: "",
     phone: 0,
     email: "",
@@ -24,20 +28,20 @@ const AddUser = () => {
   const [urlId, setUrlId] = useState(id || "");
 
   const handleOnChange = (event) => {
-    const { name, value, type, checked } = event.target;
+    const { nameu, value, type, checked } = event.target;
     const newValue = type === "checkbox" ? checked : value;
 
-    setAddUser((prevData) => ({ ...prevData, [name]: newValue }));
+    setAddUser((prevData) => ({ ...prevData, [nameu]: newValue }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (urlId) {
-        await axios.put(`http://localhost:5000/users/${urlId}`, addUser);
+        await axios.put(`${urlUser}/${urlId}`, addUser);
         console.log("Usuario Actualizado con éxito");
       } else {
-        await axios.post("http://localhost:5000/users", addUser);
+        await axios.post(`${urlUser}`, addUser);
         console.log("Usuario registrado con éxito");
       }
       setAddUser(newUserInit);
@@ -48,21 +52,26 @@ const AddUser = () => {
   };
 
   const actualId = async (idValue) => {
-    const res = await axios.get("http://localhost:5000/users/" + idValue);
-    setAddUser({
-      name: res.data.name,
-      lastName: res.data.lastName,
-      phone: res.data.phone,
-      email: res.data.email,
-      DoB: res.data.DoB,
-      country: res.data.country,
-      docType: res.data.docType,
-      docNum: res.data.docNum,
-      username: res.data.username,
-      pwd: res.data.pwd,
-      isAdmin: res.data.isAdmin
-    });
-    console.log(res.data.isAdmin)
+    try {
+      const res = await axios.get(`${urlUser}/${idValue}`);
+        setAddUser({
+          nameu: res.data.nameu,
+          lastName: res.data.lastName,
+          phone: res.data.phone,
+          email: res.data.email,
+          DoB: res.data.DoB,
+          country: res.data.country,
+          docType: res.data.docType,
+          docNum: res.data.docNum,
+          username: res.data.username,
+          pwd: res.data.pwd,
+          isAdmin: res.data.isAdmin
+        });
+        // console.log(res.data.isAdmin)
+    } catch (error){
+      console.error("Error fetching user data:", error);
+    }
+    
   };
 
 
@@ -102,7 +111,7 @@ const AddUser = () => {
           <div className="place-content-center px-5"> 
             <div className="flex flex-row gap-5"> {/* =================================================== */}
               <label className="block text-sm font-medium leading-6 text-gray-900"> Nombre <br />
-                <input className="px-2 border border-20 mb-3 shadow w-72" type="text" name="name" value={addUser.name} onChange={handleOnChange} />
+                <input className="px-2 border border-20 mb-3 shadow w-72" type="text" name="nameu" value={addUser.nameu} onChange={handleOnChange} />
               </label>
               {/* ------------------------- */}
               <label className="block text-sm font-medium leading-6 text-gray-900"> Apellidos <br />

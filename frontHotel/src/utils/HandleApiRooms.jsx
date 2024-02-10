@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:6000/rooms';
+const urlRoom = import.meta.env.VITE_BACKEND_ROOM_URL;
 
 // ========:::: GET ALL  ::::========
 
 const getAllRooms = async (setAllRooms) => {
   try {
-    await axios.get(baseUrl).then(({ data }) => {
+    await axios.get(`${urlRoom}`).then(({ data }) => {
       // console.log("data --->", data);
       setAllRooms(data);
     });

@@ -49,7 +49,7 @@ const AddRoom = () => {
   };
 
   const actualId = async (idValue) => {
-    const res = await axios.get('http://localhost:5000/rooms/' + idValue);
+    const res = await axios.get('http://localhost:6000/rooms/' + idValue);
     setAddRoom({
       name: res.data.name,
       lastName: res.data.lastName,

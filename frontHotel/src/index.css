@@ -33,4 +33,13 @@
   .btn-white {
     @apply bg-white text-[#0a0a0a];
   }
+  .active-link {
+    @apply bg-[#967142] text-white;
+  }
+  .active-link-text {
+    @apply text-[#967142] font-bold;
+  }
+  .main-pg {
+    @apply h-[10px];
+  }
 }

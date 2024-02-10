@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
@@ -11,8 +12,6 @@ export const PplContext = createContext()
 const RoomProvider = ({ children }) => {
 
   const [allRooms, setAllRooms] = useState([]);
-
-
 
   const [CheckInPrev, setCheckInPrev] = useState ('')
   const [CheckOutPrev, setCheckOutPrev] = useState ('')
@@ -45,13 +44,14 @@ useEffect(() => {
   setCartItems(getDefaultCart());
 }, [allRooms]);
 
+console.log(allRooms.rate)
 
   // =============< CART >===============================================
   const getDefaultCart = () => {
     let cart = {};
     for (let i = 0; i < allRooms.length; i++) {
       const roomId = allRooms[i].roomId;
-      cart[roomId, adultsPrev, kidsPrev]; 
+      cart[roomId]; 
     }
     return cart;
   };
@@ -63,13 +63,6 @@ useEffect(() => {
       const updatedCart = { 
         ...prev, 
         [itemId]:[itemId,{adults, kids, CheckIn, CheckOut}]
-        
-        // {itemId,
-        //   adultsPrev,
-        //   kidsPrev,
-        //   CheckInPrev,
-        //   CheckOutPrev,
-        // },
       };
       console.log('updatedCart ==', updatedCart);
       return updatedCart;
@@ -79,8 +72,11 @@ useEffect(() => {
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
-      const updatedCart = { ...prev, [itemId]: prev[itemId] -1 };
-      console.log(updatedCart)
+      const updatedCart = { 
+        ...prev, 
+        [itemId]:[itemId,{adults, kids, CheckIn, CheckOut}]-1
+      };
+      console.log('updatedCart ==', updatedCart);
       return updatedCart;
     });
   };
