@@ -40,6 +40,7 @@ const AddRoom = () => {
       );
 
       setImage(response.data.secure_url);
+      setAddRoom((prevData) => ({ ...prevData, photos: response.data.secure_url}));
     } catch (error) {
       console.log('No se puede guardar/actualizar la habitación', error);
     }
@@ -51,19 +52,19 @@ const AddRoom = () => {
     const newValue = type === 'checkbox' ? checked : value;
 
     setAddRoom((prevData) => ({ ...prevData, [name]: newValue }));
+
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (image) {
-        setAddRoom((prevData) => ({ ...prevData, photos: image }));
-        await axios.put(`http://localhost:6000/rooms`, addRoom);
-        console.log('Habitación Actualizada con éxito');
-      } else {
-        await axios.post('http://localhost:6000/rooms', addRoom);
+
+        
+        //await axios.put(`http://localhost:5000/rooms`, addRoom);
+        //console.log('Habitación Actualizada con éxito');
+        console.log(addRoom);
+        await axios.post('http://localhost:5000/rooms', addRoom);
         console.log('Habitación registrada con éxito');
-      }
       setAddRoom(newRoomInit);
       setUrlId('');
     } catch (error) {
@@ -72,7 +73,7 @@ const AddRoom = () => {
   };
 
   const actualId = async (idValue) => {
-    const res = await axios.get('http://localhost:6000/rooms/' + idValue);
+    const res = await axios.get('http://localhost:5000/rooms/' + idValue);
     setAddRoom({
       roomNum: res.data.roomNum,
       title: res.data.title,
