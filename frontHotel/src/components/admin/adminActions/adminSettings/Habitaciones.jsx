@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { PiUserListFill } from 'react-icons/pi';
+import { PiArrowFatLinesLeft, PiUserListFill } from 'react-icons/pi';
 
 const cloudinaryUploadPresets = import.meta.env.VITE_CLOUDINARY_UPLOADPRESETS;
 
@@ -14,10 +14,10 @@ const AddRoom = () => {
     roomType: '',
     desc: '',
     amenities: '',
-    rate: 0,
-    maxPeople: 0,
+    rate: 1,
+    maxPeople: 1,
     status: 'disponible',
-    bedNum: 0,
+    bedNum: 1,
     bedType: '',
     photos: '',
   };
@@ -48,10 +48,20 @@ const AddRoom = () => {
   };
 
   const handleOnChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    const newValue = type === 'checkbox' ? checked : value;
+    const { name, value, type, checked, options } = event.target;
+    let newValue;
 
-    setAddRoom((prevData) => ({ ...prevData, [name]: newValue }));
+  if (type === 'checkbox') {
+    newValue = checked;
+  } else if (type === 'select-multiple') {
+      newValue = Array.from(options)
+      .filter(option => option.selected)
+      .map(option => option.value);
+  } else {
+    newValue = value;
+  }
+
+  setAddRoom((prevData) => ({ ...prevData, [name]: newValue }));
 
   };
 
@@ -134,8 +144,8 @@ const AddRoom = () => {
                   {' '}
                   Número de Habitación <br />
                   <input
-                    className='px-2 border border-20 mb-3 shadow w-72'
-                    type='text'
+                    className='px-2 border border-20 mb-3 shadow w-13'
+                    type='number'
                     name='roomNum'
                     value={addRoom.roomNum}
                     onChange={handleOnChange}
@@ -146,7 +156,7 @@ const AddRoom = () => {
                   {' '}
                   Titulo de Habitación <br />
                   <input
-                    className='px-2 border border-20 mb-3 shadow w-72'
+                    className='px-4 border border-20 mb-3 shadow w-80'
                     type='text'
                     name='title'
                     value={addRoom.title}
@@ -154,6 +164,23 @@ const AddRoom = () => {
                   />
                 </label>
               </div>{' '}
+              {/* ================================================================================== */}
+              <div className='flex flex-row gap-4'>
+                <label className='block text-sm font-medium leading-6 text-gray-900'>
+                {' '}
+                Status <br />
+                <select
+                    className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+                    name='status'
+                    id='status'
+                    value={addRoom.status}
+                    onChange={handleOnChange}
+                    multiple={false}
+                    >
+                    <option value="disponible">disponible</option>
+                    <option value="no disponible">no disponible</option>
+                  </select>
+              </label>
               {/* ================================================================================== */}
               <label className='block text-sm font-medium leading-6 text-gray-900'>
                 {' '}
@@ -171,62 +198,70 @@ const AddRoom = () => {
               <label className='block text-sm font-medium leading-6 text-gray-900'>
                 {' '}
                 Tipo de Cama <br />
-                <input
-                  className='px-2 border border-20 mb-3 shadow w-full'
-                  type='text'
-                  name='bedType'
-                  value={addRoom.bedType}
-                  onChange={handleOnChange}
-                />
+                <select
+                    className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+                    name='bedType'
+                    id='bedType'
+                    value={addRoom.bedType}
+                    onChange={handleOnChange}
+                    multiple={false}
+                    >
+                    <option value="normal">normal</option>
+                    <option value="king size">king size</option>
+                  </select>
+                  
               </label>
+              {/* ================================================================================== */}
               {/* ================================================================================== */}
               <label className='block text-sm font-medium leading-6 text-gray-900'>
-                {' '}
-                Status <br />
-                <input
-                  className='px-2 border border-20 mb-3 shadow w-full'
-                  type='text'
-                  name='status'
-                  value={addRoom.status}
-                  onChange={handleOnChange}
-                />
-              </label>
-              {/* ================================================================================== */}
-              <div className='flex flex-row gap-4'>
-                <label className='block text-sm font-medium leading-6 text-gray-900'>
-                  {' '}
-                  Tipo de Habitación <br />
-                  <input
-                    className='px-2 border border-20 mb-3 shadow w-full'
-                    type='text'
-                    name='roomType'
-                    value={addRoom.roomType}
-                    onChange={handleOnChange}
-                  />
-                </label>
-                {/* ================================================================================== */}
-                <label className='block text-sm font-medium leading-6 text-gray-900'>
                   {' '}
                   Descripción <br />
                   <input
-                    className='px-2 border border-20 mb-3 shadow w-full'
+                    className='block px-2 w-full text-gray-900 border border-gray-300 sm:text-md'
                     type='text'
                     name='desc'
                     value={addRoom.desc}
                     onChange={handleOnChange}
                   />
                 </label>
+                </div>
+              {/* ================================================================================== */}
+              <div className='flex flex-row gap-4'>
+                <label className='block text-sm font-medium leading-6 text-gray-900'>
+                  {' '}
+                  Tipo de Habitación <br />
+                  <select
+                    className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+                    name='roomType'
+                    id="roomType"
+                    value={addRoom.roomType}
+                    onChange={handleOnChange}
+                    multiple={false}
+                    >
+                    <option value="individual">individual</option>
+                    <option value="doble">doble</option>
+                    <option value="doble de uso individual">doble de uso individual</option>
+                    <option value="triple">triple</option>
+                  </select>
+                </label>
                 {/* ================================================================================== */}
                 <label className='block text-sm font-medium leading-6 text-gray-900'>
                   {' '}
                   Amenities <br />
-                  <input
-                    className='px-2 border border-20 mb-3 shadow w-full'
-                    type='text'
-                    name='amenities'
+                  <select
+                    className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+                    name="amenities"
+                    id="amenities"
                     value={addRoom.amenities}
                     onChange={handleOnChange}
-                  />
+                    multiple={true}
+                    >
+                    <option value="TV">TV</option>
+                    <option value="aire">Aire Acondicionado</option>
+                    <option value="nevera">Nevera</option>
+                    <option value="WIFI">WIFI</option>
+                  </select>
+                
                 </label>
                 {/* ================================================================================== */}
               </div>
@@ -278,8 +313,8 @@ const AddRoom = () => {
             <div className='flex gap-5 px-5'>
               {/* ================================================================================== */}
               <div>
-              
                 <input
+                  className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                   type='file'
                   name='image'
                   onChange={handleImageChange}
@@ -291,6 +326,7 @@ const AddRoom = () => {
           </div>
           <div></div>
           <div className='flex flex-col w-full'>
+          <br />
             <button
               type='submit'
               className='bg-[#003A70] text-white hover:bg-[#dadada] hover:text-[#003A70] h-8'>
