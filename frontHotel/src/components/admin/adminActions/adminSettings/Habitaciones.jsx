@@ -278,11 +278,12 @@ const AddRoom = () => {
             <div className='flex gap-5 px-5'>
               {/* ================================================================================== */}
               <div>
+              
                 <input
                   type='file'
                   name='image'
                   onChange={handleImageChange}
-                  multiple={false}
+                  multiple={true}
                 />
               </div>
             </div>
