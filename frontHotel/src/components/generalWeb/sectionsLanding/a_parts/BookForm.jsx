@@ -25,9 +25,14 @@ const BookForm = () => {
   };
 
   const {handleResInfo} = useContext(PplContext)
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleResInfo(); // Puedes agregar console.log aquí para depurar
+  };
   
   return (
-  <form className='h-[300px] w-full lg:h-[70px]'>
+  <form onSubmit={handleSubmit}  className='h-[300px] w-full lg:h-[70px]'>
     <div className='flex flex-col w-full h-full lg:flex-row'>
       <div className='flex-1 border-r'>
         <CheckIn />
@@ -41,11 +46,11 @@ const BookForm = () => {
       <div className='flex-1 border-r'>
         <KidsDropdown />
       </div>
-      <button type='submit' className='btn btn-primary w-full h-full'>
-      <Link onClick={()=>{handleResInfo()}} className='w-full h-full flex justify-center items-center' to='/bookings/rooms'>
+      {/* <button  className=''> */}
+      <Link type='submit' className='btn btn-primary w-full h-full flex justify-center items-center' to='/bookings/rooms'>
           Buscar
       </Link>
-      </button>
+      {/* </button> */}
     </div>
   </form>
   )
