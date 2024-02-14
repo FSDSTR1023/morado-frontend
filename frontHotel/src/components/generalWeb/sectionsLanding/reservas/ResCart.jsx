@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { RoomContext, PplContext } from "../../../../context/RoomContext";
 import { FaChildren } from "react-icons/fa6";
 import { BsFillPeopleFill } from "react-icons/bs";
-import FilteredRoomCART from "./FilteredRoomCART";
-import { CambiaFecha } from "../../../../utils/CambiaFecha";
+import { GiCalendar } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 const ResCart = () => {
-  const { cartItems, adults, kids, CheckIn, CheckOut } = useContext(PplContext);
+  // const { cartItems } = useContext(PplContext);
+  const { cartItems, removeFromCart } = useContext(PplContext);
+
   const rooms = useContext(RoomContext);
   let totalGeneral = 0;
 
@@ -19,11 +20,13 @@ const ResCart = () => {
           Tu Estancia
         </div>
 
+        {/* ////////////////////////////////////////////////////////////////////// */}
         <div>
           {Object.values(cartItems).map((roomId, index) => {
             const room = rooms.find((room) => room._id === roomId[0]);
 
             const rate = room.rate;
+            console.log(rate)
 
             const PplDates = roomId[1];
             const x = Object.values(PplDates).length;
@@ -41,59 +44,82 @@ const ResCart = () => {
                   <div className="border-b-2 bg-gray-50">
                     Habitación # {numRoom}
                   </div>
-                  <div className="flex flex-col md:flex-row justify-between shadow-md p-2 mb-3">
-                    <div className="text-sm w-[40%]">
-                      {Object.values(PplDates).map((element, elementIndex) => (
-                        <div key={elementIndex}>
-                          <ul className="flex">
-                            {(function () {
-                              for (let i = 0; i < x - 3; i++) {
-                                if (elementIndex === 0) { return <li>{element}</li>; }
-                                if (elementIndex === 1) { return <li>{element}</li>; }
-                                if (elementIndex === 2) { return (
-                                    <li> <span className="mr-2">Check in : </span> {CambiaFecha(element)} </li>
-                                  );}
-                                if (elementIndex === 3) { return (
-                                    <li> <span className="mr-2">Check out:</span> {CambiaFecha(element)} </li>
-                                  );}
-                              }
-                            })()}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                    {/* ***************** Título de la Habitación ***************** */}
-                    <div className="flex flex-col w-[60%]">
-                      <div className="flex flex-row justify-between w-full border-b-2">
-                        <Link
-                          to={"/#Rooms/" + room._id}
-                          className=" text-accent font-extrabold "
-                        >
-                          {room.title}
-                        </Link>
-                        <div className="flex flex-row font-extrabold text-xl justify-end text-accent m-0">
-                          <span className="mr-2">€</span>
-                          {rate}
-                        </div>
+                  <div className="flex flex-col justify-between shadow-md p-2 mb-3">
+                    <div className="flex flex-row">
+                      <div className="text-sm w-1/2 lg:w-full border-r-2 self-end">
+                        {Object.values(PplDates).map((element, elementIndex) => (
+                          <div key={elementIndex}>
+                            <ul className="flex w-full">
+                              {(function () {
+                                for (let i = 0; i < x - 3; i++) {
+                                  if (elementIndex === 0) { return <li className="flex flex-row items-center"><BsFillPeopleFill className="mr-2 text-accent"/>{element}</li>; }
+                                  if (elementIndex === 1) { return <li className="flex flex-row items-center"><FaChildren className="mr-2 text-accent"/>{element}</li>; }
+                                  if (elementIndex === 2) { return (
+                                      <li className="flex flex-row items-center"><GiCalendar className="mr-2 text-accent"/><span className="mr-3">Check in :</span>{new Date(element).toLocaleDateString("es-ES", {
+                                        day: "numeric",
+                                        month: "short",
+                                        year: "numeric",
+                                      })} </li>
+                                    );}
+                                  if (elementIndex === 3) { return (
+                                      <li className="flex flex-row items-center"><GiCalendar className="mr-2 text-accent"/><span className="mr-2">Check out:</span>{new Date(element).toLocaleDateString("es-ES", {
+                                        day: "numeric",
+                                        month: "short",
+                                        year: "numeric",
+                                      })} </li>
+                                    );}
+                                }
+                              })()}
+                            </ul>
+                          </div>
+                        ))}
                       </div>
-                      <div className="flex text-gray-700 justify-end text-sm">
-                        Por noche
-                      </div>
-                      <div className="ml-3">
-                        {nights} noches <span>{nights * rate}</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <div className="flex justify-end mb-0 border-t-2 mt-2">
-                          <div
-                          // onClick={() => { removeFromCart(room._id, room.adults, room.kids, room.CheckIn, room.CheckOut); }}
+                      {/* ***************** Título de la Habitación ***************** */}
+                      <div className="flex flex-col w-1/2 lg:w-[150%] ml-1">
+                        <div className="flex flex-row justify-between w-full border-b-2">
+                          <Link
+                            to={"/#Rooms/" + room._id}
+                            className=" text-accent font-extrabold self-end pl-1"
                           >
-                            Quitar
+                            {room.title}
+                          </Link>
+                          <div className="flex flex-col">
+                          <div className="flex text-gray-700 justify-end text-xs"> Por noche </div>
+                          <div className="flex flex-row justify-end m-0">
+                            <span className="mr-2">€</span>
+                            {rate}
                           </div>
                         </div>
+                        </div>
+                        <div className="flex flex-row justify-between">
+                          <span className="flex self-end pl-1 font-extrabold">Noches: {nights}</span>
+                          <div className="flex flex-col">
+                            <span className="flex text-gray-700 justify-end text-xs mt-2">Subtotal</span>
+                            <strong className="flex text-accent text-2xl justify-end">€ {nights * rate}</strong>
+                          </div>
+                        </div>
+                        {/* ******************************************************************************* */}
                       </div>
-                      {/* ******************************************************************************* */}
                     </div>
+
+                    <div className="flex flex-row justify-end gap-5 border-t-2 mb-0 mt-1 font-bold text-gray-700">
+                      <div className="border-r-2 pr-5 mt-1 hover:text-accent-hover cursor-pointer"
+                          // onClick={() => { removeFromCart(room._id, room.adults, room.kids, room.CheckIn, room.CheckOut); }}
+                        >
+                        Editar
+                      </div>
+                      <div className="mt-1 hover:text-accent-hover cursor-pointer"
+                          // onClick={() => { removeFromCart(room._id, room.adults, room.kids, room.CheckIn, room.CheckOut); }}
+                          onClick={() => removeFromCart(room._id)}
+                        >
+                        Quitar
+                      </div>
+                    </div>
+
                   </div>
+
+
+
                 </div>
               );
             }
@@ -107,12 +133,13 @@ const ResCart = () => {
             );
           })}
         </div>
+        {/* ////////////////////////////////////////////////////////////////////// */}
 
         {/* Mostrar el total general al final del componente */}
         <div className="mt-3 pt-2 px-3 flex justify-end border-t-2">
           <strong>
             Total:
-            <span className="text-accent text-xl ml-2">€{totalGeneral}</span>
+            <span className="text-accent text-2xl ml-2">€ {totalGeneral}</span>
           </strong>
         </div>
       </div>

@@ -33,7 +33,13 @@ const Room = ({ room }) => {
     </div>
   ));
   
-  const {addToCart, removeFromCart, adultsPrev, kidsPrev, CheckInPrev, CheckOutPrev} = useContext(PplContext)
+  const {addToCart, removeFromCart, adultsPrev, kidsPrev, CheckInPrev, CheckOutPrev, reservedRooms} = useContext(PplContext)
+  const isRoomReserved = reservedRooms.includes(_id);
+
+  if (isRoomReserved) {
+    // Room is reserved, you may choose to render differently or return null
+    return null;
+  }
 
   // Muestra cada una de las fotos
   // ===================================================================
@@ -42,6 +48,13 @@ const Room = ({ room }) => {
   //     <img src={foto} alt="" />
   //   </div>
   // ));
+
+  const userData = {
+    adults: adultsPrev,
+    kids: kidsPrev,
+    CheckIn: CheckInPrev,
+    CheckOut: CheckOutPrev,
+  };
 
   return (
     <div className="shadow-lg group">
@@ -148,11 +161,11 @@ const Room = ({ room }) => {
                   </Link>
                 
                   <div className="w-full flex justify-center mx-5">
-                    <button
-                    onClick={()=>{addToCart(room._id, adultsPrev, kidsPrev, CheckInPrev, CheckOutPrev)}}
+                    <Link to='/bookings/guests'
+                    onClick={()=>{addToCart(room._id, userData)}}
                     className="btn btn-secondary btn-xs rounded-full shadow-xl">
                       Reservar
-                    </button>
+                    </Link>
                   </div>
                 {/* **************************************** */}
                 </div>
