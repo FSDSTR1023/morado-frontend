@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
-import RoomProvider from "./src/context/RoomContext.jsx";
+import RoomProvider from "./context/RoomContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RoomProvider>
