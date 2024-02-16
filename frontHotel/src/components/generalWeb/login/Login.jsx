@@ -1,106 +1,66 @@
-import axios from "axios";
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, {useContext, useState} from 'react'
+import { AuthContext } from '../../../context/AuthContext'
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import  Navbar  from '../../generalWeb/sectionsLanding/a_parts/NavBar'
+import line from '../../../assets/line.png'
 
-function Login() {
-  // const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [pwd, setPwd] = useState('');
-  const [token, setToken] = useState('');
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const Login = () => {
+  const [credentials, setCredentials] = useState({
+    email: undefined,
+    pwd: undefined,
+  })
+
+  const {loading, error, dispatch} = useContext(AuthContext);
+
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({...prev, [e.target.id]: e.target.value}));
+  }
+
+  const handleClick = async e => {
+    e.preventDefault ()
+    dispatch({type:"LOGIN_START"})
     try {
-      const response = await axios.post('http://localhost:5000/users/login', { email, pwd });
-      setToken(response.data.token);
-    } catch (error) {
-      console.error('Login failed:', error);
+      const res = await axios.post('http://localhost:5000/users/login', credentials)
+      const token = res.data.token;
+
+      dispatch({type:"LOGIN_SUCCESS", payload:res.data})
+      navigate("/")
+    } catch (err) {
+      dispatch({type:"LOGIN_FAILURE", payload:err.response.data})
     }
-  };
+  }
+
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={pwd} onChange={(e) => setPwd(e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
-      {token && <p>Token: {token}</p>}
+    <div className='bg-cover bg-center w-screen h-screen' style={{background:'url(https://images.pexels.com/photos/53577/hotel-architectural-tourism-travel-53577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) center/cover no-repeat'}}>
+      <Navbar />
+      <div className='w-screen h-screen bg-black/75 flex justify-center items-center flex-col'>
+          <div className='flex flex-col justify-center items-center'>
+            <strong className='text-accent text-3xl'>Hotel</strong>
+            <strong className='mb-5 text-accent text-5xl'>Manzanares</strong>
+            <img src={line} alt="" className='w-[150px] mb-10' />
+
+          </div>
+        <div className='shadow-xl p-5 bg-black/65 rounded-md'>
+          <span className='mb-5 flex justify-center text-accent text-2xl'>Bienvenido</span>
+          <div className='shadow-xl mb-5 p-5 bg-black rounded-md'>
+              <div className='flex flex-col justify-center items-center'>
+                <input className='p-2 m-1 shadow-xl w-full' type='email' placeholder='Email' id='email' onChange={handleChange}/>
+                <input className='p-2 m-1 shadow-xl w-full' type='password' placeholder='Contraseña' id='pwd' onChange={handleChange}/>
+                <button disabled={loading} onClick={handleClick} className='bg-accent w-full m-1 mt-5 p-2 text-white font-bold'>Acceder</button>
+                {error && <span>{error.message}</span>}
+              </div>
+          </div>
+          <span className='cursor-pointer text-white'>Registrarse</span>
+          <span className='mx-3 text-white'>|</span>
+          <Link className='text-white'>Olvidaste la contraseña?</Link>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
-export default Login;
 
-
-// /* eslint-disable no-unused-vars */
-// import React, { useState } from "react";
-// // import NavAdmin from "../../admin/adminActions/adminSettings/NavAdmin";
-// import NavBar from "../sectionsLanding/a_parts/NavBar";
-// import axios from "axios";
-
-// const Login = () => {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleLogin = async () => {
-//     // Aquí puedes realizar la lógica de autenticación
-//     try {
-//       const response = await axios.post("auth/api/login", { username, password });
-//       console.log("Respuesta del servidor:", response.data);
-//       // Puedes manejar la respuesta del servidor según tus necesidades
-//     } catch (error) {
-//       console.error("Error al iniciar sesión:", error.response.data);
-//       // Puedes manejar el error según tus necesidades
-//     }
-//     console.log("Usuario:", username);
-//     console.log("Contraseña:", password);
-//     // También puedes realizar una llamada a la API para autenticar al usuario
-//   };
-
-//   return (
-//     <div className="flex flex-col h-screen">
-//       <NavBar />
-//       <div className="flex-grow flex items-center justify-center">
-//         <div className="w-full max-w-xs rounded">
-//           <h2 className="text-base font-semibold leading-7 text-gray-900">
-//             Iniciar sesión
-//           </h2>
-//           <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-//             <label className="block text-sm font-medium leading-6 text-gray-900">
-//               Usuario:
-//               <br />
-//               <input
-//                 className="px-5 border border-20 mb-3"
-//                 type="text"
-//                 value={username}
-//                 onChange={(e) => setUsername(e.target.value)}
-//               />
-//             </label>
-//             <br />
-//             <label className="block text-sm font-medium leading-6 text-gray-900">
-//               Contraseña:
-//               <br />
-//               <input
-//                 className="px-5 border border-20 mb-3"
-//                 type="password"
-//                 value={password}
-//                 onChange={(e) => setPassword(e.target.value)}
-//               />
-//             </label>
-//             <br />
-//             <button
-//               type="button"
-//               onClick={handleLogin}
-//               className="px-5 bg-[#003A70] text-white hover:bg-[#dadada] hover:text-[#003A70] h-8"
-//             >
-//               Iniciar sesión
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-
-// export default Login;
-
-
+export default Login

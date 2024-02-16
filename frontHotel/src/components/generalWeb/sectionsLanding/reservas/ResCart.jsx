@@ -29,6 +29,7 @@ const ResCart = () => {
             console.log(rate)
 
             const PplDates = roomId[1];
+
             const x = Object.values(PplDates).length;
             const numRoom = index + 1;
 
@@ -73,6 +74,9 @@ const ResCart = () => {
                             </ul>
                           </div>
                         ))}
+                            <div>
+
+                            </div>
                       </div>
                       {/* ***************** Título de la Habitación ***************** */}
                       <div className="flex flex-col w-1/2 lg:w-[150%] ml-1">
@@ -144,11 +148,11 @@ const ResCart = () => {
         </div>
       </div>
 
-      <div className="grid justify-items-end">
+      {/* <div className="grid justify-items-end">
         <button className="btn btn-secondary btn-xs rounded-full">
           Completar la Reserva
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

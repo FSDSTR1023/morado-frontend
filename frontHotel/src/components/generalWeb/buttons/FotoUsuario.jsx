@@ -1,17 +1,28 @@
 /* eslint-disable no-unused-vars */
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { MdOutlineSwitchAccount } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
 import { BiLogOutCircle } from "react-icons/bi";
+import { AuthContext } from '../../../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function FotoUsuario() {
+
+  const {loading, error, user, dispatch} = useContext(AuthContext);
+  const navigate = useNavigate()
+
+
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+    navigate("/")
+  };
+
   return (
-    // <Menu as="div" className="relative inline-block text-left">
       <Menu as="div" className="relative ml-3"> 
       <div>
         <Menu.Button className="w-10 h-10 relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -69,7 +80,7 @@ export default function FotoUsuario() {
                   href="#"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
+                    "block px-4 py-2 text-sm cursor-pointer"
                   )}
                 >
                   Configuración
@@ -84,11 +95,11 @@ export default function FotoUsuario() {
                 <div className="flex flex-row pl-2">
                   <span className="self-center"><BiLogOutCircle /></span>
                 <a
-                  href="#"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
+                    "block px-4 py-2 text-sm cursor-pointer"
                   )}
+                  onClick={handleLogout}     
                 >
                   Salir
                 </a>
