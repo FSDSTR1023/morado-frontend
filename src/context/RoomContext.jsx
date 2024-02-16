@@ -42,6 +42,8 @@ const RoomProvider = ({ children }) => {
   const [gNumDoc2, setGNumDoc2] = useState('')
   const [gExtraInfo2, setGExtraInfo2] = useState('')
 
+  const [email, setEmail]= useState('')
+  console.log('email=', email)
 
   const handleResGuests = () => {
     setGName2(gName)
@@ -80,7 +82,7 @@ useEffect(() => {
   };
   
   const [cartItems, setCartItems] = useState(getDefaultCart());
-  
+  console.log(cartItems)
 
   const addToCart = (itemId, userData, userInfo) => {
     console.log('Adding to cart:', itemId, userData);
@@ -89,24 +91,12 @@ useEffect(() => {
         ...prev,
         [itemId]: [itemId, userData, userInfo],
       };
-      console.log('updatedCart ==', updatedCart);
+      // console.log('updatedCart ==', updatedCart);
       return updatedCart;
     });
     setReservedRooms((prevReservedRooms) => [...prevReservedRooms, itemId]);
   };  
 
-  // const addToCart = (itemId) => {
-  //   setCartItems((prev) => {
-  //     const updatedCart = { 
-  //       ...prev, 
-  //       [itemId]:[itemId,{adults, kids, CheckIn, CheckOut, gName2, gLastName, gTel, gTypeDoc, gNumDoc, gExtraInfo}]
-  //     };
-  //     console.log('updatedCart ==', updatedCart);
-  //     return updatedCart;
-  //   });
-  //   setReservedRooms((prevReservedRooms) => [...prevReservedRooms, itemId]);
-  // };
-  
   const removeFromCart = (itemId) => {
     setCartItems((prev) => {
       const updatedCart = { ...prev };
@@ -118,25 +108,6 @@ useEffect(() => {
     );
   };
 
-  // const removeFromCart = (itemId) => {
-  //   setCartItems((prev) => {
-  //     const updatedCart = { 
-  //       ...prev, 
-  //       [itemId]:[itemId,{adults, kids, CheckIn, CheckOut, gName2, gLastName, gTel, gTypeDoc, gNumDoc, gExtraInfo}]-1
-  //     };
-  //     console.log('updatedCart ==', updatedCart);
-  //     return updatedCart;
-  //   });
-  // };
-
-  // =============< Provider Values >===============================================
-// const ResInfoPrev = (adultsPrev, setAdultsPrev, kidsPrev, setKidsPrev, CheckInPrev, setCheckInPrev, CheckOutPrev, setCheckOutPrev)
-// const ResInfo = (adults, setAdults, kids, setKids, CheckIn, setCheckIn, CheckOut, setCheckOut)
-// const GeneralRes = (total, resRoom, setResroom, cartItems, setCartItems,  reservedRooms)
-// const ResFunctions = (handleResInfo, addToCart, removeFromCart, handleResGuests)
-// const ResguestInfo = (gName, SetGName, gLastName, SetGLastName,  gTel, SetGTel,  gTypeDoc, SetGTypeDoc, gNumDoc, SetGNumDoc, gExtraInfo, SetGExtraInfo)
-
-
 return (
     <RoomContext.Provider value={allRooms}  >
       <PplContext.Provider value={{
@@ -145,7 +116,7 @@ return (
         total, resRoom, setResroom, cartItems, setCartItems,  reservedRooms,
         handleResInfo, addToCart, removeFromCart,
         gName, setGName, gLastName, setGLastName,  gTel, setGTel,  gTypeDoc, setGTypeDoc, gNumDoc, setGNumDoc, gExtraInfo, setGExtraInfo,
-        gName2, setGName2, gLastName2, setGLastName2,  gTel2, setGTel2,  gTypeDoc2, setGTypeDoc2, gNumDoc2, setGNumDoc2, gExtraInfo2, setGExtraInfo2
+        gName2, setGName2, gLastName2, setGLastName2,  gTel2, setGTel2,  gTypeDoc2, setGTypeDoc2, gNumDoc2, setGNumDoc2, gExtraInfo2, setGExtraInfo2, email, setEmail
       }}>
             {children}
       </PplContext.Provider>

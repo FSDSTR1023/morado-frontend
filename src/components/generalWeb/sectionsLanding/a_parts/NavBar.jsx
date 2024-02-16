@@ -1,12 +1,13 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CgMenuGridR } from "react-icons/cg";
 import { LiaLanguageSolid } from "react-icons/lia";
 import FotoUsuario from "../../buttons/FotoUsuario";
+import { AuthContext } from "../../../../context/AuthContext";
 
 function NavBar() {
+  const {user} = useContext(AuthContext);
+
   let LinksMain = [
     // { name: "Inicio", link: "/#Home" },
     { name: "Nosotros", link: "/#Hotel" },
@@ -18,7 +19,7 @@ function NavBar() {
 
   let LinksLogin = [
     { name: "Mi Reserva", link: "/" },
-    { name: "Mi Cuenta", link: "/" },
+    { name: "Login", link: "/login" },
   ];
 
   let [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ function NavBar() {
                   open ? "top-10 " : "top-[-490px]"
                 }`}
               >
-                <div className="block  items-center md:flex">
+                <div className="block  items-center md:flex pr-9">
                   {LinksMain.map((link) => (
                     <li key={link.name} className="md:ml-8 md:my-0 my-7">
                       <a
@@ -55,30 +56,33 @@ function NavBar() {
                       </a>
                     </li>
                   ))}
-                </div>{" "}
-                {/*============================================================ */}
-                <div className="block  items-center md:flex  border-black">
-                  {LinksLogin.map((link) => (
-                    <li key={link.name} className="md:ml-8 md:my-0 my-7">
-                      <a
-                        href={link.link}
-                        onClick={() => setOpen(false)}
-                        className="text-gray-800 hover:text-gray-400 duration-500"
-                      >
-                        {link.name}
-                      </a>
-                    </li>
-                  ))}
-                  <div className="pl-5 text-3xl pr-9">
-                    <LiaLanguageSolid />
-                  </div>
                 </div>
+                {/*============================================================ */}
+                
+               {!user && ( 
+                  <div className="block items-center md:flex  border-black">
+                    {LinksLogin.map((link) => (
+                      <li key={link.name} className="md:ml-8 md:my-0 my-7">
+                        <a
+                          href={link.link}
+                          onClick={() => setOpen(false)}
+                          className="text-gray-800 hover:text-gray-400 duration-500"
+                        >
+                          {link.name}
+                        </a>
+                      </li>
+                    ))}
+                    <div className="pl-5 text-3xl pr-9">
+                      <LiaLanguageSolid />
+                    </div>
+                  </div>)}
+
               </ul>
             </div>
             {/*============================================================ */}
-            <div className="right-10 absolute top-2 md:right-5 md:top-4">
+            {user && (<div className="right-10 absolute top-2 md:right-5 md:top-4">
                 <FotoUsuario />
-              </div>
+              </div>)}
           </div>
 
           <div className="text-3xl absolute right-2 top-3 cursor-pointer md:hidden">

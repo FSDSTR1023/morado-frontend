@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react';
 import NavBar from './sectionsLanding/a_parts/NavBar'
 import Footer from './sectionsLanding/a_parts/footer/Footer'
 
 const Conditions = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   return (
     <div>
         <NavBar />
