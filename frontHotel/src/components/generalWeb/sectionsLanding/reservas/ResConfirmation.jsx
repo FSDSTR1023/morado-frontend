@@ -16,8 +16,6 @@ import { RoomContext, PplContext } from "../../../../context/RoomContext";
 import { Link } from 'react-router-dom';
 
 
-
-
 const ResConfirmation = () => {
   const [number, setNumber] = useState('');
   const [cardProvider, setCardProvider] = useState(null);
@@ -37,12 +35,6 @@ const ResConfirmation = () => {
       mastercard: {pattern:/^5[1-5]/, backgroundImage:'url(https://images.pexels.com/photos/3745234/pexels-photo-3745234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'},
       visa: {pattern:/^4/, backgroundImage:'url(https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}, 
     };
-
-    // for (const [provider, pattern] of Object.entries(cardPatterns)) {
-    //   if (pattern.test(cleanedNumber)) {
-    //     return provider;
-    //   }
-    // }
 
     for (const [provider, { pattern, backgroundImage }] of Object.entries(cardPatterns)) {
       if (pattern.test(cleanedNumber)) {
@@ -123,8 +115,8 @@ const ResConfirmation = () => {
             {/* ********************************************* */}
             <div className='w-full p-4 flex justify-center'>
 
-              <div name='back' className='w-[500px] h-[300px] lg:h-auto lg:w-21/2 p-8 rounded-[20px] shadow-xl transition-all duration-500' style={{ backgroundImage: backgroundImage }}>
-                <div className='grid grid-cols-2'>
+              <div name='back' className='w-[500px] h-[300px] lg:[300px] lg:w-21/2 p-8 rounded-[20px] shadow-xl transition-all duration-500' style={{ backgroundImage: backgroundImage }}>
+                <div className='grid grid-cols-2 mb-8'>
                   <div className='flex justify-start items-center '>
                     <span className='w-20'>
                       <img src={chipTarjeta} id='chip' alt=""/>
