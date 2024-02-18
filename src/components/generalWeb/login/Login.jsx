@@ -6,6 +6,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import  Navbar  from '../../generalWeb/sectionsLanding/a_parts/NavBar'
 import line from '../../../assets/line.png'
 
+const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
+const loginUrl = `${urlUser}/login`
+
 const Login = () => {
   const [credentials, setCredentials] = useState({
     email: undefined,
@@ -24,7 +27,7 @@ const Login = () => {
     e.preventDefault ()
     dispatch({type:"LOGIN_START"})
     try {
-      const res = await axios.post('http://localhost:5000/users/login', credentials)
+      const res = await axios.post(loginUrl, credentials);
       const token = res.data.token;
 
       dispatch({type:"LOGIN_SUCCESS", payload:res.data})
