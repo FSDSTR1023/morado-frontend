@@ -110,6 +110,7 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                             )}
                           </div>
 
+
                           <p className="flex justify-end mb-5 items-center"><strong>Subtotal:</strong><span className="ml-3 font-bold text-xl">€{roomReservation.subtotal}</span></p>
                         </div>
                       ))}
