@@ -105,9 +105,7 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                           <div className="px-5 border-b-2 mt-5">
                             <strong> Información Adicional: </strong>
                             <br />
-                            {roomReservation.userInfo && (
                               <p className="ml-5">{roomReservation.userInfo.gExtraInfo}</p>
-                            )}
                           </div>
 
 
