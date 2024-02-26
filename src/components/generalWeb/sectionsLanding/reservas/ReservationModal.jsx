@@ -94,9 +94,9 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                                         {" = "}
                                         {roomReservation.userInfo.gNumDoc}
                                     </p>
-                                    <p>
-                                        <strong className="mr-2">Teléfono:</strong>{roomReservation.userInfo.gTel}
-                                    </p>
+                                    {roomReservation.userInfo && (
+                                        <p className="ml-5">{roomReservation.userInfo.gExtraInfo}</p>
+                                      )}
                                   </div>
                                 </div>
                               )}
