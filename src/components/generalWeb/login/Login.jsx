@@ -6,12 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import  Navbar  from '../../generalWeb/sectionsLanding/a_parts/NavBar'
 import line from '../../../assets/line.png'
 
+const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
+const loginUrl = `${urlUser}/login`
+
 const Login = () => {
   const [credentials, setCredentials] = useState({
     email: undefined,
     pwd: undefined,
   })
-
   const {loading, error, dispatch} = useContext(AuthContext);
 
   const navigate = useNavigate()
@@ -24,9 +26,7 @@ const Login = () => {
     e.preventDefault ()
     dispatch({type:"LOGIN_START"})
     try {
-      const res = await axios.post('http://localhost:5000/users/login', credentials)
-      const token = res.data.token;
-
+      const res = await axios.post(loginUrl, credentials);
       dispatch({type:"LOGIN_SUCCESS", payload:res.data})
       navigate("/")
     } catch (err) {
@@ -37,15 +37,18 @@ const Login = () => {
   return (
     <div className='bg-cover bg-center w-screen h-screen' style={{background:'url(https://images.pexels.com/photos/53577/hotel-architectural-tourism-travel-53577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) center/cover no-repeat'}}>
       <Navbar />
-      <div className='w-screen h-screen bg-black/75 flex justify-center items-center flex-col'>
-          <div className='flex flex-col justify-center items-center'>
-            <strong className='text-accent text-3xl'>Hotel</strong>
-            <strong className='mb-5 text-accent text-5xl'>Manzanares</strong>
-            <img src={line} alt="" className='w-[150px] mb-10' />
-
-          </div>
-        <div className='shadow-xl p-5 bg-black/65 rounded-md'>
-          <span className='mb-5 flex justify-center text-accent text-2xl'>Bienvenido</span>
+      <div className='w-screen h-screen bg-black/75 flex justify-center items-center flex-col lg:gap-20 lg:flex-row'>
+      <div className='flex flex-col justify-center items-center text-white tracking-[2px]'>
+                <span className=' text-3xl place-self-start'>Hotel</span>
+                <strong className=' text-6xl uppercase'><span className='text-9xl'>M</span>anzanares</strong>
+                  <h1 className='text-5xl tracking-[2px] leading-tight mb-6 drop-shadow-xl place-self-end font-tang'>
+                    {/* {title} */}
+                    tu hogar lejos de casa...
+                  </h1>
+                <img src={line} alt="" className='w-[300px] mb-10 drop-shadow-xl' />
+              </div>
+        <div className='shadow-xl p-5 bg-black/60 rounded-md'>
+          <span className='mb-5 flex justify-center text-white text-2xl'>Bienvenido</span>
           <div className='shadow-xl mb-5 p-5 bg-black rounded-md'>
               <div className='flex flex-col justify-center items-center'>
                 <input className='p-2 m-1 shadow-xl w-full' type='email' placeholder='Email' id='email' onChange={handleChange}/>

@@ -4,9 +4,12 @@ import { CgMenuGridR } from "react-icons/cg";
 import { LiaLanguageSolid } from "react-icons/lia";
 import FotoUsuario from "../../buttons/FotoUsuario";
 import { AuthContext } from "../../../../context/AuthContext";
+import { useLocation } from "react-router-dom";
 
 function NavBar() {
   const {user} = useContext(AuthContext);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   let LinksMain = [
     // { name: "Inicio", link: "/#Home" },
@@ -16,7 +19,9 @@ function NavBar() {
     { name: "Reseñas", link: "/#Review" },
     { name: "Preguntas Frecuentes", link: "/#Faquestions" },
   ];
-
+let LinksHome =[
+  { name: "Inicio", link: "/" },
+]
   let LinksLogin = [
     { name: "Mi Reserva", link: "/" },
     { name: "Login", link: "/login" },
@@ -24,10 +29,27 @@ function NavBar() {
 
   let [open, setOpen] = useState(false);
 
+  const renderMainLinks = isHomePage && (
+    <div className="block  items-center md:flex pr-9">
+    {LinksMain.map((link) => (
+      <li key={link.name} className="md:ml-8 md:my-0 my-7">
+        <a
+          href={link.link}
+          onClick={() => setOpen(false)}
+          className="text-gray-800 hover:text-gray-400 duration-500"
+        >
+          {link.name}
+        </a>
+      </li>
+    ))}
+  </div>
+  );
+
+
   return (
-    <div className="shadow-md w-screen fixed top-0 left-0 flex flex-col z-[300]">
+    <div className="shadow-md w-screen fixed top-0 left-0 flex flex-col z-[300] bg-gray">
       <div>
-        <div className="fixed w-full transition-all duration-300 md:flex items-center justify-between py-2 md:px-10 px-7 bg-white">
+        <div className="fixed w-full transition-all duration-300 md:flex items-center justify-between py-2 md:px-10 px-7 bg-white shadow-lg">
           <div className="md:text-xl transition-all font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800">
           <a
             href="/#Home"
@@ -44,8 +66,9 @@ function NavBar() {
                   open ? "top-10 " : "top-[-490px]"
                 }`}
               >
-                <div className="block  items-center md:flex pr-9">
-                  {LinksMain.map((link) => (
+               { !isHomePage && (
+                  <div className="block  items-center md:flex pr-9">
+                  {LinksHome.map((link) => (
                     <li key={link.name} className="md:ml-8 md:my-0 my-7">
                       <a
                         href={link.link}
@@ -57,7 +80,9 @@ function NavBar() {
                     </li>
                   ))}
                 </div>
-                {/*============================================================ */}
+                )}
+                {renderMainLinks}
+                {/* ============================================================ */}
                 
                {!user && ( 
                   <div className="block items-center md:flex  border-black">

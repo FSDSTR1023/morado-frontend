@@ -5,7 +5,7 @@ import { MdOutlineSwitchAccount } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
 import { BiLogOutCircle } from "react-icons/bi";
 import { AuthContext } from '../../../context/AuthContext'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -13,9 +13,10 @@ function classNames(...classes) {
 
 export default function FotoUsuario() {
 
-  const {loading, error, user, dispatch} = useContext(AuthContext);
+  const {loading, error, user, email, username, dispatch} = useContext(AuthContext);
   const navigate = useNavigate()
 
+console.log('user==', user)
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -45,13 +46,13 @@ export default function FotoUsuario() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="p-4 ml-5">
-              <span className="block font-bold pl-2">
-                Marina Diaz
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="p-4 shadow-md">
+              <span className="block font-bold text-xl">
+                {username}
               </span>
-              <span className="block pl-2 text-xs">
-                marina.diaz@email.com
+              <span className="block text-xs">
+                {email}
               </span>
           </div>
           <div className="py-1">
@@ -59,15 +60,14 @@ export default function FotoUsuario() {
               {({ active }) => (
                 <div className="flex flex-row pl-2">
                   <span className="self-center"><MdOutlineSwitchAccount /></span>
-                <a
-                  href="#"
+                <Link
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
+                    "block px-4 py-2 cursor-pointer text-sm w-full"
                   )}
                 >
-                  gestionar Cuenta
-                </a>
+                  Gestionar Cuenta
+                </Link>
                 </div>
 
               )}
@@ -76,15 +76,14 @@ export default function FotoUsuario() {
               {({ active }) => (
                 <div className="flex flex-row pl-2">
                   <span className="self-center"><CiSettings /></span>
-                <a
-                  href="#"
+                <Link
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm cursor-pointer"
+                    "block px-4 py-2 text-sm cursor-pointer w-full"
                   )}
                 >
                   Configuración
-                </a>
+                </Link>
                 </div>
               )}
             </Menu.Item>
@@ -94,15 +93,15 @@ export default function FotoUsuario() {
               {({ active }) => (
                 <div className="flex flex-row pl-2">
                   <span className="self-center"><BiLogOutCircle /></span>
-                <a
+                <Link
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm cursor-pointer"
+                    "block px-4 py-2 text-sm cursor-pointer w-full"
                   )}
                   onClick={handleLogout}     
                 >
                   Salir
-                </a>
+                </Link>
                 </div>
               )}
             </Menu.Item>

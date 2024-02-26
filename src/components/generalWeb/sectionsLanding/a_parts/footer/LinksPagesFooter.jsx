@@ -2,8 +2,12 @@
 import React from "react";
 import { BsChevronBarRight } from "react-icons/bs";
 import { RiArrowRightDoubleLine } from "react-icons/ri";
+import { useLocation } from "react-router-dom";
 
 const LinksPagesFooter = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   let LinksMain1 = [
     { name: "Inicio", link: "/#Home" },
     { name: "Nosotros", link: "/#Hotel" },
@@ -26,6 +30,38 @@ const LinksPagesFooter = () => {
     { name: "Términos y Condiciones", link: "/conditions" },
   ];
 
+  // Renderizar los enlaces solo si es la página principal
+  const renderMainLinks = isHomePage && (
+    <div className="flex flex-row gap-5 border-b-2 border-b-gray-200 pb-4">
+      <div className="flex flex-col w-full">
+        {LinksMain1.map((link) => (
+          <li key={link.name} className="">
+            <a
+              href={link.link}
+              className="text-black hover:text-accent-hover duration-300 flex flex-row gap-2"
+            >
+              <RiArrowRightDoubleLine className="self-center" />
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </div>
+      <div className="flex flex-col w-full">
+        {LinksMain2.map((link) => (
+          <li key={link.name} className="">
+            <a
+              href={link.link}
+              className="text-black hover:text-accent-hover duration-300 flex flex-row gap-3"
+            >
+              <RiArrowRightDoubleLine className="self-center" />
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div>
       <div className="flex flex-col font-normal">
@@ -34,34 +70,7 @@ const LinksPagesFooter = () => {
         </div>
         <div>
           <ul className="flex flex-col pb-0 static pl-10 w-auto">
-            <div className="flex flex-row gap-5 border-b-2 border-b-gray-200 pb-4">
-                <div className="flex flex-col w-full">
-                  {LinksMain1.map((link) => (
-                    <li key={link.name} className="">
-                      <a
-                        href={link.link}
-                        className="text-black hover:text-accent-hover duration-300 flex flex-row gap-2"
-                      >
-                        <RiArrowRightDoubleLine className="self-center"/>
-                        {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </div>
-                <div className="flex flex-col w-full">
-                {LinksMain2.map((link) => (
-                  <li key={link.name} className="">
-                    <a
-                      href={link.link}
-                      className="text-black hover:text-accent-hover duration-300 flex flex-row gap-3"
-                    >
-                      <RiArrowRightDoubleLine className="self-center"/>
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </div>
-            </div>
+            {renderMainLinks}
             {/*============================================================ */}
             <div className="flex flex-row gap-8 border-b-2 hover:text-accent-hover p-4">
               {LinksLogin.map((link) => (

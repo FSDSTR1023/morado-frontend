@@ -33,7 +33,7 @@ const Room = ({ room }) => {
     </div>
   ));
   
-  const {addToCart, removeFromCart, adultsPrev, kidsPrev, CheckInPrev, CheckOutPrev, reservedRooms} = useContext(PplContext)
+  const {addToCart, removeFromCart, adultsPrev, kidsPrev, checkInPrev, checkOutPrev, reservedRooms} = useContext(PplContext)
   const isRoomReserved = reservedRooms.includes(_id);
 
   if (isRoomReserved) {
@@ -49,11 +49,19 @@ const Room = ({ room }) => {
   //   </div>
   // ));
 
+  
+  const checkInDate = new Date(checkInPrev);
+  const checkOutDate = new Date(checkOutPrev);
+  const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+  console.log('nights==', nights)
+
+
   const userData = {
     adults: adultsPrev,
     kids: kidsPrev,
-    CheckIn: CheckInPrev,
-    CheckOut: CheckOutPrev,
+    checkIn: checkInPrev,
+    checkOut: checkOutPrev,
+    nights: nights,
   };
 
   return (

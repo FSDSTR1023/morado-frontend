@@ -7,7 +7,6 @@ import { GiCalendar } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 const ResCart = () => {
-  // const { cartItems } = useContext(PplContext);
   const { cartItems, removeFromCart } = useContext(PplContext);
 
   const rooms = useContext(RoomContext);
@@ -24,17 +23,12 @@ const ResCart = () => {
         <div>
           {Object.values(cartItems).map((roomId, index) => {
             const room = rooms.find((room) => room._id === roomId[0]);
-
             const rate = room.rate;
-            console.log(rate)
-
             const PplDates = roomId[1];
-
             const x = Object.values(PplDates).length;
             const numRoom = index + 1;
-
-            const checkInDate = new Date(PplDates.CheckIn);
-            const checkOutDate = new Date(PplDates.CheckOut);
+            const checkInDate = new Date(PplDates.checkIn);
+            const checkOutDate = new Date(PplDates.checkOut);
             const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
             const subtotal = nights * rate;
 
@@ -74,9 +68,7 @@ const ResCart = () => {
                             </ul>
                           </div>
                         ))}
-                            <div>
 
-                            </div>
                       </div>
                       {/* ***************** Título de la Habitación ***************** */}
                       <div className="flex flex-col w-1/2 lg:w-[150%] ml-1">
