@@ -94,9 +94,6 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                                         {" = "}
                                         {roomReservation.userInfo.gNumDoc}
                                     </p>
-                                    {roomReservation.userInfo && (
-                                        <p className="ml-5">{roomReservation.userInfo.gExtraInfo}</p>
-                                      )}
                                   </div>
                                 </div>
                               )}
