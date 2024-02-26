@@ -7,7 +7,10 @@ const FilteredRooms = () => {
   const rooms = useContext(RoomContext);
   const {total} = useContext(PplContext)
 
+  console.log('total', total)
+
 const ftRooms = rooms.filter((ftroom) => ftroom.maxPeople >= total )
+console.log('ftRooms==', ftRooms)
 
   return (
     <section className="p-3 shadow-md border-2">

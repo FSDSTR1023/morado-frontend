@@ -12,7 +12,7 @@ export function BreadcrumbsRes() {
   };
 
   return (
-    <div className="grid grid-cols-3 w-[400px] lg:w-[600px]"> 
+    <div className="grid grid-cols-3 w-[400px] lg:w-[600px] my-3"> 
       <Link to="/bookings/rooms" className="flex flex-col hover:text-accent-hover group" >
           <div className="flex flex-row">
                 <div className="w-full h-5"></div>

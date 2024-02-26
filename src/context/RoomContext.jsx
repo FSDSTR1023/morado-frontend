@@ -14,14 +14,14 @@ const RoomProvider = ({ children }) => {
 
   const [allRooms, setAllRooms] = useState([]);
 
-  const [CheckInPrev, setCheckInPrev] = useState ('')
-  const [CheckOutPrev, setCheckOutPrev] = useState ('')
-  const [adultsPrev, setAdultsPrev] = useState( '1 Adultos' );
-  const [kidsPrev, setKidsPrev] = useState( '0 Niños' );
+  const [checkInPrev, setCheckInPrev] = useState ('')
+  const [checkOutPrev, setCheckOutPrev] = useState ('')
+  const [adultsPrev, setAdultsPrev] = useState( ' Adultos' );
+  const [kidsPrev, setKidsPrev] = useState( ' Niños' );
   const [total, setTotal] = useState(0);
 
-  const [CheckIn, setCheckIn] = useState ('')
-  const [CheckOut, setCheckOut] = useState ('')
+  const [checkIn, setCheckIn] = useState ('')
+  const [checkOut, setCheckOut] = useState ('')
   const [adults, setAdults] = useState('1 Adultos');
   const [kids, setKids] = useState( '0 Niños');
 
@@ -43,23 +43,23 @@ const RoomProvider = ({ children }) => {
   const [gExtraInfo2, setGExtraInfo2] = useState('')
 
   const [email, setEmail]= useState('')
-  console.log('email=', email)
 
-  const handleResGuests = () => {
-    setGName2(gName)
-    setGLastName2(gLastName)
-    setGTel2(gTel)
-    setGTypeDoc2(gTypeDoc)
-    setGNumDoc2(gNumDoc);
-    setGExtraInfo2(gExtraInfo)
-  }
+  // const handleResGuests = () => {
+  //   setGName2(gName)
+  //   setGLastName2(gLastName)
+  //   setGTel2(gTel)
+  //   setGTypeDoc2(gTypeDoc)
+  //   setGNumDoc2(gNumDoc);
+  //   setGExtraInfo2(gExtraInfo)
+  // }
 
   const handleResInfo = () => {
     setAdults(adultsPrev)
     setKids(kidsPrev)
-    setCheckIn(CheckInPrev)
-    setCheckOut(CheckOutPrev)
+    setCheckIn(checkInPrev)
+    setCheckOut(checkOutPrev)
     setTotal(Number(adultsPrev[0]) + Number(kidsPrev[0]));
+    console.log('total==', total)
   }
 
 useEffect(() => {
@@ -80,18 +80,18 @@ useEffect(() => {
     }
     return cart;
   };
+
   
   const [cartItems, setCartItems] = useState(getDefaultCart());
-  console.log(cartItems)
+  console.log('cartItems', cartItems)
 
   const addToCart = (itemId, userData, userInfo) => {
-    console.log('Adding to cart:', itemId, userData);
     setCartItems((prev) => {
       const updatedCart = {
         ...prev,
         [itemId]: [itemId, userData, userInfo],
       };
-      // console.log('updatedCart ==', updatedCart);
+
       return updatedCart;
     });
     setReservedRooms((prevReservedRooms) => [...prevReservedRooms, itemId]);
@@ -104,15 +104,16 @@ useEffect(() => {
       return updatedCart;
     });
     setReservedRooms((prevReservedRooms) =>
-      prevReservedRooms.filter((id) => id !== itemId)
+    prevReservedRooms.filter((id) => id !== itemId)
     );
   };
 
+
 return (
     <RoomContext.Provider value={allRooms}  >
-      <PplContext.Provider value={{
-        adultsPrev, setAdultsPrev, kidsPrev, setKidsPrev, CheckInPrev, setCheckInPrev, CheckOutPrev, setCheckOutPrev,
-        adults, setAdults, kids, setKids, CheckIn, setCheckIn, CheckOut, setCheckOut,
+      <PplContext.Provider value={{ 
+        adultsPrev, setAdultsPrev, kidsPrev, setKidsPrev, checkInPrev, setCheckInPrev, checkOutPrev, setCheckOutPrev,
+        adults, setAdults, kids, setKids, checkIn, setCheckIn, checkOut, setCheckOut,
         total, resRoom, setResroom, cartItems, setCartItems,  reservedRooms,
         handleResInfo, addToCart, removeFromCart,
         gName, setGName, gLastName, setGLastName,  gTel, setGTel,  gTypeDoc, setGTypeDoc, gNumDoc, setGNumDoc, gExtraInfo, setGExtraInfo,

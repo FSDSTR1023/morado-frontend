@@ -32,6 +32,8 @@ module.exports = withMT ({
       primary: 'Gilda Display',
       secondary: 'Barlow',
       tertiary: 'Barlow Condensed',
+      'tang': ["Tangerine"],
+
     },
     container: {
       padding: {

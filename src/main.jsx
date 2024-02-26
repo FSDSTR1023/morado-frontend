@@ -10,10 +10,10 @@ import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthContextProvider>
-    <RoomProvider>
+      <RoomProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-    </RoomProvider>
+      </RoomProvider>
   </AuthContextProvider>
 );

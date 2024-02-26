@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Outlet } from 'react-router-dom' 
 import React from 'react'
-import NavBar from '../a_parts/NavBarLight.jsx'
+import NavBar from '../a_parts/NavBar.jsx'
 import ResDetails from './ResDetails.jsx'
 import Footer from '../a_parts/footer/Footer.jsx'
 

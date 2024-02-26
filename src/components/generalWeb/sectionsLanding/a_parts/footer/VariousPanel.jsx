@@ -28,11 +28,6 @@ const VariousPanel = () => {
       );
   };
 
-  const clearForm = () => {
-    form.current.reset();
-    setMessageSent(false);
-  };
-
   return (
     <div className="items-center flex flex-col">
       <div className="text-center w-full font-bold border-b-2 border-b-gray-200 pb-5 uppercase">
@@ -45,7 +40,7 @@ const VariousPanel = () => {
         </div>
       )}
 
-        <form ref={form} onSubmit={sendEmail}>
+        <form ref={form} onSubmit={sendEmail} className="-z-0">
             <div className="place-content-center mx-5">
               <div className="flex flex-row mb-2 gap-2 mt-3">
                   <Input  className='bg-white' label='Nombre' type="text" name="name" />
@@ -66,12 +61,7 @@ const VariousPanel = () => {
                         Enviar
                     </button>
                 </div>
-                <div className="flex flex-col w-[100px]">
-                <button type="button" className='btn btn-secondary btn-xs mx-auto gap-5 rounded-full shadow-xl' onClick={clearForm}>
-                  Limpiar
-                </button>
-                </div>
-            </div>
+             </div>
 
 
         </form>
