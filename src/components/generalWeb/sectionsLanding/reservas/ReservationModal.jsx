@@ -94,16 +94,17 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                                         {" = "}
                                         {roomReservation.userInfo.gNumDoc}
                                     </p>
+                                    <p>
+                                        <strong className="mr-2">Teléfono:</strong>{roomReservation.userInfo.gTel}
+                                    </p>
                                   </div>
                                 </div>
                               )}
                             </div>
                           </div>
-                          <div className="px-5 border-b-2 mt-5">
-                            <strong> Información Adicional: </strong>
-                            <br />
-                            <p className="ml-5">{roomReservation.userInfo.gExtraInfo}</p>
-                          </div>
+                          {roomReservation.userInfo && (
+                              <p className="ml-5">{roomReservation.userInfo.gExtraInfo}</p>
+                            )}
 
                           <p className="flex justify-end mb-5 items-center"><strong>Subtotal:</strong><span className="ml-3 font-bold text-xl">€{roomReservation.subtotal}</span></p>
                         </div>
