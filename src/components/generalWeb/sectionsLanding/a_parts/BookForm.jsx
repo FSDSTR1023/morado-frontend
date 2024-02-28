@@ -58,7 +58,7 @@ const isValidDate = (dateString) => {
       </div>
 
       <div className='flex justify-center items-center'>
-        <button type='submit' className='btn btn-primary w-full h-full'>
+        <button type='submit' data-cy='boton-busqueda' className='btn btn-primary w-full h-full'>
           Buscar
         </button>
       </div>
