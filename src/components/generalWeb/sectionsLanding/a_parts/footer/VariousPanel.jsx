@@ -29,7 +29,7 @@ const VariousPanel = () => {
   };
 
   return (
-    <div className="items-center flex flex-col">
+    <div className="items-center flex flex-col w-full">
       <div className="text-center w-full font-bold border-b-2 border-b-gray-200 pb-5 uppercase">
         Déjanos un mensaje
       </div>
@@ -40,11 +40,15 @@ const VariousPanel = () => {
         </div>
       )}
 
-        <form ref={form} onSubmit={sendEmail} className="-z-0">
+        <form ref={form} onSubmit={sendEmail} className="-z-0 w-full">
             <div className="place-content-center mx-5">
-              <div className="flex flex-row mb-2 gap-2 mt-3">
-                  <Input  className='bg-white' label='Nombre' type="text" name="name" />
-                  <Input className='bg-white' label='Teléfono' type="number" name="telefono" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 my-2">
+                  <div >
+                    <Input label='Nombre' type="text" name="name" />
+                  </div>
+                  <div >
+                    <Input label='Teléfono' type="number" name="telefono" />
+                  </div>
               </div>
                   <div className="mb-2">
                     <Input className='bg-white' label='E-mail' type="email" name="email" />
@@ -55,12 +59,12 @@ const VariousPanel = () => {
                   
             </div>
  
-            <div className="w-full flex flex-row justify-center gap-5">
-                <div className="flex flex-col w-[100px]">
-                    <button type="submit" className='btn btn-secondary btn-xs mx-auto gap-5 rounded-full shadow-xl' >
-                        Enviar
-                    </button>
-                </div>
+            <div className="flex flex-row justify-end px-5">
+              <div>
+                <button type="submit" className='btn btn-secondary btn-xs mx-auto gap-5 rounded-full shadow-xl w-[150px]' >
+                  Enviar
+                </button>
+              </div>
              </div>
 
 

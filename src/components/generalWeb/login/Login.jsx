@@ -40,8 +40,8 @@ const Login = () => {
       <div className='w-screen h-screen bg-black/75 flex justify-center items-center flex-col lg:gap-20 lg:flex-row'>
       <div className='flex flex-col justify-center items-center text-white tracking-[2px]'>
                 <span className=' text-3xl place-self-start'>Hotel</span>
-                <strong className=' text-6xl uppercase'><span className='text-9xl'>M</span>anzanares</strong>
-                  <h1 className='text-5xl tracking-[2px] leading-tight mb-6 drop-shadow-xl place-self-end font-tang'>
+                <strong className='text-4xl lg:text-6xl uppercase'><span className='text-7xl lg:text-9xl'>M</span>anzanares</strong>
+                  <h1 className='text-3xl lg:text-5xl tracking-[2px] leading-tight mb-6 drop-shadow-xl place-self-end font-tang'>
                     {/* {title} */}
                     tu hogar lejos de casa...
                   </h1>

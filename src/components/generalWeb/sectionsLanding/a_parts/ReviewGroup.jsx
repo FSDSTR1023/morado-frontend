@@ -32,7 +32,7 @@ let information = [
 const ReviewGroup = () => {
   return (
 <section className='py-24' >
-    <div className='container mx-auto lg:px-0'>
+    <div className='w-[85%] mx-auto lg:px-0'>
 
         <div className='flex justify-center uppercase font-tertiary mb-16 text-2xl h-5 w-full'>
           Lo que opinan nuestros Huéspedes

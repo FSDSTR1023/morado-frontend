@@ -7,15 +7,12 @@ const FilteredRooms = () => {
   const rooms = useContext(RoomContext);
   const {total} = useContext(PplContext)
 
-  console.log('total', total)
-
 const ftRooms = rooms.filter((ftroom) => ftroom.maxPeople >= total )
-console.log('ftRooms==', ftRooms)
 
   return (
-    <section className="p-3 shadow-md border-2">
-      <div className="container mx-auto lg:px-0">
-        <div className="grid grid-cols-1 mx-auto gap-[30px]">
+    <section className="flex p-3 shadow-md border-2">
+      <div className="mx-0 lg:px-0">
+        <div className="grid grid-cols-1 gap-y-[30px]">
           {ftRooms.map((room) => {
             return <FilteredRoomDesign room={room} key={room._id} />;
           })}
