@@ -37,7 +37,7 @@ module.exports = withMT ({
     },
     container: {
       padding: {
-        DEFAULT: '15px',
+        DEFAULT: '1rem',
       },
     },
     screens: {

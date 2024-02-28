@@ -12,8 +12,8 @@ const MainBooking = () => {
         <NavBar />
       </div>
       {/*==================================================================*/}
-      <div className='flex flex-col-reverse lg:flex-row mx-2 lg:mx-20'>
-        <main className='w-full justify-center'>
+      <div className='flex flex-col-reverse mx-0 lg:flex-row lg:mx-20'>
+        <main className='justify-center'>
           <Outlet />
         </main>
         <div className='w-full lg:w-1/2 justify-center'>

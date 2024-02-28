@@ -42,7 +42,7 @@ const FilteredRoomDesign = ({ room }) => {
   // ));
 
   return (
-    <div className="bg-white shadow-2xl min-h-[550px] group">
+    <div className="bg-white shadow-2xl min-h-[550px] w-full group">
       {/* ==== imagen =============== */}
       <div className="overflow-hidden">
         <img

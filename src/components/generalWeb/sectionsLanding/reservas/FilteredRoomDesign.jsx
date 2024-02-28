@@ -37,23 +37,12 @@ const Room = ({ room }) => {
   const isRoomReserved = reservedRooms.includes(_id);
 
   if (isRoomReserved) {
-    // Room is reserved, you may choose to render differently or return null
     return null;
   }
 
-  // Muestra cada una de las fotos
-  // ===================================================================
-  // const fotos = room.photos.map((foto, index) => (
-  //   <div key={index}>
-  //     <img src={foto} alt="" />
-  //   </div>
-  // ));
-
-  
   const checkInDate = new Date(checkInPrev);
   const checkOutDate = new Date(checkOutPrev);
   const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-  console.log('nights==', nights)
 
 
   const userData = {
@@ -67,10 +56,10 @@ const Room = ({ room }) => {
   return (
     <div className="shadow-lg group">
 
-      <div className='flex flex-col lg:flex-row'>
+      <div className='flex flex-col lg:flex-row w-full'>
           <div className="">
               {/* ==== imagen =============== */}
-              <div className="overflow-hidden lg:w-full lg:h-full">
+              <div className="overflow-hidden w-full h-full">
                 <img
                   className="object-cover group-hover:scale-105 transition-all duration-300 lg:w-[250px] lg:h-full cursor-pointer"
                   src={photos}
@@ -161,7 +150,7 @@ const Room = ({ room }) => {
                   </div>
                 </div> {/* ---------------------------------------------- */}
                 <div className=" flex flex-col lg:flex-row gap-5 w-full mb-3 justify-center items-center">
-                  <Link className="w-full flex justify-start hover:text-accent-hover">
+                  <Link className="w-full flex justify-start hover:text-accent-hover" to={"/roomdetails/" + room._id}>
                     <div className=" flex justify-center items-center mx-2"><RiArrowRightDoubleLine  size={18}/></div>
                     <div className="flex-flex-row underline" >
                       Detalle de la habitación
