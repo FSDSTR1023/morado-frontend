@@ -68,7 +68,6 @@ const AddUser = () => {
         pwd: res.data.pwd || "",
         isAdmin: res.data.isAdmin || false
       });
-        // console.log(res.data.isAdmin)
     } catch (error){
       console.error("Error fetching user data:", error);
     }
@@ -79,7 +78,6 @@ const AddUser = () => {
   const isMounted = useRef(true);
 
   useEffect(() => {
-    // if (isMounted.current && urlId !== "") {
     if (isMounted.current && urlId !== "" && urlId !== undefined){
       actualId(urlId);
     }
@@ -90,7 +88,7 @@ const AddUser = () => {
     <div className="flex flex-col items-center w-full gap-5">
       <div className="flex w-full shadow-md justify-between">
         <div className="p-5 text-xl font-bold self-start">
-          Datos del Huésped
+          Datos del Usuario
         </div>
         <div className="flex">
           <Link

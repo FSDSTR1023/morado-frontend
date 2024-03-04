@@ -5,7 +5,8 @@ import MainAdmin from './components/MainAdmin.jsx';
 import DashboardMain from './components/admin/adminActions/DashboardMain.jsx';
 import Bookings from './components/admin/adminActions/bookings/Bookings.jsx';
 import Calendar from './components/admin/adminActions/calendar/Calendar.jsx';
-import Habitaciones from './components/admin/adminActions/adminSettings/Habitaciones.jsx';
+import Habitaciones from './components/admin/adminActions/rooms/Habitaciones.jsx';
+import RoomsList from './components/admin/adminActions/rooms/RoomsList.jsx'
 import AddUser from './components/admin/adminActions/users/AddUsers.jsx';
 import UsersList from './components/admin/adminActions/users/UsersList.jsx';
 import MainBooking from './components/generalWeb/sectionsLanding/reservas/MainBooking.jsx';
@@ -44,7 +45,9 @@ function App() {
                   <Route path='guests/create' element={<AddUser />}/>
                   <Route path='guests/edit/:id' element={<AddUser />}/>
               <Route path='calendar' element={<Calendar />}/>
-              <Route path='habitaciones' element={<Habitaciones />}/>
+              <Route path='habitaciones' element={<RoomsList />}/>
+                  <Route path='habitaciones/create' element={<Habitaciones />}/>
+                  <Route path='habitaciones/edit/:id' element={<Habitaciones />}/>
         </Route>
       </Routes>
     </div>  

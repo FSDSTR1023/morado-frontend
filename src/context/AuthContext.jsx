@@ -59,6 +59,8 @@ export const AuthContextProvider = ({ children }) => {
   const userId = decodedToken?.id;
   const username = decodedToken?.username;
   const email = decodedToken?.email;
+  const isAdmin = decodedToken?.isAdmin;
+  console.log('isAdmin==', isAdmin)
 
   return (
     <AuthContext.Provider
@@ -69,6 +71,7 @@ export const AuthContextProvider = ({ children }) => {
         userId,
         username,
         email,
+        isAdmin,
         dispatch,
       }}
     >

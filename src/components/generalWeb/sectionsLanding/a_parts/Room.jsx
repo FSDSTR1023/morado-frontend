@@ -25,29 +25,13 @@ const FilteredRoomDesign = ({ room }) => {
     featured
   } = room;
 
-  // Muetra Todos los amenities individualmente
-  // ===================================================================
-  // const amenitiesList = room.amenities.map((amenity, index) => (
-  //   <div key={index}>
-  //     {amenity}
-  //   </div>
-  // ));
-
-  // Muestra cada una de las fotos
-  // ===================================================================
-  // const fotos = room.photos.map((foto, index) => (
-  //   <div key={index}>
-  //     <img src={foto} alt="" />
-  //   </div>
-  // ));
-
   return (
     <div className="bg-white shadow-2xl min-h-[550px] w-full group">
       {/* ==== imagen =============== */}
       <div className="overflow-hidden">
         <img
           className="object-cover group-hover:scale-105 transition-all duration-300 w-full cursor-pointer"
-          src={photos}
+          src={photos[0]}
           alt=""
         />
       </div>
@@ -112,9 +96,9 @@ const FilteredRoomDesign = ({ room }) => {
         </p>
       </div> {/* ====================== */}
       {/* ==== Botón ================ */}
-      <Link to={"/#Rooms/" + _id} className="btn btn-secondary btn-sm max-w-[240px] mx-auto self-end">
+      {/* <Link to={"/#Rooms/" + _id} className="btn btn-secondary btn-sm max-w-[240px] mx-auto self-end">
           Reserva desde €{rate}
-      </Link>
+      </Link> */}
     </div>
   );
 };

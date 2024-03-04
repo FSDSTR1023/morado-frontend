@@ -13,7 +13,7 @@ function classNames(...classes) {
 
 export default function FotoUsuario() {
 
-  const {loading, error, user, email, username, dispatch} = useContext(AuthContext);
+  const {loading, error, user, email, username, isAdmin, dispatch} = useContext(AuthContext);
   const navigate = useNavigate()
 
 console.log('user==', user)

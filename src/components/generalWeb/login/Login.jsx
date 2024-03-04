@@ -14,7 +14,7 @@ const Login = () => {
     email: undefined,
     pwd: undefined,
   })
-  const {loading, error, dispatch} = useContext(AuthContext);
+  const {loading, error, dispatch, isAdmin} = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -22,21 +22,38 @@ const Login = () => {
     setCredentials((prev) => ({...prev, [e.target.id]: e.target.value}));
   }
 
-  const handleClick = async e => {
-    e.preventDefault ()
-    dispatch({type:"LOGIN_START"})
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(loginUrl, credentials);
-      dispatch({type:"LOGIN_SUCCESS", payload:res.data})
-      navigate("/")
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      if (isAdmin === true) {
+        navigate("/adminctrl");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
-      dispatch({type:"LOGIN_FAILURE", payload:err.response.data})
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
-  }
+  };
+
+  // const handleClick = async e => {
+  //   e.preventDefault ()
+  //   dispatch({type:"LOGIN_START"})
+  //   try {
+  //     const res = await axios.post(loginUrl, credentials);
+  //     dispatch({type:"LOGIN_SUCCESS", payload:res.data})
+  //     navigate("/")
+  //   } catch (err) {
+  //     dispatch({type:"LOGIN_FAILURE", payload:err.response.data})
+  //   }
+  // }
 
   return (
     <div className='bg-cover bg-center w-screen h-screen' style={{background:'url(https://images.pexels.com/photos/53577/hotel-architectural-tourism-travel-53577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) center/cover no-repeat'}}>
       <Navbar />
+      
       <div className='w-screen h-screen bg-black/75 flex justify-center items-center flex-col lg:gap-20 lg:flex-row'>
       <div className='flex flex-col justify-center items-center text-white tracking-[2px]'>
                 <span className=' text-3xl place-self-start'>Hotel</span>

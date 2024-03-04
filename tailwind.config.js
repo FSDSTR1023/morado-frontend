@@ -1,23 +1,4 @@
 /* eslint-disable no-undef */
-// /** @type {import('tailwindcss').Config} */
-// export default {
-  
-//   content: [
-//     "./index.html",
-//     "./app.jsx",
-//     "./src/**/*.{js,ts,jsx,tsx}",
-//   ],
-//   theme: {
-//     extend: {},
-//   },
-//   plugins: [
-//   ],
-//   variants: {
-//     extend: {
-//       visibility: ['responsive', 'hover', 'focus', 'group-hover'],
-//     },
-//   },
-// }
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT ({
@@ -33,7 +14,6 @@ module.exports = withMT ({
       secondary: 'Barlow',
       tertiary: 'Barlow Condensed',
       'tang': ["Tangerine"],
-
     },
     container: {
       padding: {
@@ -51,6 +31,14 @@ module.exports = withMT ({
         accent: {
           DEFAULT: '#967142',
         },
+        inset: {
+          '0': 0,
+          'auto': 'auto',
+          '1/2': '50%',
+        },
+        zIndex: {
+          '1': 1,
+        }
       },
       colors: {
         primary: '#0a0a0a',
