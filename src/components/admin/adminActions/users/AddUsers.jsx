@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { PiUserListFill } from "react-icons/pi";
 import UserFormInputs from "./UserFormInputs";
 
@@ -40,15 +40,16 @@ const AddUser = () => {
     try {
       if (urlId) {
         await axios.put(`${urlUser}/${urlId}`, addUser);
-        console.log("Usuario Actualizado con éxito");
+        showAlert("Usuario Actualizado con éxito");
       } else {
         await axios.post(`${urlUser}/signup`, addUser);
-        console.log("Usuario registrado con éxito");
+        showAlert("Usuario registrado con éxito");
       }
       setAddUser(newUserInit);
       setUrlId("");
     } catch (error) {
       console.error("No se puede guardar/actualizar el usuario", error);
+      showAlert("No se pudo registrar el usuario, Inténtelo nuevamente.");
     }
   };
 
@@ -74,7 +75,6 @@ const AddUser = () => {
     
   };
 
-
   const isMounted = useRef(true);
 
   useEffect(() => {
@@ -84,23 +84,41 @@ const AddUser = () => {
     isMounted.current = false;
   }, [urlId]);
 
+  const location = useLocation();
+  const isRegisterRoute = location.pathname === "/login/register";
+  const [alertMessage, setAlertMessage] = useState(null);
+  const navigate = useNavigate()
+
+  const showAlert = (message) => {
+    setAlertMessage(message);
+    setTimeout(() => {
+      setAlertMessage(null);
+      if (message.includes("con éxito")) {
+        navigate("/login");
+      }
+    }, 3000);
+  };
+
   return (
     <div className="flex flex-col items-center w-full gap-5">
-      <div className="flex w-full shadow-md justify-between">
-        <div className="p-5 text-xl font-bold self-start">
-          Datos del Usuario
-        </div>
-        <div className="flex">
-          <Link
-            className="flex h-14 items-center hover:text-[#003A70] pr-10"
-            to="../guests"
-          >
-            <PiUserListFill size={25} className="w-14" /> Lista de Usuarios
-          </Link>
-        </div>
-      </div>
 
-      <div className="flex shadow-xl p-8 w-fit">
+    {!isRegisterRoute && (
+        <div className="flex w-full shadow-md justify-between">
+          <div className="p-5 text-xl font-bold self-start">
+            Datos del Usuario
+          </div>
+          <div className="flex">
+            <Link
+              className="flex h-14 items-center hover:text-[#003A70] pr-10"
+              to="../guests"
+            >
+              <PiUserListFill size={25} className="w-14" /> Lista de Usuarios
+            </Link>
+          </div>
+        </div>
+      )}
+
+      <div className="flex shadow-xl p-8 w-fit flex-col-reverse lg:flex-row">
         <form onSubmit={handleSubmit}>
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
 
@@ -114,12 +132,17 @@ const AddUser = () => {
           </div>
         </form>
 
-      <img className="ml-7 w-80 object-cover shadow-2xl" 
+      <img className=" ml-7 w-80 object-cover shadow-2xl hidden lg:block" 
            src="https://images.pexels.com/photos/5371683/pexels-photo-5371683.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
            alt="Agregar Usuario" 
       />
 
       </div>
+      {alertMessage && (
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 bg-accent text-white text-xl rounded text-center shadow-xl">
+            {alertMessage}
+          </div>
+        )}
     </div>
   );
 };
