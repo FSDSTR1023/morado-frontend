@@ -6,6 +6,7 @@ import { CiSettings } from "react-icons/ci";
 import { BiLogOutCircle } from "react-icons/bi";
 import { AuthContext } from '../../../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
+import { PiUserCircleDuotone } from "react-icons/pi";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -13,7 +14,7 @@ function classNames(...classes) {
 
 export default function FotoUsuario() {
 
-  const {loading, error, user, email, username, dispatch} = useContext(AuthContext);
+  const {loading, error, user, email, username, isAdmin, dispatch} = useContext(AuthContext);
   const navigate = useNavigate()
 
 console.log('user==', user)
@@ -26,14 +27,15 @@ console.log('user==', user)
   return (
       <Menu as="div" className="relative ml-3"> 
       <div>
-        <Menu.Button className="w-10 h-10 relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+        <Menu.Button className="w-10 h-10 relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
         <span className="absolute -inset-1.5" />
         <span className="sr-only">Open user menu</span>
-        <img
+        {/* <img
           className="h-10 w-10 rounded-full" 
           src="https://images.pexels.com/photos/871495/pexels-photo-871495.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
           alt="perfil"
-        />
+        /> */}
+        <PiUserCircleDuotone className="h-10 w-10 rounded-full"/>
         </Menu.Button>
       </div>
 

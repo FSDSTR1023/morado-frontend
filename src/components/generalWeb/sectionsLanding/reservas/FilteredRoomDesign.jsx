@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoBedOutline } from "react-icons/io5";
 import { IoPerson } from "react-icons/io5";
@@ -8,8 +8,24 @@ import { IoPeople } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { PplContext } from "../../../../context/RoomContext";
+import { socket } from '../../../../socket.jsx';
+
+// import { ConnectionState } from './ConnectionState.jsx';
+import { ConnectionManager } from './ConnectionManager.jsx';
+// import { Events } from "./Events.jsx";
 
 const Room = ({ room }) => {
+  const [connectedUsers, setConnectedUsers] = useState(0);
+
+  useEffect(() => {
+
+    socket.on("userConnection", ({ message, count }) => {
+      console.log(message);
+      setConnectedUsers(count);
+    });
+
+  }, []);
+
   const {
     _id,
     roomNum,
@@ -56,13 +72,15 @@ const Room = ({ room }) => {
   return (
     <div className="shadow-lg group">
 
+      <ConnectionManager />
+
       <div className='flex flex-col lg:flex-row w-full'>
           <div className="">
               {/* ==== imagen =============== */}
               <div className="overflow-hidden w-full h-full">
                 <img
                   className="object-cover group-hover:scale-105 transition-all duration-300 lg:w-[250px] lg:h-full cursor-pointer"
-                  src={photos}
+                  src={photos[0]}
                   alt=""
                 />
               </div>
@@ -137,6 +155,10 @@ const Room = ({ room }) => {
                     <div className="w-full mb-2 pl-5 lg:mb-0">
                       {amenitiesList.slice(0, 3)}
                     </div>
+                  <div className="w-full flex justify-start text-orange-900 font-bold text-sm">
+                    <p><span>{`${connectedUsers}`}</span> personas están viendo esta habitación</p>
+                  </div>
+
                   </div>
                   {/* ------------------------------------------------------------- */}
                   <div className="flex flex-col w-full">
@@ -165,6 +187,9 @@ const Room = ({ room }) => {
                     </Link>
                   </div>
                 {/* **************************************** */}
+                {/* <div className="w-full flex justify-center">
+                  <p>{`Usuarios Conectados: ${connectedUsers}`}</p>
+                </div> */}
                 </div>
               </div>
           </div>

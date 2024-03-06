@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { AuthContext } from '../../../context/AuthContext'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,29 +15,36 @@ const Login = () => {
     email: undefined,
     pwd: undefined,
   })
-  const {loading, error, dispatch} = useContext(AuthContext);
+
+  const {loading, error, dispatch, isAdmin} = useContext(AuthContext);
 
   const navigate = useNavigate()
+
+useEffect(() => {
+  if (isAdmin == undefined ) return
+  if (isAdmin ) navigate("/adminctrl") 
+  else navigate("/")
+},[isAdmin])
 
   const handleChange = (e) => {
     setCredentials((prev) => ({...prev, [e.target.id]: e.target.value}));
   }
 
-  const handleClick = async e => {
-    e.preventDefault ()
-    dispatch({type:"LOGIN_START"})
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(loginUrl, credentials);
-      dispatch({type:"LOGIN_SUCCESS", payload:res.data})
-      navigate("/")
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+
     } catch (err) {
-      dispatch({type:"LOGIN_FAILURE", payload:err.response.data})
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
-  }
+  };
 
   return (
-    <div className='bg-cover bg-center w-screen h-screen' style={{background:'url(https://images.pexels.com/photos/53577/hotel-architectural-tourism-travel-53577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) center/cover no-repeat'}}>
-      <Navbar />
+    <div className='bg-cover bg-center w-screen h-screen'>
+      
       <div className='w-screen h-screen bg-black/75 flex justify-center items-center flex-col lg:gap-20 lg:flex-row'>
       <div className='flex flex-col justify-center items-center text-white tracking-[2px]'>
                 <span className=' text-3xl place-self-start'>Hotel</span>
@@ -47,7 +55,7 @@ const Login = () => {
                   </h1>
                 <img src={line} alt="" className='w-[300px] mb-10 drop-shadow-xl' />
               </div>
-        <div className='shadow-xl p-5 bg-black/60 rounded-md'>
+        <div className='shadow-xl p-5 bg-black/60 backdrop-blur-sm rounded-md'>
           <span className='mb-5 flex justify-center text-white text-2xl'>Bienvenido</span>
           <div className='shadow-xl mb-5 p-5 bg-black rounded-md'>
               <div className='flex flex-col justify-center items-center'>
@@ -57,9 +65,12 @@ const Login = () => {
                 {error && <span>{error.message}</span>}
               </div>
           </div>
-          <span className='cursor-pointer text-white'>Registrarse</span>
-          <span className='mx-3 text-white'>|</span>
-          <Link className='text-white'>Olvidaste la contraseña?</Link>
+          <div className='flex flex-col lg:flex-row justify-center'>
+            <span className='text-white mr-3 font-extralight'>Aun no tienes Cuenta?</span>
+            <Link to={'/login/register'} className='cursor-pointer text-accent hover:text-white hover:underline'>Registrate</Link>
+          </div>
+          {/* <span className='mx-3 text-white'>|</span> */}
+          {/* <Link className='text-white'>Olvidaste la contraseña?</Link> */}
         </div>
       </div>
     </div>

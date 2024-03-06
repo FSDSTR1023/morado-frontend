@@ -7,7 +7,6 @@ import { getAllRooms } from '../utils/HandleApiRooms';
 
 export const RoomContext = createContext()
 export const PplContext = createContext()
-// export const ResContext = createContext()
 
 const RoomProvider = ({ children }) => {
   const [reservedRooms, setReservedRooms] = useState([]);
@@ -44,22 +43,12 @@ const RoomProvider = ({ children }) => {
 
   const [email, setEmail]= useState('')
 
-  // const handleResGuests = () => {
-  //   setGName2(gName)
-  //   setGLastName2(gLastName)
-  //   setGTel2(gTel)
-  //   setGTypeDoc2(gTypeDoc)
-  //   setGNumDoc2(gNumDoc);
-  //   setGExtraInfo2(gExtraInfo)
-  // }
-
   const handleResInfo = () => {
     setAdults(adultsPrev)
     setKids(kidsPrev)
     setCheckIn(checkInPrev)
     setCheckOut(checkOutPrev)
     setTotal(Number(adultsPrev[0]) + Number(kidsPrev[0]));
-    console.log('total==', total)
   }
 
 useEffect(() => {
@@ -80,10 +69,8 @@ useEffect(() => {
     }
     return cart;
   };
-
   
   const [cartItems, setCartItems] = useState(getDefaultCart());
-  console.log('cartItems', cartItems)
 
   const addToCart = (itemId, userData, userInfo) => {
     setCartItems((prev) => {

@@ -23,24 +23,31 @@ import SearchBar from "./SearchBar.jsx"
   // ========================================================================================================
   const deleteUser = async (id) => {
     await axios.delete(`${urlUser}/${id}`)
-    alert(" El Usuario: " + id + " ha si do Eliminado");
+    alert(" El Usuario: " + id + " ha sido Eliminado");
     getAllusers(setAllusers);
   }
+
+  const confirmDeleteUser= (id, nameu, lastName, email) => {
+    const shouldDelete = window.confirm(`Estás seguro de que deseas eliminar al Usuario: \n ${id}\n ${nameu} ${lastName}\n ${email}`);
+    if (shouldDelete) {
+      deleteUser(id);
+    }
+  };
 
   return (
     // ==== Creación de la tabla para mostrar todos los datos de os usuarios
     <div className="flex flex-col items-center w-full">
 
       <div className="flex w-full shadow-md justify-between">
-        <div className="p-5 text-xl font-bold self-start">Listado Completo de Huéspedes</div>
+        <div className="p-5 text-xl font-bold self-start">Listado Completo de Usuarios</div>
         <div className="flex">
           <Link className="flex h-14 items-center hover:text-[#003A70] pr-10" to="../guests/create">
-          <HiUserAdd size={25} className="w-14"/> Agregar Huésped</Link>
+          <HiUserAdd size={25} className="w-14"/> Agregar Usuario</Link>
         </div>
       </div>
 
       <div className="flex-col p-4 mt-5 w-auto max-h-[80vh] min-h-[80vh] h-4/5 shadow-lg">
-        <div className="flex justify-end"><SearchBar /></div>
+        {/* <div className="flex justify-end"><SearchBar /></div> */}
         <table className="text-sm text-left rtl:text-right text-gray-500">
           {/* Estos son todos los encabezados */}
           {/* ================================================================================================= */}
@@ -102,7 +109,7 @@ import SearchBar from "./SearchBar.jsx"
               ==================================================================================================*/}
                   <button
                     className="hover:shadow hover:bg-[#003A70] hover:text-white p-3 text-black"
-                    onClick={() => deleteUser(item._id)}
+                    onClick={() => confirmDeleteUser(item._id, item.nameu, item.lastName, item.email)}
                   >
                     {/* <MdDeleteForever /> es el icono para eliminar */}
                     <MdDeleteForever />

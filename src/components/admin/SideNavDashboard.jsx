@@ -14,19 +14,19 @@ import { ImCalendar } from "react-icons/im";
 import { FaHotel } from "react-icons/fa";
 
 const navlinks = [
-  { name: "Dashboard", icon: MdDashboard, link: "dashboard" },
+  // { name: "Dashboard", icon: MdDashboard, link: "dashboard" },
   { name: "Reservas", icon: PiNotepad, link: "bookings" },
-  { name: "Huéspedes", icon: IoPeople, link: "guests" },
-  { name: "Calendario", icon: ImCalendar, link: "calendar" },
+  { name: "Usuarios", icon: IoPeople, link: "guests" },
+  // { name: "Calendario", icon: ImCalendar, link: "calendar" },
   { name: "Habitaciones", icon: FaHotel, link: "habitaciones" },
 ];
 
 const SideNavDashboard = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <section>
       <div
-        className={`bg-gray-100 h-[94vh] ${
+        className={`bg-blue-gray-100 h-[94vh] ${
           open ? "w-[200px]" : "w-[80px]"
         } duration-200 pl-4 text-[#003A70] font-bold py-12 flex flex-col w-1/5 h-[94vh] relative bg-gray-100`}
       >
