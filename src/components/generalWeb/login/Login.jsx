@@ -21,8 +21,9 @@ const Login = () => {
   const navigate = useNavigate()
 
 useEffect(() => {
-  if (isAdmin == undefined ) return
-  if (isAdmin ) navigate("/adminctrl") 
+  // if (isAdmin === undefined ) return
+  if (isAdmin ) {navigate("/adminctrl") 
+  console.log('isAdmin === ', isAdmin)}
   else navigate("/")
 },[isAdmin])
 
