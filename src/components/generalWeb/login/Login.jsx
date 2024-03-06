@@ -21,10 +21,13 @@ const Login = () => {
   const navigate = useNavigate()
 
 useEffect(() => {
-  if (isAdmin == undefined ) return
-  if (isAdmin ) navigate("/adminctrl") 
-  else navigate("/")
-},[isAdmin])
+  if (isAdmin === undefined) return;
+  if (isAdmin) {
+    navigate("/adminctrl");
+  } else {
+    navigate("/");
+  }
+}, [isAdmin]);
 
   const handleChange = (e) => {
     setCredentials((prev) => ({...prev, [e.target.id]: e.target.value}));
