@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoBedOutline } from "react-icons/io5";
 import { IoPerson } from "react-icons/io5";
 import { IoPeople } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { PplContext } from "../../../../context/RoomContext";
+import { AuthContext } from "../../../../context/AuthContext";
 import { socket } from '../../../../socket.jsx';
 
 // import { ConnectionState } from './ConnectionState.jsx';
@@ -16,14 +17,17 @@ import { ConnectionManager } from './ConnectionManager.jsx';
 
 const Room = ({ room }) => {
   const [connectedUsers, setConnectedUsers] = useState(0);
+  const {user} = useContext(AuthContext);
+  const [showMessage, setShowMessage] = useState(false);
+  const navigate = useNavigate()
+  const {addToCart, removeFromCart, adultsPrev, kidsPrev, checkInPrev, checkOutPrev, reservedRooms} = useContext(PplContext)
+ 
 
   useEffect(() => {
-
-    socket.on("userConnection", ({ message, count }) => {
-      console.log(message);
-      setConnectedUsers(count);
-    });
-
+    return () => {
+      // Clean up: clear the timeout when the component unmounts
+      clearTimeout();
+    };
   }, []);
 
   const {
@@ -49,8 +53,15 @@ const Room = ({ room }) => {
     </div>
   ));
   
-  const {addToCart, removeFromCart, adultsPrev, kidsPrev, checkInPrev, checkOutPrev, reservedRooms} = useContext(PplContext)
-  const isRoomReserved = reservedRooms.includes(_id);
+ const isRoomReserved = reservedRooms.includes(_id);
+
+  useEffect(() => {
+    socket.on("userConnection", ({ message, count }) => {
+      console.log('message == ', message);
+      setConnectedUsers(count);
+    });
+
+  }, []);
 
   if (isRoomReserved) {
     return null;
@@ -68,6 +79,26 @@ const Room = ({ room }) => {
     checkOut: checkOutPrev,
     nights: nights,
   };
+
+  const handleReservation = () => {
+    if (user) {
+      if (room && room._id) {
+        addToCart(room._id, userData);
+        setTimeout(() => {
+          navigate("/bookings/guests");
+        }, 100);
+      }
+    } else {
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+        if (!user) {
+          navigate("/login");
+        }
+      }, 2000);
+    }
+  };
+  
 
   return (
     <div className="shadow-lg group">
@@ -180,11 +211,17 @@ const Room = ({ room }) => {
                   </Link>
                 
                   <div className="w-full flex justify-center mx-5">
-                    <Link to='/bookings/guests'
-                    onClick={()=>{addToCart(room._id, userData)}}
-                    className="btn btn-secondary btn-xs rounded-full shadow-xl">
-                      Reservar
-                    </Link>
+                    {showMessage ? (
+                      <div className="text-red-500">Para reservar, necesita estar autenticado.</div>
+                    ) : (
+                      <Link
+                      onClick={handleReservation}
+                      className="btn btn-secondary btn-xs rounded-full shadow-xl"
+                      // to="/bookings/guests"
+                      >
+                        Reservar
+                      </Link>
+                    )}
                   </div>
                 {/* **************************************** */}
                 {/* <div className="w-full flex justify-center">

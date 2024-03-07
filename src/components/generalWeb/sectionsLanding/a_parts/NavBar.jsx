@@ -15,12 +15,11 @@ function NavBar() {
   const isLoginRoute = location.pathname === "/login";
 
   let LinksMain = [
-    // { name: "Inicio", link: "/#Home" },
-    { name: "Nosotros", link: "/#Hotel" },
-    { name: "Habitaciones", link: "/#Rooms" },
-    { name: "Ubicación", link: "/#Location" },
-    { name: "Reseñas", link: "/#Review" },
-    { name: "Preguntas Frecuentes", link: "/#Faquestions" },
+    { name: "Nosotros", link: "#Hotel" },
+    { name: "Habitaciones", link: "#Rooms" },
+    { name: "Ubicación", link: "#Location" },
+    { name: "Reseñas", link: "#Review" },
+    { name: "Preguntas Frecuentes", link: "#Faquestions" },
   ];
 let LinksHome =[
   { name: "Inicio", link: "/" },
@@ -28,13 +27,20 @@ let LinksHome =[
 
 let [open, setOpen] = useState(false);
 
-  const renderMainLinks = isHomePage && (
-    <div className="block  items-center md:flex pr-9">
+const renderMainLinks = isHomePage && (
+  <div className="block  items-center md:flex pr-9">
     {LinksMain.map((link) => (
       <li key={link.name} className="md:ml-8 md:my-0 my-7">
         <Link
           to={link.link}
-          onClick={() => setOpen(false)}
+          onClick={(e) => {
+            setOpen(false);
+            e.preventDefault();
+            const element = document.querySelector(link.link);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
           className="text-gray-800 hover:text-gray-400 duration-500"
         >
           {link.name}
@@ -42,7 +48,7 @@ let [open, setOpen] = useState(false);
       </li>
     ))}
   </div>
-  );
+);
 
   return (
     <div className="shadow-md w-screen fixed top-0 left-0 flex flex-col z-[300] bg-gray">
