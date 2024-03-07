@@ -23,13 +23,13 @@ const HomeRes = () => {
           </div>
         </div>
         
-      <div className="self-baseline" id="Hotel"><Hotel  /></div>
-      <div className="self-baseline" id="Rooms"><Rooms  /></div>
+      <section className="self-baseline" id="Hotel"><Hotel  /></section>
+      <section className="self-baseline" id="Rooms"><Rooms  /></section>
       {/* <div className="self-baseline" id="Location"><Location  /></div> */}
-      <div className="self-baseline" id="Review"><ReviewGroup  /></div>
-      <div className="shadow-xl mb-10" id="Faquestions">
+      <section className="self-baseline" id="Review"><ReviewGroup  /></section>
+      <section className="shadow-xl mb-10" id="Faquestions">
           <Faquestions  />
-      </div>
+      </section>
       <Footer />
     </div>
   )
