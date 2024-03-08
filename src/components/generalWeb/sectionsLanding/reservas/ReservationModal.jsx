@@ -12,8 +12,6 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
         <h2 className="mb-3 font-extrabold text-2xl border-b-2 bg-black text-white flex justify-center">Detalles de la Reservación</h2>
         {reservationSummary && (
           <div>
-            {/* <p>Reserva ID: {reservationSummary._id}</p> */}
-            {/* ... (mostrar otros detalles de la reserva según tu estructura de datos) */}
 
             <div className="">
               {creditCard && (

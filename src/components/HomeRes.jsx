@@ -10,6 +10,7 @@ import Footer from './generalWeb/sectionsLanding/a_parts/footer/Footer.jsx'
 import BookForm from './generalWeb/sectionsLanding/a_parts/BookForm.jsx'
 import HeroSlider from "./generalWeb/sectionsLanding/a_parts/HeroSlider.jsx"
 import Hotel from "./generalWeb/sectionsLanding/Hotel.jsx"
+import Location from "./generalWeb/sectionsLanding/Location.jsx"
 
 const HomeRes = () => {
   return (
@@ -25,7 +26,7 @@ const HomeRes = () => {
         
       <section className="self-baseline" id="Hotel"><Hotel  /></section>
       <section className="self-baseline" id="Rooms"><Rooms  /></section>
-      {/* <div className="self-baseline" id="Location"><Location  /></div> */}
+      <div className="self-baseline" id="Location"><Location  /></div>
       <section className="self-baseline" id="Review"><ReviewGroup  /></section>
       <section className="shadow-xl mb-10" id="Faquestions">
           <Faquestions  />

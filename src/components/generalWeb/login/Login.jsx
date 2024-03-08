@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import  Navbar  from '../../generalWeb/sectionsLanding/a_parts/NavBar'
 import line from '../../../assets/line.png'
+import { useLocation } from 'react-router-dom';
 
 const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
 const loginUrl = `${urlUser}/login`
@@ -18,19 +19,29 @@ const Login = () => {
 
   const {loading, error, dispatch, isAdmin} = useContext(AuthContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();  
 
   useEffect(() => {
     if (isAdmin === undefined || isAdmin === null) {
-      return; 
+      return;
     }
     if (isAdmin) {
-      navigate("/adminctrl");
+      if (location.state && location.state.from) {
+        navigate(location.state.from);
+        console.log('location.state.from === ', location.state.from)
+      } else {
+        navigate('/adminctrl');
+      }
       console.log('isAdmin === ', isAdmin);
     } else {
-      navigate("/");
+      if (location.state && location.state.from) {
+        navigate(location.state.from);
+      } else {
+        navigate('/');
+      }
     }
-  }, [isAdmin]);
+  }, [isAdmin, location, navigate]);
 
   const handleChange = (e) => {
     setCredentials((prev) => ({...prev, [e.target.id]: e.target.value}));

@@ -17,7 +17,7 @@ export default function FotoUsuario() {
   const {loading, error, user, email, username, isAdmin, dispatch} = useContext(AuthContext);
   const navigate = useNavigate()
 
-console.log('user==', user)
+// console.log('user==', user)
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -57,7 +57,7 @@ console.log('user==', user)
                 {email}
               </span>
           </div>
-          <div className="py-1">
+          {/* <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <div className="flex flex-row pl-2">
@@ -89,7 +89,7 @@ console.log('user==', user)
                 </div>
               )}
             </Menu.Item>
-          </div>
+          </div> */}
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (

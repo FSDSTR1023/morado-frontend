@@ -45,7 +45,7 @@ import { HiUserAdd } from "react-icons/hi";
 
       <div className="flex-col p-4 mt-5 w-auto max-h-[80vh] min-h-[80vh] h-4/5 shadow-lg bg-white" >
         <div style={{ overflowY: 'auto' }} className="max-h-[75vh]">
-        <table className="text-sm text-left rtl:text-right text-gray-500">
+        <table className="text-sm text-left rtl:text-right text-gray-700">
           {/* Estos son todos los encabezados */}
           {/* ================================================================================================= */}
           <thead className="text-xs text-white uppercase bg-[#003A70] sticky top-0 z-1 h-8">

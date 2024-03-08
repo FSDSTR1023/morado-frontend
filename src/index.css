@@ -45,29 +45,23 @@
     @apply h-[10px];
   }
 
-  /* Estilos para Visa */
 .visa-card {
-  @apply bg-[#4caf50]; /* Green */
+  @apply bg-[#4caf50]; 
 }
 
-/* Estilos para Mastercard */
 .mastercard-card {
   @apply bg-[#3498db]; /* Blue */
 }
 
-/* Estilos para American Express */
 .amex-card {
-  @apply bg-[#ff9800]; /* Orange */
+  @apply bg-[#ff9800];
 }
 
-/* Estilos para Discover */
 .discover-card {
-  @apply bg-[#e91e63]; /* Pink */
+  @apply bg-[#e91e63];
 }
 
-/* Estilos generales para la tarjeta */
 .credit-card {
-  /* Estilos comunes para todas las tarjetas */
   @apply w-[300px] h-[200px] rounded-[10px] p-[20px] text-white text-[18px];
 }
 }

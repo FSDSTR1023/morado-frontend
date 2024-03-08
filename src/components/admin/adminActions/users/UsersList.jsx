@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar.jsx"
   export default function UsersList() {
 
   const [allusers, setAllusers] = useState([]);
+  console.log('allusers == ', allusers)
   const urlUser = import.meta.env.VITE_BACKEND_USER_URL;
 
   useEffect(() => {
@@ -48,7 +49,7 @@ import SearchBar from "./SearchBar.jsx"
 
       <div className="flex-col p-4 mt-5 w-auto max-h-[80vh] min-h-[80vh] h-4/5 shadow-lg">
         {/* <div className="flex justify-end"><SearchBar /></div> */}
-        <table className="text-sm text-left rtl:text-right text-gray-500">
+        <table className="text-sm text-left rtl:text-right text-gray-700">
           {/* Estos son todos los encabezados */}
           {/* ================================================================================================= */}
           <thead className="text-xs text-white uppercase bg-[#003A70]">
