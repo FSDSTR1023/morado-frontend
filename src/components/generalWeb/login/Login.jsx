@@ -51,9 +51,9 @@ const Login = () => {
           <span className='mb-5 flex justify-center text-white text-2xl'>Bienvenido</span>
           <div className='shadow-xl mb-5 p-5 bg-black rounded-md'>
               <div className='flex flex-col justify-center items-center'>
-                <input className='p-2 m-1 shadow-xl w-full' type='email' placeholder='Email' id='email' onChange={handleChange}/>
-                <input className='p-2 m-1 shadow-xl w-full' type='password' placeholder='Contraseña' id='pwd' onChange={handleChange}/>
-                <button disabled={loading} onClick={handleClick} className='bg-accent w-full m-1 mt-5 p-2 text-white font-bold'>Acceder</button>
+                <input className='p-2 m-1 shadow-xl w-full' data-cy='email' type='email' placeholder='Email' id='email' onChange={handleChange}/>
+                <input className='p-2 m-1 shadow-xl w-full' data-cy='password' type='password' placeholder='Contraseña' id='pwd' onChange={handleChange}/>
+                <button disabled={loading} onClick={handleClick} className='bg-accent w-full m-1 mt-5 p-2 text-white font-bold' data-cy ='acceder'>Acceder</button>
                 {error && <span>{error.message}</span>}
               </div>
           </div>
