@@ -8,32 +8,19 @@ import { RoomContext }  from '../../../../context/RoomContext';
 
 const Bookings = () => {
   const [allBookings, setAllbookings] = useState([]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [checkIn, setCheckIn] = useState(null);
+  const [checkOut, setCheckOut] = useState(null);
   const rooms = useContext(RoomContext);
-
-  console.log('bookings prueba == ', allBookings)
 
   useEffect(() => {
     getAllBookings(setAllbookings);
   }, []);
-
-  // useEffect(() => {
-  //   getAllBookings(setAllbookings, startDate, endDate);
-  // }, [startDate, endDate]);
 
   const getRoomNumber = (roomCode) => {
     const room = rooms.find(room => room._id === roomCode);
     return room ? room.roomNum : "N/A";
   };
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-  };
-
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
 
 return (
 <div className="flex flex-col w-full">
@@ -41,16 +28,7 @@ return (
         <div className="flex w-full shadow-md p-5 text-xl font-bold self-start">Reservaciones</div>
     <div className="w-full flex justify-center items-center mt-3">
       <div className="bg-white w-full max-h-[80vh] overflow-y-auto mx-5">
-      {/* <div className="flex justify-between items-center mb-3 p-3">
-            <div>
-              <label className="mr-3">Fecha de inicio:</label>
-              <input type="date" onChange={(e) => handleStartDateChange(e.target.value)} />
-            </div>
-            <div>
-              <label className="mr-3">Fecha de fin:</label>
-              <input type="date" onChange={(e) => handleEndDateChange(e.target.value)} />
-            </div>
-          </div> */}
+
 
         {allBookings.map((item) => (
           <div className="border-b-4 border-accent mb-3 shadow-lg" key={item._id}>

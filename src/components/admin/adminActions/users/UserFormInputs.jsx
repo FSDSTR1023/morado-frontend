@@ -37,7 +37,17 @@ const UserFormInputs = ( { addUser, handleOnChange } ) => {
             <input className="px-2 border border-20 mb-3 shadow w-full text-gray-900" type="text" name="country" value={addUser.country} onChange={handleOnChange} />
           </label>{/* ================================================================================== */}
           <label className="block text-sm font-medium leading-6"> Tipo de Documento <br />
-            <input className="px-2 border border-20 mb-3 shadow w-full text-gray-900" type="text" name="docType" value={addUser.docType} onChange={handleOnChange} />
+            <select
+              className="px-2 border border-20 mb-3 shadow w-full text-gray-900"
+              name="docType"
+              value={addUser.docType}
+              onChange={handleOnChange}
+            >
+              <option value="">Selecciona un tipo de documento</option>
+              <option value="DNI-NIF">DNI-NIF</option>
+              <option value="NIE">NIE</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
           </label>{/* ================================================================================== */}
           <label className="block text-sm font-medium leading-6"> Numero de Documento <br />
             <input className="px-2 border border-20 mb-3 shadow w-full text-gray-900" type="text" name="docNum" value={addUser.docNum} onChange={handleOnChange} />
@@ -66,11 +76,8 @@ const UserFormInputs = ( { addUser, handleOnChange } ) => {
         <input className="px-2 border border-20 mb-3 shadow w-full text-gray-900" type="text" name="username" value={addUser.username} onChange={handleOnChange} />
       </label>
       {/* ================================================================================== */}
-      {/* <label className="block text-sm font-medium leading-6"> Contraseña <br />
-        <input className="px-2 border border-20 mb-3 shadow w-full text-gray-900" type="password" name="pwd" value={addUser.pwd} onChange={handleOnChange} />
-      </label> */}
 
-<label className="block text-sm font-medium leading-6">
+      <label className="block text-sm font-medium leading-6">
           Contraseña
           <br />
           <div className="relative">
