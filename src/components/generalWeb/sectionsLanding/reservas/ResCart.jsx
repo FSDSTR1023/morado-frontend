@@ -5,6 +5,7 @@ import { FaChildren } from "react-icons/fa6";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { GiCalendar } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { RiArrowRightDoubleLine } from "react-icons/ri";
 
 const ResCart = () => {
   const { cartItems, removeFromCart } = useContext(PplContext);
@@ -132,19 +133,19 @@ const ResCart = () => {
         {/* ////////////////////////////////////////////////////////////////////// */}
 
         {/* Mostrar el total general al final del componente */}
-        <div className="mt-3 pt-2 px-3 flex justify-end border-t-2">
+        <div className="mt-3 pt-2 px-3 flex justify-between border-t-2">
+        <Link className="flex justify-start hover:text-accent-hover" to="/bookings/rooms">
+                    <div className=" flex justify-center items-center"><RiArrowRightDoubleLine  size={18}/></div>
+                    <div className="flex-flex-row underline" >
+                      Agregar habitación
+                    </div>
+                  </Link>
           <strong>
             Total:
             <span className="text-accent text-2xl ml-2">€ {totalGeneral}</span>
           </strong>
         </div>
       </div>
-
-      {/* <div className="grid justify-items-end">
-        <button className="btn btn-secondary btn-xs rounded-full">
-          Completar la Reserva
-        </button>
-      </div> */}
     </div>
   );
 };

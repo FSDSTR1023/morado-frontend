@@ -90,26 +90,6 @@ const Room = ({ room }) => {
     }
   };
 
-  // const handleReservation = () => {
-  //   if (user) {
-  //     if (room && room._id) {
-  //       addToCart(room._id, userData);
-  //       setTimeout(() => {
-  //         navigate("/bookings/guests");
-  //       }, 100);
-  //     }
-  //   } else {
-  //     setShowMessage(true);
-  //     setTimeout(() => {
-  //       setShowMessage(false);
-  //       if (!user) {
-  //         navigate("/login");
-  //       }
-  //     }, 2000);
-  //   }
-  // };
-  
-
   return (
     <div className="shadow-lg group">
       <div className='flex flex-col lg:flex-row w-full'>

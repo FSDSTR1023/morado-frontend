@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ReservationModal = ({ reservationSummary, onClose }) => {
   const creditCard = reservationSummary.creditCard;
   const resDetail = reservationSummary.resDetail;
+  const navigate = useNavigate();
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black/85 flex justify-center items-center z-10 shadow-xl">
@@ -113,9 +115,17 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                     </div>
                   )}
                    <p className="flex justify-end items-center mt-5"><strong>Total de la Reservación:</strong><span className="ml-3 font-bold text-2xl">€{reservationSummary.totalRate}</span></p>
-                   <div className="w-full flex justify-end mt-5"><span className="text-white font-bold flex justify-center text-xl cursor-pointer hover:font-extraboldbold bg-black rounded-md hover:bg-accent-hover w-52 p-1" onClick={onClose}>
-          Aceptar
-        </span></div>
+                   <div className="w-full flex justify-end mt-5">
+                   <span
+            className="text-white font-bold flex justify-center text-xl cursor-pointer hover:font-extraboldbold bg-black rounded-md hover:bg-accent-hover w-52 p-1"
+            onClick={() => {
+              navigate("/"); // Use the navigate function to redirect to "/"
+              onClose(); // Make sure to invoke the onClose function
+            }}
+          >
+            Aceptar
+          </span>
+          </div>
                   </div>
                 </div>
               )}

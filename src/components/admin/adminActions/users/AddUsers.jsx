@@ -30,8 +30,11 @@ const AddUser = () => {
 
   const handleOnChange = (event) => {
     const { name, value, type, checked } = event.target;
-    const newValue = type === "checkbox" ? checked : value;
+    let newValue = type === "checkbox" ? checked : value;
 
+    if (name === "phone" && type === "number") {
+      newValue = newValue.slice(0, 9);
+    }
     setAddUser((prevData) => ({ ...prevData, [name]: newValue }));
   };
 
@@ -94,7 +97,9 @@ const AddUser = () => {
     setTimeout(() => {
       setAlertMessage(null);
       if (message.includes("con éxito")) {
-        navigate("/login");
+        const isEditRoute = location.pathname.startsWith("/adminctrl/guests/edit/");
+        const isCreateRoute = location.pathname.startsWith("/adminctrl/guests/create/");
+        navigate(isEditRoute || isCreateRoute? "/adminctrl/guests" : "/login");
       }
     }, 3000);
   };
