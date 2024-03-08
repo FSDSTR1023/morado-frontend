@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { BreadcrumbsRes } from './BreadcrumbsRes'
-// import BookFormLight from './BookFormLight'
 import FilteredRooms from './FilteredRooms'
 import BookForm from '../a_parts/BookForm'
 

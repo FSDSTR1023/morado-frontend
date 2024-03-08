@@ -9,11 +9,7 @@ import { IoIosPeople } from "react-icons/io";
 import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { PplContext } from "../../../../context/RoomContext";
 import { AuthContext } from "../../../../context/AuthContext";
-import { socket } from '../../../../socket.jsx';
-
-// import { ConnectionState } from './ConnectionState.jsx';
-import { ConnectionManager } from './ConnectionManager.jsx';
-// import { Events } from "./Events.jsx";
+import { useLocation } from 'react-router-dom';
 
 const Room = ({ room }) => {
   const [connectedUsers, setConnectedUsers] = useState(0);
@@ -21,11 +17,10 @@ const Room = ({ room }) => {
   const [showMessage, setShowMessage] = useState(false);
   const navigate = useNavigate()
   const {addToCart, removeFromCart, adultsPrev, kidsPrev, checkInPrev, checkOutPrev, reservedRooms} = useContext(PplContext)
- 
+  const location = useLocation();
 
   useEffect(() => {
     return () => {
-      // Clean up: clear the timeout when the component unmounts
       clearTimeout();
     };
   }, []);
@@ -55,13 +50,6 @@ const Room = ({ room }) => {
   
  const isRoomReserved = reservedRooms.includes(_id);
 
-  useEffect(() => {
-    socket.on("userConnection", ({ message, count }) => {
-      console.log('message == ', message);
-      setConnectedUsers(count);
-    });
-
-  }, []);
 
   if (isRoomReserved) {
     return null;
@@ -85,7 +73,8 @@ const Room = ({ room }) => {
       if (room && room._id) {
         addToCart(room._id, userData);
         setTimeout(() => {
-          navigate("/bookings/guests");
+          const redirectPath = location.pathname; // Obtener la ruta actual
+          navigate("/bookings/guests", { state: { from: redirectPath } });
         }, 100);
       }
     } else {
@@ -93,18 +82,36 @@ const Room = ({ room }) => {
       setTimeout(() => {
         setShowMessage(false);
         if (!user) {
-          navigate("/login");
+          const redirectPath = location.pathname; // Obtener la ruta actual
+          console.log('redirectPath == ', redirectPath)
+          navigate("/login", { state: { from: redirectPath } });
         }
       }, 2000);
     }
   };
+
+  // const handleReservation = () => {
+  //   if (user) {
+  //     if (room && room._id) {
+  //       addToCart(room._id, userData);
+  //       setTimeout(() => {
+  //         navigate("/bookings/guests");
+  //       }, 100);
+  //     }
+  //   } else {
+  //     setShowMessage(true);
+  //     setTimeout(() => {
+  //       setShowMessage(false);
+  //       if (!user) {
+  //         navigate("/login");
+  //       }
+  //     }, 2000);
+  //   }
+  // };
   
 
   return (
     <div className="shadow-lg group">
-
-      <ConnectionManager />
-
       <div className='flex flex-col lg:flex-row w-full'>
           <div className="">
               {/* ==== imagen =============== */}
@@ -186,9 +193,6 @@ const Room = ({ room }) => {
                     <div className="w-full mb-2 pl-5 lg:mb-0">
                       {amenitiesList.slice(0, 3)}
                     </div>
-                  <div className="w-full flex justify-start text-orange-900 font-bold text-sm">
-                    <p><span>{`${connectedUsers}`}</span> personas están viendo esta habitación</p>
-                  </div>
 
                   </div>
                   {/* ------------------------------------------------------------- */}

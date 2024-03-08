@@ -9,6 +9,9 @@ export const RoomContext = createContext()
 export const PplContext = createContext()
 
 const RoomProvider = ({ children }) => {
+  const [resReftofind, setResReftofind] = useState('');
+  console.log('resReftofind=== ', resReftofind)
+
   const [reservedRooms, setReservedRooms] = useState([]);
 
   const [allRooms, setAllRooms] = useState([]);
@@ -104,7 +107,8 @@ return (
         total, resRoom, setResroom, cartItems, setCartItems,  reservedRooms,
         handleResInfo, addToCart, removeFromCart,
         gName, setGName, gLastName, setGLastName,  gTel, setGTel,  gTypeDoc, setGTypeDoc, gNumDoc, setGNumDoc, gExtraInfo, setGExtraInfo,
-        gName2, setGName2, gLastName2, setGLastName2,  gTel2, setGTel2,  gTypeDoc2, setGTypeDoc2, gNumDoc2, setGNumDoc2, gExtraInfo2, setGExtraInfo2, email, setEmail
+        gName2, setGName2, gLastName2, setGLastName2,  gTel2, setGTel2,  gTypeDoc2, setGTypeDoc2, gNumDoc2, setGNumDoc2, gExtraInfo2, setGExtraInfo2, email, setEmail,
+        resReftofind, setResReftofind
       }}>
             {children}
       </PplContext.Provider>
