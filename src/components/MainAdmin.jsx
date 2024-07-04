@@ -11,7 +11,7 @@ function MainAdmin() {
         </div>
         <div className='flex'>
           <SideNavDashboard />
-          <main className='flex items-start w-screen justify-center'>
+          <main className='flex items-start min-w-[90%] md:w-full'>
             <Outlet />
           </main>
         </div>

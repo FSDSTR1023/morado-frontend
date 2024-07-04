@@ -105,11 +105,11 @@ const AddUser = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full gap-5">
+    <div className="flex w-full flex-col items-center gap-0 md:gap-5">
 
     {!isRegisterRoute && (
-        <div className="flex w-full shadow-md justify-between">
-          <div className="p-5 text-xl font-bold self-start">
+        <div className="flex w-full shadow-md justify-between flex-row gap-0  md:gap-auto">
+          <div className="p-2 md:p-5 text-xl font-bold items-center">
             Datos del Usuario
           </div>
           <div className="flex">
@@ -117,13 +117,13 @@ const AddUser = () => {
               className="flex h-14 items-center hover:text-[#003A70] pr-10"
               to="../guests"
             >
-              <PiUserListFill size={25} className="w-14" /> Lista de Usuarios
+              <PiUserListFill size={25} className="md:w-14" /><span className="ml-2 md:ml-auto">Lista de Usuarios</span>
             </Link>
           </div>
         </div>
       )}
 
-      <div className="flex shadow-xl p-8 w-fit flex-col-reverse lg:flex-row">
+      <div className="flex shadow-xl p-2 md:p-8 w-fit flex-col-reverse lg:flex-row ">
         <form onSubmit={handleSubmit}>
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
 

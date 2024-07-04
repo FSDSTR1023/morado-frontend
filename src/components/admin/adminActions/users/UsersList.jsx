@@ -36,90 +36,88 @@ import SearchBar from "./SearchBar.jsx"
   };
 
   return (
-    // ==== Creación de la tabla para mostrar todos los datos de os usuarios
-    <div className="flex flex-col items-center w-full">
+    // ==== Creación de la tabla para mostrar todos los datos de los usuarios
+    <div className="flex flex-col w-full">
 
-      <div className="flex w-full shadow-md justify-between">
-        <div className="p-5 text-xl font-bold self-start">Listado Completo de Usuarios</div>
-        <div className="flex">
-          <Link className="flex h-14 items-center hover:text-[#003A70] pr-10" to="../guests/create">
-          <HiUserAdd size={25} className="w-14"/> Agregar Usuario</Link>
+        <div className="flex flex-col shadow-md md:justify-between md:flex-row w-full">
+          <div className="p-2 md:p-5 text-xl font-bold items-center">Listado Completo de Usuarios</div>
+          <div>
+            <Link className="flex h-14 items-center hover:text-[#003A70] pr-10" to="../guests/create">
+            <HiUserAdd size={25} className="w-14"/> Agregar Usuario</Link>
+          </div>
         </div>
-      </div>
 
-      <div className="flex-col p-4 mt-5 w-auto max-h-[80vh] min-h-[80vh] h-4/5 shadow-lg">
-        {/* <div className="flex justify-end"><SearchBar /></div> */}
-        <table className="text-sm text-left rtl:text-right text-gray-700">
-          {/* Estos son todos los encabezados */}
-          {/* ================================================================================================= */}
-          <thead className="text-xs text-white uppercase bg-[#003A70]">
-            <tr className="place-content-center border-solid border-2">
-              <th className="px-3 py-2 border-solid border-2"> Nombre </th>
-              <th className="px-3 py-2 border-solid border-2"> Apellido </th>
-              <th className="px-3 py-2 border-solid border-2"> Teléfono </th>
-              <th className="px-3 py-2border-solid border-2"> E-mail </th>
-              <th className="px-3 py-2  row-span-2"> País </th>
-              <th className="px-3 py-2 border-solid border-2"> Nacimiento</th>
-              <th className="px-3 py-2 border-solid border-2"> Documento</th>
-              <th className="px-3 py-2 border-solid border-2"> Número</th>
-              <th className="px-3 py-2 border-solid border-2"> Usuario </th>
-              <th className="px-3 py-2 border-solid border-2"> Admin </th>
-              <th className="px-3 py-2 bg-transparent border-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* se iteran todos los datos de la base de datos y se distribuyen en las celdas de la tabla */}
-            {/* =============================================================================================== */}
-            {allusers.map((item) => (
-              <tr
-                key={item._id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td className="px-3 py-2"> <BdUserslist nameu={item.nameu} /> </td>
-                <td className="px-3 py-2"> <BdUserslist lastName={item.lastName} /> </td>
-                <td className="px-3 py-2"> <BdUserslist phone={item.phone} /> </td>
-                <td className="px-3 py-2 max-w-48 min-w-48 truncate"> <BdUserslist email={item.email} /> </td>
-                <td className="px-3 py-2"> <BdUserslist country={item.country} /> </td>
-                <td className="px-3 py-2">
-                  <BdUserslist DoB={item.DoB} />
-                </td>
-                <td className="px-3 py-2">
-                  <BdUserslist docType={item.docType} />
-                </td>
-                <td className="px-3 py-2">
-                  <BdUserslist docNum={item.docNum} />
-                </td>
-                <td className="px-3 py-2">
-                  <BdUserslist username={item.username} />
-                </td>
-                <td className="flex px-3 py-2 justify-center">
-                  <BdUserslist isAdmin={item.isAdmin} />
-                  <input type="checkbox" checked={item.isAdmin} readOnly  />
-                </td>
-                <td className="px-3 py-2 space-x-3 bg-gray-100">
-                  <button className="hover:shadow hover:bg-[#003A70] hover:text-white p-3 text-black">
-                    {/* con este Link se pasa el codigo del usuario mediante la ruta 
-              ==================================================================================================*/}
-                    <Link to={"../guests/edit/" + item._id}>
-                      {/* <CiEdit /> es el icono de Editar */}
-                      <CiEdit />
-                    </Link>{" "}
-                  </button>
-
-                  {/* este boton elinina el usuario, onclick llama la funcion de eliminar el usuario especifico
-              ==================================================================================================*/}
-                  <button
-                    className="hover:shadow hover:bg-[#003A70] hover:text-white p-3 text-black"
-                    onClick={() => confirmDeleteUser(item._id, item.nameu, item.lastName, item.email)}
+        <div className="flex-col px-1 mt-3 max-h-[80vh] min-h-[80vh] h-4/5 shadow-lg items-center w-full">
+          {/* <div className="flex justify-end"><SearchBar /></div> */}
+          <div className="overflow-x-auto overflow-y-auto w-full max-h-[78vh]">
+            <table className="text-sm text-left text-gray-700 w-full">
+              {/* Estos son todos los encabezados */}
+              {/* ================================================================================================= */}
+              <thead className="text-xs text-white uppercase bg-[#003A70] sticky top-0 z-1 h-8">
+                <tr className="border-solid border-2 w-full">
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Nombre </th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Apellido </th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Teléfono </th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> E-mail </th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> País </th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Nacimiento</th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Documento</th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Número</th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Usuario </th>
+                  <th className="px-1 md:px-3 py-2 border-solid border-2 text-center"> Admin </th>
+                  <th className="px-1 md:px-3 py-2 bg-white border-white border-2"></th>
+                </tr>
+              </thead>
+              <tbody className="max-w-px">
+                {/* se iteran todos los datos de la base de datos y se distribuyen en las celdas de la tabla */}
+                {/* =============================================================================================== */}
+                {allusers.map((item) => (
+                  <tr
+                    key={item._id}
+                    className="bg-white border-b"
                   >
-                    {/* <MdDeleteForever /> es el icono para eliminar */}
-                    <MdDeleteForever />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                    <td className="px-1 md:px-3"> <BdUserslist nameu={item.nameu} /> </td>
+                    <td className="px-1 md:px-3"> <BdUserslist lastName={item.lastName} /> </td>
+                    <td className="px-1 md:px-3"> <BdUserslist phone={item.phone} /> </td>
+                    <td className="px-1 md:px-3 max-w-48 truncate"> <BdUserslist email={item.email} /> </td>
+                    <td className="px-1 md:px-3"> <BdUserslist country={item.country} /> </td>
+                    <td className="px-1 md:px-3"><BdUserslist DoB={item.DoB} /> </td>
+                    <td className="px-1 md:px-3"><BdUserslist docType={item.docType} /></td>
+                    <td className="px-1 md:px-3"><BdUserslist docNum={item.docNum} /></td>
+                    <td className="px-1 md:px-3"><BdUserslist username={item.username} /></td>
+                    <td className="px-1 md:px-3">
+                      <div className="flex items-center justify-center w-full h-full">
+                        <BdUserslist isAdmin={item.isAdmin} />
+                        <input type="checkbox" checked={item.isAdmin} readOnly />
+                      </div>
+                    </td> 
+                    <td className="px-1 md:px-3 bg-gray-100">
+                      <div className="flex flex-row">
+                        <button className="hover:shadow hover:bg-[#003A70] hover:text-white px-3 py-3 md:py-0 text-black">
+                          {/* con este Link se pasa el codigo del usuario mediante la ruta 
+                    ==================================================================================================*/}
+                          <Link to={"../guests/edit/" + item._id}>
+                            {/* <CiEdit /> es el icono de Editar */}
+                            <CiEdit />
+                          </Link>{" "}
+                        </button>
+
+                        {/* este boton elinina el usuario, onclick llama la funcion de eliminar el usuario especifico
+                    ==================================================================================================*/}
+                        <button
+                          className="hover:shadow hover:bg-[#003A70] hover:text-white px-3 py-3 md:py-0 text-black"
+                          onClick={() => confirmDeleteUser(item._id, item.nameu, item.lastName, item.email)}
+                        >
+                          {/* <MdDeleteForever /> es el icono para eliminar */}
+                          <MdDeleteForever />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
   );}

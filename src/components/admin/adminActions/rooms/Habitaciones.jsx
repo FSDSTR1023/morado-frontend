@@ -144,7 +144,7 @@ const AddRoom = () => {
     TV: "Televisión",
     ac: "Aire Acondicionado",
     nevera: "Nevera",
-    Wifi: "WiFi",
+    Wifi: "WiFi"
   };
 
   const roomAmenity = ["TV", "ac", "nevera", "Wifi"];
@@ -180,10 +180,10 @@ const AddRoom = () => {
 
   return (
     <div className="flex flex-col items-center w-full gap-5">
-      <div className="flex w-full shadow-md justify-between">
-        <div className="p-5 text-xl font-bold self-start">
-          Datos de la habitación
-        </div>
+
+      {/* <div className="flex w-full shadow-md justify-between"> */}
+      <div className="flex flex-col shadow-md md:justify-between md:flex-row w-full">
+        <div className="p-2 md:p-5 text-xl font-bold items-center">Datos de la habitación</div>
         <div className="flex">
           <Link
             className="flex h-14 items-center hover:text-[#003A70] pr-10"
@@ -194,20 +194,21 @@ const AddRoom = () => {
         </div>
       </div>
 
-      <div className="flex shadow-xl p-8 w-fit">
+      <div className="flex shadow-xl p-2 md:p-8 w-full md:w-auto">
+        <div className="max-h-[78vh] overflow-y-auto flex flex-col md:flex-row">
         <form>
           {/* //////////////////////////////////////////////////////////////////////////////////////  */}
           <div>
             <div className="border-b-black border-b-2 mb-7">
-              Datos Habitación
+              Datos Habitación  
             </div>
             <div className="place-content-center px-5">
-              <div className="flex flex-row gap-5">
+              <div className="flex flex-col md:flex-row gap-1 md:gap-5">
                 {/* =================================================== */}
                 <label className="block text-sm font-medium leading-6 text-gray-900">
                   Número de Habitación <br />
                   <input
-                    className="pl-2 border border-20 mb-3 shadow w-full"
+                    className="pl-2 border border-20 mb-3 shadow"
                     type="number"
                     name="roomNum"
                     value={addRoom.roomNum}
@@ -218,7 +219,7 @@ const AddRoom = () => {
                 <label className="block text-sm font-medium leading-6 text-gray-900">
                   Titulo de Habitación <br />
                   <input
-                    className="px-2 border border-20 mb-3 shadow w-80"
+                    className="px-2 border border-20 mb-3 shadow w-full md:w-80"
                     type="text"
                     name="title"
                     value={addRoom.title}
@@ -227,7 +228,7 @@ const AddRoom = () => {
                 </label>
 
                 {/* ================================================================================== */}
-                <label className="flex flex-row lg:flex-col justify-center">
+                <label className="flex flex-row-reverse lg:flex-col justify-end md:justify-center">
                   <span className="text-sm font-medium leading-6 text-gray-900">
                     Destacado
                   </span>
@@ -241,7 +242,7 @@ const AddRoom = () => {
                 </label>
               </div>
               {/* ================================================================================== */}
-              <div className="flex justify-stretch gap-2">
+              <div className="flex justify-stretch gap-0 md:gap-2 flex-col md:flex-row">
                 <label className="block text-sm font-medium leading-6 text-gray-900 w-full">
                   Status <br />
                   <select
@@ -302,7 +303,7 @@ const AddRoom = () => {
               </div>
               {/* ================================================================================== */}
 
-              <div className="flex flex-row gap-4 w-full">
+              <div className="flex flex-col gap-0 md:flex-row md:gap-4 w-full">
                 {/* ================================================================================== */}
                 {/* Amenities */}
                 <div className="block text-sm font-medium leading-6 text-gray-900 w-full">
@@ -385,11 +386,11 @@ const AddRoom = () => {
                     Galería
                   </div>
 
-                  <div className="flex gap-5 px-5 flex-col">
+                  <div className="flex gap-5 px-0 md:px-5 flex-col">
                     {/* ================================================================================== */}
                     <div>
                       <input
-                        className="bg-white text-gray-800 font-semibold py-2 px-2 border border-gray-400 rounded shadow"
+                        className="bg-white text-gray-800 font-semibold py-2 px-1 md:px-2 border border-gray-400 rounded shadow w-full"
                         type="file"
                         name="image"
                         accept="image/*"
@@ -413,11 +414,11 @@ const AddRoom = () => {
             </div>
           </div>
         </form>
-        <div className="ml-7 flex flex-col overflow-hidden">
+        <div className="ml-7 flex flex-col overflow-visible md:overflow-hidden">
           <div className="grid h-full w-full">
-            <div className="h-full w-full mb-44 pb-3">
+            <div className="flex h-full w-full mb-44 pb-3 justify-start ml-2">
               <img
-                className="w-80 object-cover shadow-xl h-full"
+                className="w-72 md:w-80 object-cover shadow-xl h-full"
                 src={active || addRoom.photos[0]}
                 alt=""
               />
@@ -443,8 +444,10 @@ const AddRoom = () => {
                 ))}
               </Slider>
               </div>
+              
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

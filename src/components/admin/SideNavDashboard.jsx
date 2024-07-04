@@ -27,8 +27,8 @@ const SideNavDashboard = () => {
     <section>
       <div
         className={`bg-blue-gray-100 h-[94vh] ${
-          open ? "w-[200px]" : "w-[80px]"
-        } duration-200 pl-4 text-[#003A70] font-bold py-12 flex flex-col w-1/5 h-[94vh] relative bg-gray-100`}
+          open ? "w-[150px] md:w-[200px]" : "w-[40px] md:w-[80px]"
+        } duration-200 pl-0 md:pl-4 text-[#003A70] font-bold py-12 flex flex-col w-1/5 h-[94vh] relative bg-gray-100`}
       >
         <div
           className="cursor-pointer self-end w-5 h-5 bg-[#003A70] rounded-full flex items-center justify-center text-white"
@@ -53,7 +53,7 @@ const SideNavDashboard = () => {
                   : " hover:bg-white hover:text-[#003A70] text-black duration-300";
               }}
             >
-              <div className="flex flex-row space-x-3 items-center p-4">
+              <div className="flex flex-row space-x-3 items-center p-2 md:p-4">
                 <div>
                   <item.icon size={21} className={"items-center"} />
                 </div>
