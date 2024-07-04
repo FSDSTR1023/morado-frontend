@@ -16,7 +16,7 @@ const NavAdmin = () => {
         </div>
         <div className='flex items-center'>
           <Link to='/' className='pr-12'>Ver Web</Link>
-          {user && (<div className="right-10 absolute top-2 md:right-5 md:top-4 text-black">
+          {user && (<div className="right-2 absolute top-2 md:right-5 md:top-4 text-black">
                 <FotoUsuario />
               </div>)}
         </div>

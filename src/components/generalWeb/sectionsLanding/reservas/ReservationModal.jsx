@@ -10,7 +10,7 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black/85 flex justify-center items-center z-10 shadow-xl">
-      <div className="bg-white p-[20px] w-[70%] max-h-[90vh] mt-10 overflow-y-auto">
+      <div className="bg-white p-[20px] w-full md:w-[70%] max-h-[100vh] md:max-h-[90vh] mt-10 overflow-y-auto relative">
         <h2 className="mb-3 font-extrabold text-2xl border-b-2 bg-black text-white flex justify-center">Detalles de la Reservación</h2>
         {reservationSummary && (
           <div>
@@ -19,7 +19,7 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
               {creditCard && (
                 <div>
                   <div className="ml-5">
-                    <div className="flex flex-row w-full">
+                    <div className="flex flex-col md:flex-row w-full">
                         <div className="w-full">
                             <p>
                             Tarjeta: {creditCard.cardProvider}
@@ -30,7 +30,7 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                             <p><strong>vencimiento:</strong> {creditCard.expiry}</p>
                             <p><strong>email:</strong> {reservationSummary.email}</p>
                         </div>
-                        <div className="w-full flex justify-center items-center">
+                        <div className="w-full flex justify-center items-center  mt-5 md:mt-0 bg-green-100">
                             <div className="flex flex-col items-center"><span>Referencia:</span><span className="font-bold text-2xl">{reservationSummary.resRef}</span></div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                     <div className="mt-3">
                       <strong className="text-xl">Detalle por Habitación:</strong>
                       {resDetail.map((roomReservation, index) => (
-                        <div key={index} className="ml-5">
+                        <div key={index} className="ml-0 md:ml-5">
                           <div className="w-full border-b-2 flex justify-between bg-gray-100 ">
                             <span className="font-bold">Habitación #{index + 1}</span>
                             <div>
@@ -54,8 +54,8 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                               {/* Renderizar ResData */}
                               {roomReservation.resData && (
                                 <div className="w-full">
-                                  <strong className="border-b-2 mx-3 flex">Estadía:</strong>
-                                  <div className="ml-5">
+                                  <strong className="border-b-2 mx-0 md:mx-3 flex">Estadía:</strong>
+                                  <div className="ml-1 md:ml-5">
                                     <p>
                                         <strong className="mr-2">Noches:</strong> {roomReservation.resData.nights}
                                     </p>
@@ -115,17 +115,16 @@ const ReservationModal = ({ reservationSummary, onClose }) => {
                     </div>
                   )}
                    <p className="flex justify-end items-center mt-5"><strong>Total de la Reservación:</strong><span className="ml-3 font-bold text-2xl">€{reservationSummary.totalRate}</span></p>
-                   <div className="w-full flex justify-end mt-5">
-                   <span
-            className="text-white font-bold flex justify-center text-xl cursor-pointer hover:font-extraboldbold bg-black rounded-md hover:bg-accent-hover w-52 p-1"
-            onClick={() => {
-              navigate("/"); // Use the navigate function to redirect to "/"
-              onClose(); // Make sure to invoke the onClose function
-            }}
-          >
-            Aceptar
-          </span>
-          </div>
+                   <div className="w-full flex justify-end mt-5 sticky bottom-0 bg-white py-3">
+                   <span className="text-white font-bold flex justify-center text-xl cursor-pointer hover:font-extraboldbold bg-black rounded-md hover:bg-accent-hover w-52 p-1"
+                      onClick={() => {
+                        navigate("/"); // Use the navigate function to redirect to "/"
+                        onClose(); // Make sure to invoke the onClose function
+                      }}
+                    >
+                      Aceptar
+                    </span>
+                    </div>
                   </div>
                 </div>
               )}

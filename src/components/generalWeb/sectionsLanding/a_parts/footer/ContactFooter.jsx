@@ -23,7 +23,7 @@ const ContactFooter = () => {
                     hmanzanares@hotelmanzanares.com.es
                 </li>
                 <li className='flex flex-row gap-4 mb-2'>
-                    <BsTelephone size={20} className='font-extrabold text-gray-500' />
+                    <BsTelephone size={20} className='font-extrabold text-gray-500 ml-1' />
                     911 98 97 07
                 </li>
                 <li className='flex flex-row gap-4 mb-2'>
@@ -31,7 +31,7 @@ const ContactFooter = () => {
                     911 95 95 03
                 </li>
                 <li className='flex flex-row gap-4 mb-5'>
-                    <PiMapPinLineLight size={30} className='font-extrabold text-gray-500' />
+                    <PiMapPinLineLight size={25} className='font-extrabold text-gray-500' />
                     Calle de Núñez de Balboa, 12, Salamanca, 28001 Madrid
                 </li>
             
