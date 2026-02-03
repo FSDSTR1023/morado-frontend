@@ -1,23 +1,32 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, {createContext, useContext, useEffect, useState} from 'react';
+/* eslint-disable react/prop-types */
+import React, { createContext, useEffect, useState } from 'react';
 import { getAllBookings } from '../utils/HandleApiRes';
 
-export const BookingsContext = createContext()
+export const BookingsContext = createContext();
 
 const BookingsProvider = ({ children }) => {
-    const [allBookings, setAllbookings] = useState([]);
-    
-    useEffect(() => {
-      console.log('useEffect en BookingsProvider ejecutado bookings == ', allBookings);
-      getAllBookings(setAllbookings);
-    }, []);
+  const [allBookings, setAllBookings] = useState([]);
 
-return (
-    <BookingsContext.Provider value={{allBookings, setAllbookings}}  >
-            {children}
-    </BookingsContext.Provider> 
-  )
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        console.log('useEffect ejecutado: obteniendo reservas...');
+        await getAllBookings(setAllBookings);
+        console.log('Reservas obtenidas');
+      } catch (error) {
+        console.error('Error al obtener reservas:', error);
+      }
+    };
+
+    fetchBookings();
+  }, []);
+
+  return (
+    <BookingsContext.Provider value={{ allBookings, setAllBookings }}>
+      {children}
+    </BookingsContext.Provider>
+  );
 };
 
 export default BookingsProvider;
