@@ -12,6 +12,7 @@ const getAllRooms = async (setAllRooms) => {
     });
   } catch (error) {
     console.error('No se pueden obtener las Habitaciones');
+    console.log('ROOM URL:', urlRoom);
   }
 };
 

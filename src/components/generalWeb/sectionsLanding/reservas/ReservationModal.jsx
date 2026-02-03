@@ -4,126 +4,137 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ReservationModal = ({ reservationSummary, onClose }) => {
-  const creditCard = reservationSummary.creditCard;
-  const resDetail = reservationSummary.resDetail;
+  const creditCard = reservationSummary?.creditCard;
+  const resDetail = reservationSummary?.resDetail;
   const navigate = useNavigate();
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black/85 flex justify-center items-center z-10 shadow-xl">
       <div className="bg-white p-[20px] w-full md:w-[70%] max-h-[100vh] md:max-h-[90vh] mt-10 overflow-y-auto relative">
-        <h2 className="mb-3 font-extrabold text-2xl border-b-2 bg-black text-white flex justify-center">Detalles de la Reservación</h2>
+        <h2 className="mb-3 font-extrabold text-2xl border-b-2 bg-black text-white flex justify-center">
+          Detalles de la Reservación
+        </h2>
         {reservationSummary && (
           <div>
-
             <div className="">
               {creditCard && (
                 <div>
                   <div className="ml-5">
                     <div className="flex flex-col md:flex-row w-full">
-                        <div className="w-full">
-                            <p>
-                            Tarjeta: {creditCard.cardProvider}
-                            {" = "}
-                            {creditCard.numCard}
-                            </p>
-                            <p><strong>Titular:</strong> {creditCard.cardHolder}</p>
-                            <p><strong>vencimiento:</strong> {creditCard.expiry}</p>
-                            <p><strong>email:</strong> {reservationSummary.email}</p>
+                      <div className="w-full">
+                        <p>
+                          Tarjeta: {creditCard.cardProvider} = {creditCard.numCard}
+                        </p>
+                        <p>
+                          <strong>Titular:</strong> {creditCard.cardHolder}
+                        </p>
+                        <p>
+                          <strong>vencimiento:</strong> {creditCard.expiry}
+                        </p>
+                        <p>
+                          <strong>email:</strong> {reservationSummary.email}
+                        </p>
+                      </div>
+                      <div className="w-full flex justify-center items-center mt-5 md:mt-0 bg-green-100">
+                        <div className="flex flex-col items-center">
+                          <span>Referencia:</span>
+                          <span className="font-bold text-2xl">{reservationSummary.resRef}</span>
                         </div>
-                        <div className="w-full flex justify-center items-center  mt-5 md:mt-0 bg-green-100">
-                            <div className="flex flex-col items-center"><span>Referencia:</span><span className="font-bold text-2xl">{reservationSummary.resRef}</span></div>
-                        </div>
+                      </div>
                     </div>
 
-                  {resDetail && resDetail.length > 0 && (
-                    <div className="mt-3">
-                      <strong className="text-xl">Detalle por Habitación:</strong>
-                      {resDetail.map((roomReservation, index) => (
-                        <div key={index} className="ml-0 md:ml-5">
-                          <div className="w-full border-b-2 flex justify-between bg-gray-100 ">
-                            <span className="font-bold">Habitación #{index + 1}</span>
-                            <div>
-                              <span>Tarifa por Habitación:</span>
-                              <span className="ml-2">
-                                € {roomReservation.ratePerRoom}
-                              </span>
+                    {resDetail && resDetail.length > 0 && (
+                      <div className="mt-3">
+                        <strong className="text-xl">Detalle por Habitación:</strong>
+                        {resDetail.map((roomReservation, index) => (
+                          <div key={index} className="ml-0 md:ml-5">
+                            <div className="w-full border-b-2 flex justify-between bg-gray-100 ">
+                              <span className="font-bold">Habitación #{index + 1}</span>
+                              <div>
+                                <span>Tarifa por Habitación:</span>
+                                <span className="ml-2">€ {roomReservation?.ratePerRoom}</span>
+                              </div>
                             </div>
-                          </div>
-                          <div className="flex flex-row w-full px-5">
-                            <div className="w-full">
-                              {/* Renderizar ResData */}
-                              {roomReservation.resData && (
-                                <div className="w-full">
-                                  <strong className="border-b-2 mx-0 md:mx-3 flex">Estadía:</strong>
-                                  <div className="ml-1 md:ml-5">
-                                    <p>
+                            <div className="flex flex-row w-full px-5">
+                              <div className="w-full">
+                                {roomReservation?.resData && (
+                                  <div className="w-full">
+                                    <strong className="border-b-2 mx-0 md:mx-3 flex">Estadía:</strong>
+                                    <div className="ml-1 md:ml-5">
+                                      <p>
                                         <strong className="mr-2">Noches:</strong> {roomReservation.resData.nights}
-                                    </p>
-                                    <p>
+                                      </p>
+                                      <p>
                                         <strong className="mr-2">checkIn:</strong> {roomReservation.resData.checkIn}
-                                    </p>
-                                    <p>
+                                      </p>
+                                      <p>
                                         <strong className="mr-2">checkOut:</strong> {roomReservation.resData.checkOut}
-                                    </p>
-                                    <span className="flex flex-row gap-5">
+                                      </p>
+                                      <span className="flex flex-row gap-5">
                                         <p>
-                                           <strong className="mr-2">Adultos:</strong>  {roomReservation.resData.adults[0]}
+                                          <strong className="mr-2">Adultos:</strong> {roomReservation.resData.adults?.[0]}
                                         </p>
                                         <p>
-                                            <strong className="mr-2">Niños:</strong> {roomReservation.resData.kids[0]}
+                                          <strong className="mr-2">Niños:</strong> {roomReservation.resData.kids?.[0]}
                                         </p>
-                                    </span>
+                                      </span>
+                                    </div>
                                   </div>
-                                </div>
-                              )}
-                            </div>
-                            {/* Renderizar userInfo */}
-                            <div className="w-full">
-                              {roomReservation.userInfo && (
-                                <div className="w-full">
-                                  <strong className="border-b-2 mx-3 flex">Huésped:</strong>
-                                  <div className="ml-5">
-                                    <p>
-                                    <strong className="mr-2">Nombre y Apellidos:</strong>
-                                        {roomReservation.userInfo.gName}{" "}
-                                        {roomReservation.userInfo.gLastName}
-                                    </p>
-                                    <p>
+                                )}
+                              </div>
+
+                              <div className="w-full">
+                                {roomReservation?.userInfo && (
+                                  <div className="w-full">
+                                    <strong className="border-b-2 mx-3 flex">Huésped:</strong>
+                                    <div className="ml-5">
+                                      <p>
+                                        <strong className="mr-2">Nombre y Apellidos:</strong>
+                                        {roomReservation.userInfo?.gName} {roomReservation.userInfo?.gLastName}
+                                      </p>
+                                      <p>
                                         <strong className="mr-2">Identificación:</strong>
-                                        {roomReservation.userInfo.gTypeDoc}
-                                        {" = "}
-                                        {roomReservation.userInfo.gNumDoc}
-                                    </p>
-                                    <p>
-                                        <strong className="mr-2">Teléfono:</strong>{roomReservation.userInfo.gTel}
-                                    </p>
+                                        {roomReservation.userInfo?.gTypeDoc} = {roomReservation.userInfo?.gNumDoc}
+                                      </p>
+                                      <p>
+                                        <strong className="mr-2">Teléfono:</strong> {roomReservation.userInfo?.gTel}
+                                      </p>
+                                    </div>
                                   </div>
-                                </div>
-                              )}
+                                )}
+                              </div>
                             </div>
-                          </div>
-                          <div className="px-5 border-b-2 mt-5">
-                            <strong> Información Adicional: </strong>
-                            <br />
-                              <p className="ml-5">{roomReservation.userInfo.gExtraInfo}</p>
-                          </div>
 
+                            <div className="px-5 border-b-2 mt-5">
+                              <strong>Información Adicional:</strong>
+                              <br />
+                              <p className="ml-5">{roomReservation.userInfo?.gExtraInfo || "No hay información adicional"}</p>
+                            </div>
 
-                          <p className="flex justify-end mb-5 items-center"><strong>Subtotal:</strong><span className="ml-3 font-bold text-xl">€{roomReservation.subtotal}</span></p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                   <p className="flex justify-end items-center mt-5"><strong>Total de la Reservación:</strong><span className="ml-3 font-bold text-2xl">€{reservationSummary.totalRate}</span></p>
-                   <div className="w-full flex justify-end mt-5 sticky bottom-0 bg-white py-3">
-                   <span className="text-white font-bold flex justify-center text-xl cursor-pointer hover:font-extraboldbold bg-black rounded-md hover:bg-accent-hover w-52 p-1"
-                      onClick={() => {
-                        navigate("/"); // Use the navigate function to redirect to "/"
-                        onClose(); // Make sure to invoke the onClose function
-                      }}
-                    >
-                      Aceptar
-                    </span>
+                            <p className="flex justify-end mb-5 items-center">
+                              <strong>Subtotal:</strong>
+                              <span className="ml-3 font-bold text-xl">€{roomReservation?.subtotal}</span>
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <p className="flex justify-end items-center mt-5">
+                      <strong>Total de la Reservación:</strong>
+                      <span className="ml-3 font-bold text-2xl">€{reservationSummary?.totalRate}</span>
+                    </p>
+
+                    <div className="w-full flex justify-end mt-5 sticky bottom-0 bg-white py-3">
+                      <span
+                        className="text-white font-bold flex justify-center text-xl cursor-pointer hover:font-extraboldbold bg-black rounded-md hover:bg-accent-hover w-52 p-1"
+                        onClick={() => {
+                          navigate("/");
+                          onClose();
+                        }}
+                      >
+                        Aceptar
+                      </span>
                     </div>
                   </div>
                 </div>

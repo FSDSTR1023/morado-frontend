@@ -1,7 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { io } from 'socket.io-client';
-const URL = 'http://localhost:4000';
 
-  export const socket = io(URL, {
-    autoConnect: true
-  });
+const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+
+export const socket = io(URL, {
+  autoConnect: true
+});
