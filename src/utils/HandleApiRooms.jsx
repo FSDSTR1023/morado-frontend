@@ -7,7 +7,6 @@ const urlRoom = import.meta.env.VITE_BACKEND_ROOM_URL;
 const getAllRooms = async (setAllRooms) => {
   try {
     await axios.get(`${urlRoom}`).then(({ data }) => {
-      // console.log("data --->", data);
       setAllRooms(data);
     });
   } catch (error) {
