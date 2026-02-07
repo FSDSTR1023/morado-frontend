@@ -8,19 +8,19 @@ export const BookingsContext = createContext();
 const BookingsProvider = ({ children }) => {
   const [allBookings, setAllBookings] = useState([]);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        console.log('useEffect ejecutado: obteniendo reservas...');
-        await getAllBookings(setAllBookings);
-        console.log('Reservas obtenidas');
-      } catch (error) {
-        console.error('Error al obtener reservas:', error);
-      }
-    };
+useEffect(() => {
+  const fetchBookings = async () => {
+    try {
+      console.log('useEffect ejecutado: obteniendo reservas...');
+      const data = await getAllBookings();
+      setAllBookings(data);
+    } catch (error) {
+      console.error('Error al obtener reservas:', error);
+    }
+  };
 
-    fetchBookings();
-  }, []);
+  fetchBookings();
+}, []);
 
   return (
     <BookingsContext.Provider value={{ allBookings, setAllBookings }}>
